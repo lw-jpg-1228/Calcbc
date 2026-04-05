@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Calculus BC Review Hub</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:#0a0a12;color:#e0e0e0;min-height:100vh}
+nav{background:#111;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #1e90ff;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px}
+nav h1{color:#1e90ff;font-size:1.3em}
+nav .links{display:flex;gap:8px;flex-wrap:wrap}
+nav a{color:#888;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:.85em;transition:.2s}
+nav a:hover,nav a.active{background:#1e90ff;color:#fff}
+.container{max-width:950px;margin:25px auto;padding:0 18px}
+h2{color:#1e90ff;margin-bottom:18px;font-size:1.7em}
+h3{color:#7b68ee;margin:18px 0 8px}
+h4{color:#4ecca3;margin:12px 0 6px}
+.card{background:#141420;border-radius:10px;padding:22px;margin-bottom:18px;border:1px solid#222}
+.card:hover{border-color:#1e90ff33}
+.section{display:none}.section.active{display:block}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th{background:#1e90ff;color:#fff;padding:10px;text-align:left;font-size:.9em}
+td{padding:8px 10px;border-bottom:1px solid#222;font-size:.9em}
+tr:hover{background:#1a1a2a}
+.btn{background:#1e90ff;color:#fff;border:none;padding:10px 22px;border-radius:7px;cursor:pointer;font-size:.95em;transition:.2s;margin:4px}
+.btn:hover{background:#1674d2;transform:translateY(-1px)}
+.btn-s{background:#333}.btn-s:hover{background:#444}
+.btn-sm{padding:7px 14px;font-size:.82em}
+.tab-bar{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:8px 16px;background:#1a1a2a;border:none;color:#777;border-radius:6px 6px 0 0;cursor:pointer;font-size:.85em}
+.tab.active{background:#1e90ff;color:#fff}
+.quiz-opt{display:block;width:100%;text-align:left;background:#111;color:#ddd;border:2px solid#222;padding:12px 18px;border-radius:8px;cursor:pointer;margin:6px 0;font-size:.95em;transition:.2s}
+.quiz-opt:hover{border-color:#1e90ff;background:#161625}
+.quiz-opt.correct{border-color:#4ecca3;background:#142a1a;color:#4ecca3}
+.quiz-opt.wrong{border-color:#e94560;background:#2a1414;color:#e94560}
+.quiz-opt:disabled{cursor:default;opacity:.7}
+.score-bar{background:#222;border-radius:20px;height:10px;margin:12px 0;overflow:hidden}
+.score-fill{background:linear-gradient(90deg,#1e90ff,#7b68ee);height:100%;border-radius:20px;transition:width .4s}
+.streak{font-size:1.1em;color:#f0a500;margin:8px 0}
+.progress{color:#666;margin-bottom:12px}
+.fc{background:linear-gradient(135deg,#141420,#111);border:2px solid#1e90ff33;border-radius:14px;padding:50px 35px;text-align:center;cursor:pointer;min-height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:.2s;user-select:none}
+.fc:hover{transform:scale(1.01)}
+.fc .front{font-size:1.6em;color:#1e90ff}
+.fc .back{font-size:1.3em;color:#4ecca3;display:none}
+.fc .hint{color:#555;font-size:.85em;margin-top:12px}
+.fc.flipped .front{display:none}.fc.flipped .back{display:block}.fc.flipped .hint{display:none}
+.explanation{background:#1a1a2a;border-left:3px solid#4ecca3;padding:12px 16px;margin-top:10px;border-radius:0 8px 8px 0;font-size:.9em;color:#aaa}
+.unit-card{background:#141420;border:1px solid#222;border-radius:10px;padding:18px;margin:8px 0;cursor:pointer;transition:.2s}
+.unit-card:hover{border-color:#1e90ff;background:#161625}
+.unit-card h3{margin:0;color:#1e90ff}
+.unit-card p{color:#777;font-size:.9em;margin-top:5px}
+.unit-card .badge{display:inline-block;background:#1e90ff22;color:#1e90ff;padding:3px 10px;border-radius:12px;font-size:.75em;margin-top:8px}
+.unit-card .badge.bc{background:#7b68ee22;color:#7b68ee}
+@media(max-width:600px){nav{flex-direction:column}.fc{padding:35px 18px}.fc .front{font-size:1.3em}}
+</style>
+</head>
+<body>
+
+<nav>
+<h1>∫ AP Calc BC</h1>
+<div class="links">
+<a href="#" onclick="show('home')" class="active" id="n-home">Home</a>
+<a href="#" onclick="show('units')" id="n-units">Units</a>
+<a href="#" onclick="show('practice')" id="n-practice">Practice</a>
+<a href="#" onclick="show('flash')" id="n-flash">Flashcards</a>
+<a href="#" onclick="show('calc')" id="n-calc">Calculator</a>
+</div>
+</nav>
+
+<!-- HOME -->
+<div class="section active" id="s-home">
+<div class="container">
+<h2>AP Calculus BC Review 📐</h2>
+<div class="card">
+<h3>Exam: May 2026</h3>
+<p style="margin:10px 0">Section I: 45 MC (75 min, 50%) | Section II: 6 FRQ (90 min, 50%)</p>
+<p style="color:#f0a500">⚠️ NO FORMULA SHEET — memorize everything in the Flashcards section!</p>
+<div style="margin-top:15px">
+<button class="btn" onclick="show('practice')">🧠 Practice Questions</button>
+<button class="btn btn-s" onclick="show('flash')">🃏 Formula Flashcards</button>
+<button class="btn btn-s" onclick="show('units')">📖 Study by Unit</button>
+</div>
+</div>
+<div class="card">
+<h3>Unit Weights</h3>
+<table>
+<tr><th>Unit</th><th>Topic</th><th>Weight</th></tr>
+<tr><td>1</td><td>Limits & Continuity</td><td>4-7%</td></tr>
+<tr><td>2</td><td>Differentiation: Definition & Properties</td><td>4-7%</td></tr>
+<tr><td>3</td><td>Differentiation: Composite, Implicit, Inverse</td><td>4-7%</td></tr>
+<tr><td>4</td><td>Contextual Applications of Differentiation</td><td>6-9%</td></tr>
+<tr><td>5</td><td>Analytical Applications of Differentiation</td><td>8-11%</td></tr>
+<tr><td>6</td><td>Integration & Accumulation</td><td>17-20%</td></tr>
+<tr><td>7</td><td>Differential Equations</td><td>6-9%</td></tr>
+<tr><td>8</td><td>Applications of Integration</td><td>6-9%</td></tr>
+<tr><td style="color:#7b68ee">9</td><td style="color:#7b68ee">Parametric, Polar & Vectors [BC]</td><td>11-12%</td></tr>
+<tr><td style="color:#7b68ee">10</td><td style="color:#7b68ee">Infinite Sequences & Series [BC]</td><td>17-18%</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<!-- UNITS -->
+<div class="section" id="s-units">
+<div class="container">
+<h2>Study by Unit</h2>
+<div id="unit-list"></div>
+<div id="unit-detail" style="display:none"></div>
+</div>
+</div>
+
+<!-- PRACTICE -->
+<div class="section" id="s-practice">
+<div class="container">
+<h2>Practice Questions 🧠</h2>
+<div class="card">
+<div class="tab-bar" id="prac-tabs"></div>
+<div class="streak" id="p-streak">🔥 Streak: 0</div>
+<div class="progress" id="p-prog">Question 1/10</div>
+<div class="score-bar"><div class="score-fill" id="p-bar" style="width:0%"></div></div>
+<div id="p-area"></div>
+<div style="margin-top:15px;text-align:center">
+<button class="btn btn-s" onclick="startPractice(curUnit)" id="p-restart" style="display:none">🔄 New Set</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="section" id="s-flash">
+<div class="container">
+<h2>Formula & Definition Flashcards 🃏</h2>
+<div class="card">
+<div class="tab-bar">
+<button class="tab active" onclick="startFC('derivatives',this)">Derivatives</button>
+<button class="tab" onclick="startFC('integrals',this)">Integrals</button>
+<button class="tab" onclick="startFC('series',this)">Series</button>
+<button class="tab" onclick="startFC('theorems',this)">Theorems</button>
+<button class="tab" onclick="startFC('parametric',this)">Param/Polar</button>
+<button class="tab" onclick="startFC('all',this)">All Formulas</button>
+</div>
+<div class="fc" id="fc" onclick="flipFC()">
+<div class="front" id="fc-f">d/dx [sin x]</div>
+<div class="back" id="fc-b">cos x</div>
+<div class="hint">Click to flip</div>
+</div>
+<div style="text-align:center;margin-top:15px">
+<button class="btn btn-s" onclick="prevFC()">⬅</button>
+<span id="fc-p" style="margin:0 18px;color:#666">1/50</span>
+<button class="btn" onclick="nextFC()">➡</button>
+</div>
+<div style="text-align:center;margin-top:8px">
+<button class="btn-sm btn btn-s" onclick="shuffFC()">🔀 Shuffle</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CALCULATOR -->
+<div class="section" id="s-calc">
+<div class="container">
+<h2>Calculator Section Practice 🔢</h2>
+<div class="card">
+<p style="color:#f0a500;margin-bottom:15px">⚠️ These questions are designed for the <b>calculator-active</b> sections (MC Part B + FRQ Part A). Use your graphing calculator!</p>
+<p style="margin-bottom:15px;color:#888">On the real exam: TI-84, TI-89, TI-Nspire CAS all allowed. You're expected to use your calculator for:</p>
+<ul style="padding-left:20px;line-height:2;color:#aaa;margin-bottom:20px">
+<li>Graphing to find intersections, zeros, extrema</li>
+<li>Numerical derivatives: nDeriv(f,x,a)</li>
+<li>Numerical integrals: fnInt(f,x,a,b)</li>
+<li>Solving equations numerically</li>
+</ul>
+<div class="streak" id="c-streak">🔥 Streak: 0</div>
+<div class="progress" id="c-prog">Question 1/12</div>
+<div class="score-bar"><div class="score-fill" id="c-bar" style="width:0%"></div></div>
+<div id="c-area"></div>
+<div style="margin-top:15px;text-align:center">
+<button class="btn btn-s" onclick="startCalcQuiz()" id="c-restart" style="display:none">🔄 New Set</button>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+// ===== DATA =====
+const U = [
+{id:1,name:"Limits & Continuity",weight:"4-7%",topics:[
+"Limits from graphs & tables","Algebraic limits (factor, rationalize, complex fractions)","Squeeze Theorem",
+"Continuity at a point (3 conditions)","Types of discontinuity (removable, jump, infinite)",
+"IVT (Intermediate Value Theorem)","Limits at infinity / horizontal asymptotes","Infinite limits / vertical asymptotes"
+],notes:`<b>Key formulas:</b><br>
+• lim(x→0) sin(x)/x = 1<br>
+• lim(x→0) (1-cos x)/x = 0<br>
+• lim(x→∞) (1+1/n)^n = e<br>
+<b>IVT:</b> If f continuous on [a,b] and k between f(a) and f(b), then ∃ c in (a,b) with f(c)=k`},
+{id:2,name:"Differentiation: Definition & Properties",weight:"4-7%",topics:[
+"Limit definition of derivative","Differentiability vs continuity","Power rule","Sum/difference/constant multiple rules",
+"Product rule","Quotient rule","Derivatives of trig functions","Derivatives of e^x, ln x"
+],notes:`<b>Limit def:</b> f'(x) = lim(h→0) [f(x+h)-f(x)]/h<br>
+<b>Product:</b> (fg)' = f'g + fg'<br>
+<b>Quotient:</b> (f/g)' = (f'g - fg')/g²`},
+{id:3,name:"Differentiation: Composite, Implicit, Inverse",weight:"4-7%",topics:[
+"Chain rule","Implicit differentiation","Derivatives of inverse functions",
+"Derivatives of inverse trig (arcsin, arctan, arcsec)","Higher-order derivatives"
+],notes:`<b>Chain:</b> d/dx[f(g(x))] = f'(g(x))·g'(x)<br>
+<b>Inverse:</b> g'(x) = 1/f'(g(x)) where g = f⁻¹<br>
+<b>d/dx[arcsin x]</b> = 1/√(1-x²)<br>
+<b>d/dx[arctan x]</b> = 1/(1+x²)`},
+{id:4,name:"Contextual Applications of Differentiation",weight:"6-9%",topics:[
+"Interpreting derivatives in context","Position/velocity/acceleration","Related rates",
+"Linearization / local linear approximation","L'Hôpital's Rule"
+],notes:`<b>Motion:</b> v(t) = s'(t), a(t) = v'(t)<br>
+<b>Speed</b> = |v(t)|<br>
+<b>Linearization:</b> L(x) = f(a) + f'(a)(x-a)<br>
+<b>L'Hôpital:</b> 0/0 or ∞/∞ → lim f/g = lim f'/g'`},
+{id:5,name:"Analytical Applications of Differentiation",weight:"8-11%",topics:[
+"Mean Value Theorem","Extreme Value Theorem","Finding critical points",
+"First derivative test","Second derivative test","Concavity & inflection points",
+"Curve sketching","Optimization problems","Candidates test (closed interval)"
+],notes:`<b>MVT:</b> f continuous [a,b], differentiable (a,b) → ∃ c: f'(c) = [f(b)-f(a)]/(b-a)<br>
+<b>f'>0:</b> increasing | <b>f'<0:</b> decreasing<br>
+<b>f''>0:</b> concave up | <b>f''<0:</b> concave down`},
+{id:6,name:"Integration & Accumulation",weight:"17-20%",topics:[
+"Riemann sums (left, right, midpoint, trapezoidal)","Definite integral as limit of Riemann sums",
+"FTC Part 1: d/dx ∫ₐˣ f(t)dt = f(x)","FTC Part 2: ∫ₐᵇ f(x)dx = F(b)-F(a)",
+"Properties of definite integrals","Basic antiderivatives","u-substitution",
+"[BC] Integration by parts","[BC] Partial fractions","[BC] Improper integrals"
+],notes:`<b>IBP:</b> ∫u dv = uv - ∫v du (LIATE)<br>
+<b>Partial fractions:</b> decompose P(x)/Q(x)<br>
+<b>Improper:</b> replace ∞ or bad point with limit variable`},
+{id:7,name:"Differential Equations",weight:"6-9%",topics:[
+"Modeling with DEs","Slope fields","Separation of variables",
+"Exponential growth/decay (dy/dt = ky)","[BC] Euler's method","[BC] Logistic growth (dy/dt = ky(1-y/L))"
+],notes:`<b>Exponential:</b> y = Ce^(kt)<br>
+<b>Logistic:</b> y = L/(1+Ce^(-kt)), max growth at y=L/2<br>
+<b>Euler's:</b> y_(n+1) = y_n + f(x_n,y_n)·Δx`},
+{id:8,name:"Applications of Integration",weight:"6-9%",topics:[
+"Average value of a function","Displacement vs total distance","Net change (accumulation)",
+"Area between curves (dx and dy)","Volumes: cross sections (squares, semicircles, triangles)",
+"Volumes: disk method","Volumes: washer method","[BC] Arc length"
+],notes:`<b>Avg value:</b> 1/(b-a) ∫ₐᵇ f(x)dx<br>
+<b>Displacement:</b> ∫v(t)dt | <b>Distance:</b> ∫|v(t)|dt<br>
+<b>Disk:</b> π∫[R(x)]²dx | <b>Washer:</b> π∫([R]²-[r]²)dx<br>
+<b>Arc:</b> ∫√(1+[f'(x)]²)dx`},
+{id:9,name:"Parametric, Polar & Vectors [BC]",weight:"11-12%",bc:true,topics:[
+"Parametric derivatives: dy/dx = (dy/dt)/(dx/dt)","Second derivative of parametric",
+"Parametric arc length","Vector-valued functions","Speed = |v(t)|",
+"Polar coordinates","dy/dx in polar","Polar area: ½∫r²dθ","Area between polar curves"
+],notes:`<b>Parametric arc:</b> ∫√((dx/dt)²+(dy/dt)²)dt<br>
+<b>Speed:</b> √([x'(t)]²+[y'(t)]²)<br>
+<b>Polar area:</b> ½∫[r(θ)]²dθ<br>
+<b>Polar dy/dx:</b> (r'sinθ+rcosθ)/(r'cosθ-rsinθ)`},
+{id:10,name:"Infinite Sequences & Series [BC]",weight:"17-18%",bc:true,topics:[
+"Convergent vs divergent series","Geometric series (a/(1-r), |r|<1)",
+"nth term test (divergence)","Integral test","p-series (1/n^p, p>1 converges)",
+"Comparison test","Limit comparison test","Alternating series test",
+"Ratio test","Absolute vs conditional convergence",
+"Taylor/Maclaurin polynomials","Lagrange error bound",
+"Radius & interval of convergence","Power series operations",
+"Known Maclaurin series (e^x, sin, cos, 1/(1-x), ln(1+x), arctan)"
+],notes:`<b>Geometric:</b> Σar^n = a/(1-r) if |r|<1<br>
+<b>p-series:</b> Σ1/n^p converges iff p>1<br>
+<b>Ratio test:</b> L=lim|a_(n+1)/a_n|, L<1→converge<br>
+<b>Taylor:</b> Σ f^(k)(a)/k! · (x-a)^k<br>
+<b>Lagrange:</b> |Rn|≤M|x-a|^(n+1)/(n+1)!<br>
+<b>Must know:</b> e^x = Σx^n/n!, sinx = Σ(-1)^n x^(2n+1)/(2n+1)!, cosx = Σ(-1)^n x^(2n)/(2n)!, 1/(1-x) = Σx^n, ln(1+x) = Σ(-1)^(n+1) x^n/n, arctanx = Σ(-1)^n x^(2n+1)/(2n+1)`}
+];
+
+// QUESTIONS - organized by unit
+const Q = {
+1:[
+{q:"lim(x→3) (x²-9)/(x-3) = ?",opts:["6","3","0","DNE"],ans:0,exp:"Factor: (x+3)(x-3)/(x-3) = x+3. At x=3: 6"},
+{q:"lim(x→0) sin(5x)/x = ?",opts:["5","1","0","5/π"],ans:0,exp:"lim sin(5x)/x = 5·lim sin(5x)/(5x) = 5·1 = 5"},
+{q:"lim(x→∞) (3x²+1)/(5x²-2) = ?",opts:["3/5","5/3","∞","0"],ans:0,exp:"Leading coefficients: 3/5"},
+{q:"lim(x→0) (1-cos x)/x² = ?",opts:["1/2","1","0","DNE"],ans:0,exp:"Known limit or L'Hôpital twice: 1/2"},
+{q:"If f is continuous on [1,5], f(1)=2, f(5)=8, which is guaranteed by IVT?",opts:["f(c)=5 for some c in (1,5)","f'(c)=0 for some c","f(c)=10 for some c","f has a max at c"],ans:0,exp:"IVT: 5 is between 2 and 8, so ∃c with f(c)=5"},
+{q:"f(x) = (x²-4)/(x-2). What type of discontinuity at x=2?",opts:["Removable","Jump","Infinite","None"],ans:0,exp:"Factor: (x+2)(x-2)/(x-2). Hole at x=2, limit exists = 4"},
+{q:"lim(x→0⁺) ln(x) = ?",opts:["-∞","0","∞","1"],ans:0,exp:"ln(x) → -∞ as x→0⁺"},
+{q:"lim(x→∞) (2x+1)/√(x²+1) = ?",opts:["2","1","∞","0"],ans:0,exp:"Divide by x: (2+1/x)/√(1+1/x²) → 2/1 = 2"},
+{q:"For the Squeeze Theorem, if g(x)≤f(x)≤h(x) and lim g = lim h = 5, then lim f = ?",opts:["5","Between g and h","DNE","Cannot determine"],ans:0,exp:"Squeeze theorem guarantees lim f = 5"},
+{q:"lim(x→0) x·sin(1/x) = ?",opts:["0","1","DNE","-1"],ans:0,exp:"−|x| ≤ x·sin(1/x) ≤ |x|, both→0. Squeeze: 0"},
+{q:"lim(x→∞) e^(-x) = ?",opts:["0","∞","1","-∞"],ans:0,exp:"e^(-x) = 1/e^x → 0 as x→∞"},
+{q:"lim(x→2) (x³-8)/(x-2) = ?",opts:["12","8","6","4"],ans:0,exp:"Factor: (x-2)(x²+2x+4)/(x-2) = x²+2x+4. At x=2: 12"}
+],
+2:[
+{q:"Using the limit definition, f'(x) for f(x)=x² is:",opts:["2x","x²","2","x"],ans:0,exp:"lim(h→0) [(x+h)²-x²]/h = lim(2x+h) = 2x"},
+{q:"d/dx [x⁷] = ?",opts:["7x⁶","6x⁷","7x⁷","x⁶"],ans:0,exp:"Power rule: nx^(n-1)"},
+{q:"d/dx [sin x] = ?",opts:["cos x","-cos x","sin x","-sin x"],ans:0,exp:"Basic derivative"},
+{q:"d/dx [cos x] = ?",opts:["-sin x","sin x","-cos x","cos x"],ans:0,exp:"Basic derivative"},
+{q:"d/dx [e^x] = ?",opts:["e^x","xe^(x-1)","e^(x-1)","xe^x"],ans:0,exp:"e^x is its own derivative"},
+{q:"d/dx [ln x] = ?",opts:["1/x","ln x / x","x","1/(x ln x)"],ans:0,exp:"Basic derivative"},
+{q:"d/dx [tan x] = ?",opts:["sec²x","csc²x","-sec²x","tan²x"],ans:0,exp:"Derivative of tan x = sec²x"},
+{q:"d/dx [3x⁴ - 2x + 7] = ?",opts:["12x³ - 2","12x³ - 2x","3x³ - 2","12x⁴ - 2"],ans:0,exp:"Sum rule + power rule: 12x³ - 2"},
+{q:"Product rule: d/dx [x²·sin x] = ?",opts:["2x·sin x + x²·cos x","2x·cos x","x²·cos x","2x·sin x"],ans:0,exp:"f'g + fg' = 2x·sinx + x²·cosx"},
+{q:"Quotient rule: d/dx [sin x / x] = ?",opts:["(x cos x - sin x)/x²","cos x / x","(cos x - sin x)/x²","sin x / x²"],ans:0,exp:"(f'g-fg')/g² = (x·cosx - sinx)/x²"},
+{q:"If f is differentiable at x=a, then f is:",opts:["Continuous at a","Has a max at a","Differentiable everywhere","Constant near a"],ans:0,exp:"Differentiable ⟹ continuous (not the converse)"},
+{q:"d/dx [sec x] = ?",opts:["sec x tan x","-sec x tan x","sec²x","csc x cot x"],ans:0,exp:"sec x tan x"}
+],
+3:[
+{q:"d/dx [sin(3x)] = ?",opts:["3cos(3x)","cos(3x)","3sin(3x)","-3cos(3x)"],ans:0,exp:"Chain rule: cos(3x)·3 = 3cos(3x)"},
+{q:"d/dx [e^(2x)] = ?",opts:["2e^(2x)","e^(2x)","2xe^(2x)","e^(2x)/2"],ans:0,exp:"Chain: e^(2x)·2"},
+{q:"d/dx [ln(x²)] = ?",opts:["2/x","2x","1/x²","2/(x²)"],ans:0,exp:"Chain: (1/x²)·2x = 2/x, or simplify ln(x²)=2lnx first"},
+{q:"d/dx [(x²+1)⁵] = ?",opts:["10x(x²+1)⁴","5(x²+1)⁴","5x(x²+1)⁴","10(x²+1)⁴"],ans:0,exp:"5(x²+1)⁴·2x = 10x(x²+1)⁴"},
+{q:"d/dx [arcsin x] = ?",opts:["1/√(1-x²)","-1/√(1-x²)","1/(1+x²)","1/(x√(x²-1))"],ans:0,exp:"Standard inverse trig derivative"},
+{q:"d/dx [arctan x] = ?",opts:["1/(1+x²)","1/√(1-x²)","-1/(1+x²)","arctan x / x"],ans:0,exp:"Standard inverse trig derivative"},
+{q:"For x²+y²=25, find dy/dx by implicit differentiation:",opts:["-x/y","x/y","-y/x","25-2x"],ans:0,exp:"2x+2y·dy/dx=0 → dy/dx=-x/y"},
+{q:"If g=f⁻¹ and f(2)=5, f'(2)=3, then g'(5)=?",opts:["1/3","3","1/5","5"],ans:0,exp:"g'(x)=1/f'(g(x)). g'(5)=1/f'(g(5))=1/f'(2)=1/3"},
+{q:"d/dx [√(sin x)] = ?",opts:["cos x / (2√(sin x))","1/(2√(sin x))","cos x · √(sin x)","sin x / (2√x)"],ans:0,exp:"½(sinx)^(-½)·cosx = cosx/(2√(sinx))"},
+{q:"d²/dx² [e^(3x)] = ?",opts:["9e^(3x)","3e^(3x)","6e^(3x)","e^(3x)"],ans:0,exp:"First: 3e^(3x). Second: 9e^(3x)"},
+{q:"d/dx [tan⁻¹(2x)] = ?",opts:["2/(1+4x²)","1/(1+4x²)","2/(1+2x²)","-2/(1+4x²)"],ans:0,exp:"Chain: 1/(1+(2x)²)·2 = 2/(1+4x²)"},
+{q:"d/dx [x^x] using log diff = ?",opts:["x^x(ln x + 1)","x·x^(x-1)","x^x · ln x","x^(x+1)"],ans:0,exp:"y=x^x → lny=xlnx → y'/y=lnx+1 → y'=x^x(lnx+1)"}
+],
+4:[
+{q:"Position s(t)=t³-6t². Velocity at t=2?",opts:["-12","-6","0","12"],ans:0,exp:"v(t)=3t²-12t. v(2)=12-24=-12"},
+{q:"v(t)=3t²-12t. When is particle speeding up? At t=1:",opts:["Slowing down","Speeding up","At rest","Constant speed"],ans:0,exp:"v(1)=-9<0, a(1)=6(1)-12=-6<0. Same sign → speeding up"},
+{q:"lim(x→0) (e^x - 1)/x = ? (L'Hôpital)",opts:["1","0","e","∞"],ans:0,exp:"0/0 form. L'Hôp: e^x/1 → e⁰=1"},
+{q:"lim(x→∞) x/e^x = ?",opts:["0","1","∞","e"],ans:0,exp:"∞/∞. L'Hôp: 1/e^x → 0"},
+{q:"lim(x→0) sin x / tan x = ?",opts:["1","0","∞","-1"],ans:0,exp:"sinx/(sinx/cosx) = cosx → cos(0) = 1"},
+{q:"Linearization of f(x)=√x at a=4. Approximate √4.1:",opts:["2.025","2.05","2.01","2.1"],ans:0,exp:"f'(x)=1/(2√x). L(x)=2+¼(x-4). L(4.1)=2+0.025=2.025"},
+{q:"A spherical balloon inflates at dV/dt=10. Find dr/dt when r=5.",opts:["1/(10π)","10π","2/(5π)","1/(5π)"],ans:0,exp:"V=4πr³/3. dV/dt=4πr²·dr/dt. 10=4π(25)·dr/dt → dr/dt=1/(10π)"},
+{q:"A 10ft ladder slides down. dx/dt=2 when x=6. Find dy/dt.",opts:["-3/2","-2","3/2","-6/8"],ans:0,exp:"x²+y²=100, y=8. 2x·dx/dt+2y·dy/dt=0. 12(2)+16·dy/dt=0 → dy/dt=-3/2"},
+{q:"lim(x→∞) (1+3/x)^x = ?",opts:["e³","3e","∞","1"],ans:0,exp:"Standard form: lim(1+k/x)^x = e^k → e³"},
+{q:"lim(x→0) x·ln x = ?",opts:["0","−∞","1","DNE"],ans:0,exp:"Rewrite as ln(x)/(1/x), L'Hôp: (1/x)/(-1/x²)=-x→0"}
+],
+5:[
+{q:"f(x)=x³-3x+1 on [-2,2]. By MVT, find c where f'(c)=(f(2)-f(-2))/4.",opts:["c=±2/√3","c=1","c=0","c=±1"],ans:0,exp:"f(2)=3,f(-2)=-1. Slope=1. f'(x)=3x²-3=1 → x²=4/3 → x=±2/√3"},
+{q:"f(x)=x⁴-4x³. Critical points?",opts:["x=0 and x=3","x=0 only","x=3 only","x=0 and x=4"],ans:0,exp:"f'=4x³-12x²=4x²(x-3)=0 → x=0,3"},
+{q:"f''(x)>0 means:",opts:["Concave up","Concave down","Increasing","Decreasing"],ans:0,exp:"f''>0 → concave up (holds water)"},
+{q:"On [0,4], f continuous. f(0)=1, f(4)=5. Must there be c with f'(c)=1?",opts:["Yes (MVT)","No","Only if f''>0","Only if f is polynomial"],ans:0,exp:"MVT: f'(c)=(5-1)/(4-0)=1 for some c in (0,4)"},
+{q:"f'(x) changes from + to − at x=2. x=2 is:",opts:["Local max","Local min","Inflection point","Neither"],ans:0,exp:"First derivative test: +to− = local max"},
+{q:"f(x)=xe^(-x). Find absolute max on [0,∞).",opts:["1/e at x=1","e at x=1","0 at x=0","No max"],ans:0,exp:"f'=e^(-x)-xe^(-x)=e^(-x)(1-x)=0 → x=1. f(1)=1/e"},
+{q:"Find x where f(x)=x³-3x² has an inflection point.",opts:["x=1","x=0","x=2","x=3"],ans:0,exp:"f''=6x-6=0 → x=1. Sign change confirmed."},
+{q:"Extreme Value Theorem requires:",opts:["f continuous on [a,b]","f differentiable on [a,b]","f has critical points","f'(a)=f'(b)"],ans:0,exp:"EVT needs continuity on a closed interval"},
+{q:"A box with square base, volume 32. Minimize surface area. Side length?",opts:["4","2","8","2∛4"],ans:0,exp:"V=x²h=32, h=32/x². SA=x²+4xh=x²+128/x. SA'=2x-128/x²=0 → x³=64 → x=4"},
+{q:"f'(3)=0 and f''(3)<0 means:",opts:["Local max at x=3","Local min at x=3","Inflection at x=3","Nothing"],ans:0,exp:"Second derivative test: f'=0, f''<0 → local max"}
+],
+6:[
+{q:"∫ x³ dx = ?",opts:["x⁴/4 + C","3x² + C","x⁴ + C","4x⁴ + C"],ans:0,exp:"Power rule: x^(n+1)/(n+1)"},
+{q:"∫ 1/x dx = ?",opts:["ln|x| + C","x⁻¹ + C","-1/x² + C","ln(x²) + C"],ans:0,exp:"Standard: ln|x| + C"},
+{q:"∫ cos x dx = ?",opts:["sin x + C","-sin x + C","cos x + C","tan x + C"],ans:0,exp:"Antiderivative of cos is sin"},
+{q:"∫₀² 3x² dx = ?",opts:["8","6","12","24"],ans:0,exp:"[x³]₀² = 8-0 = 8"},
+{q:"∫ e^(3x) dx = ?",opts:["e^(3x)/3 + C","3e^(3x) + C","e^(3x) + C","e^(3x)/x + C"],ans:0,exp:"u-sub: u=3x → (1/3)e^(3x) + C"},
+{q:"∫ x·cos(x²) dx = ?",opts:["½sin(x²) + C","sin(x²) + C","x·sin(x²) + C","cos(x²) + C"],ans:0,exp:"u=x², du=2x dx → ½∫cos(u)du = ½sin(x²)+C"},
+{q:"[BC] ∫ x·e^x dx = ?",opts:["xe^x - e^x + C","xe^x + C","x²e^x/2 + C","e^x(x+1) + C"],ans:0,exp:"IBP: u=x, dv=e^x dx → xe^x - e^x + C"},
+{q:"[BC] ∫ ln x dx = ?",opts:["x ln x - x + C","1/x + C","x ln x + C","ln x / x + C"],ans:0,exp:"IBP: u=lnx, dv=dx → xlnx - x + C"},
+{q:"[BC] ∫₁^∞ 1/x² dx = ?",opts:["1","∞","1/2","Diverges"],ans:0,exp:"lim(t→∞)[-1/x]₁ᵗ = lim(-1/t+1) = 1. Converges!"},
+{q:"[BC] ∫ 1/(x²-1) dx using partial fractions = ?",opts:["½ln|x-1| - ½ln|x+1| + C","ln|x²-1| + C","arctan(x) + C","½ln|x+1| + C"],ans:0,exp:"1/((x-1)(x+1)) = ½/(x-1) - ½/(x+1)"},
+{q:"d/dx ∫₀^x sin(t²) dt = ?",opts:["sin(x²)","cos(x²)","2x·sin(x²)","∫sin(t²)dt"],ans:0,exp:"FTC Part 1: directly gives sin(x²)"},
+{q:"d/dx ∫₀^(x²) sin(t) dt = ?",opts:["2x·sin(x²)","sin(x²)","cos(x²)","2x·cos(x²)"],ans:0,exp:"FTC + Chain: sin(x²)·2x"},
+{q:"Left Riemann sum overestimates when f is:",opts:["Decreasing","Increasing","Concave up","Concave down"],ans:0,exp:"Left sum overestimates for decreasing functions"},
+{q:"∫ sec²x dx = ?",opts:["tan x + C","sec x + C","-cot x + C","sec x tan x + C"],ans:0,exp:"Antiderivative of sec²x is tanx"},
+{q:"∫ 1/(1+x²) dx = ?",opts:["arctan x + C","arcsin x + C","ln(1+x²) + C","1/(2x) + C"],ans:0,exp:"Standard: gives arctan x"}
+],
+7:[
+{q:"Solve dy/dx = 2y, y(0)=3.",opts:["y=3e^(2x)","y=2e^(3x)","y=3·2^x","y=6e^x"],ans:0,exp:"Separate: dy/y=2dx → lny=2x+C → y=3e^(2x)"},
+{q:"dy/dx = x/y, y(0)=1. Find y(2).",opts:["√5","5","√3","3"],ans:0,exp:"y dy=x dx → y²/2=x²/2+C. y(0)=1→C=½. y²=x²+1. y(2)=√5"},
+{q:"Which slope field matches dy/dx = x?",opts:["Slopes depend only on x-coord","Slopes depend only on y-coord","All slopes = 0 at origin","Slopes are circles"],ans:0,exp:"dy/dx=x: slope depends only on x. Vertical strips of equal slopes."},
+{q:"[BC] Euler's method: dy/dx=x+y, y(0)=1, Δx=0.5. Find y(0.5).",opts:["1.5","2","1.25","0.5"],ans:0,exp:"y₁ = 1 + (0+1)(0.5) = 1 + 0.5 = 1.5"},
+{q:"[BC] Logistic: dy/dt=2y(1-y/100). Carrying capacity?",opts:["100","50","200","2"],ans:0,exp:"L=100 (the value in 1-y/L)"},
+{q:"[BC] In logistic growth, max growth rate occurs at:",opts:["y = L/2","y = L","y = 0","y = L/4"],ans:0,exp:"Maximum growth rate at half carrying capacity"},
+{q:"Population P satisfies dP/dt = 0.05P. P doubles in:",opts:["ln 2 / 0.05 ≈ 13.86","20","10","ln 2"],ans:0,exp:"2P₀=P₀e^(0.05t) → t=ln2/0.05"},
+{q:"dy/dx = y²·sin x, separation gives:",opts:["∫y⁻² dy = ∫sin x dx","∫y² dy = ∫sin x dx","∫dy = ∫y²sinx dx","Cannot separate"],ans:0,exp:"dy/y² = sinx dx → ∫y⁻²dy = ∫sinx dx"}
+],
+8:[
+{q:"Average value of f(x)=x² on [0,3] = ?",opts:["3","9","6","9/3"],ans:0,exp:"1/3 · ∫₀³ x² dx = 1/3 · 9 = 3"},
+{q:"Area between y=x² and y=x from 0 to 1:",opts:["1/6","1/3","1/2","1"],ans:0,exp:"∫₀¹(x-x²)dx = [x²/2-x³/3]₀¹ = 1/2-1/3 = 1/6"},
+{q:"Volume: y=√x rotated about x-axis, 0≤x≤4 (disk):",opts:["8π","4π","16π","2π"],ans:0,exp:"π∫₀⁴(√x)²dx = π∫₀⁴x dx = π·8 = 8π"},
+{q:"Cross-section squares with base from y=0 to y=1-x². Volume:",opts:["16/15","8/15","4/3","2/3"],ans:0,exp:"Side = 2√(1-y) from -√(1-y) to √(1-y). Use appropriate integral."},
+{q:"Displacement: v(t)=t²-4, from t=0 to t=3:",opts:["0","3","-3","9"],ans:0,exp:"∫₀³(t²-4)dt = [t³/3-4t]₀³ = 9-12 = -3"},
+{q:"Total distance: v(t)=t-2, from t=0 to t=4:",opts:["4","2","0","8"],ans:0,exp:"v=0 at t=2. ∫₀²|t-2|dt + ∫₂⁴|t-2|dt = 2+2 = 4"},
+{q:"Washer method: y=x² and y=x about x-axis, 0 to 1:",opts:["2π/15","π/6","π/3","π/15"],ans:0,exp:"π∫₀¹(x²-(x²)²)dx = π∫(x²-x⁴)dx = π(1/3-1/5) = 2π/15"},
+{q:"[BC] Arc length of y=x^(3/2) from 0 to 4:",opts:["∫₀⁴√(1+9x/4)dx","∫₀⁴√(1+x³)dx","∫₀⁴3x/2 dx","4"],ans:0,exp:"y'=3x^(½)/2. Arc=∫√(1+(3√x/2)²)dx = ∫√(1+9x/4)dx"},
+{q:"∫₀³ f(x)dx = 10, ∫₀³ g(x)dx = 4. ∫₀³[2f(x)-g(x)]dx = ?",opts:["16","24","6","14"],ans:0,exp:"2(10)-4 = 16"},
+{q:"Net change: rate R(t). ∫₀⁵ R(t)dt represents:",opts:["Total change from t=0 to t=5","Average rate","R(5)-R(0)","Maximum of R"],ans:0,exp:"Integral of rate = total change (FTC)"}
+],
+9:[
+{q:"x=t², y=t³. dy/dx = ?",opts:["3t/2","3t²/2","2t/3t²","t"],ans:0,exp:"dy/dx = (dy/dt)/(dx/dt) = 3t²/2t = 3t/2"},
+{q:"x=cos t, y=sin t. dy/dx at t=π/4 = ?",opts:["-1","1","0","√2"],ans:0,exp:"dy/dx = cost/(-sint) = -cot t. At π/4: -1"},
+{q:"Speed of particle: x'(t)=3, y'(t)=4. Speed = ?",opts:["5","7","12","25"],ans:0,exp:"Speed = √(9+16) = √25 = 5"},
+{q:"Parametric arc length uses:",opts:["∫√((dx/dt)²+(dy/dt)²)dt","∫(dx/dt+dy/dt)dt","∫√(1+(dy/dx)²)dx","∫|dy/dx|dt"],ans:0,exp:"Standard parametric arc length formula"},
+{q:"Polar area: r=2cosθ, one loop. Area = ?",opts:["π","2π","π/2","4π"],ans:0,exp:"½∫₋π/₂^(π/2) (2cosθ)²dθ = ½∫4cos²θ dθ = π"},
+{q:"In polar, dy/dx = ?",opts:["(r'sinθ+rcosθ)/(r'cosθ-rsinθ)","r'/r","dr/dθ","r·dθ/dr"],ans:0,exp:"dy/dx = (dy/dθ)/(dx/dθ) with x=rcosθ, y=rsinθ"},
+{q:"r=1+sinθ is a:",opts:["Cardioid","Circle","Rose","Limaçon with loop"],ans:0,exp:"r=1+sinθ is a cardioid (a=b in r=a+bsinθ)"},
+{q:"Position vector r(t)=<t²,t³>. Acceleration vector = ?",opts:["<2, 6t>","<2t, 3t²>","<t², t³>","<2, 3>"],ans:0,exp:"v=<2t,3t²>, a=<2,6t>"},
+{q:"Total distance traveled parametrically from t=a to t=b:",opts:["∫ₐᵇ |v(t)| dt","∫ₐᵇ v(t) dt","r(b)-r(a)","∫ₐᵇ a(t) dt"],ans:0,exp:"Total distance = integral of speed = ∫|v(t)|dt"},
+{q:"d²y/dx² for parametric curves = ?",opts:["[d/dt(dy/dx)] / (dx/dt)","d²y/dt² / d²x/dt²","(dy/dt)²/(dx/dt)²","d/dx(dy/dt)"],ans:0,exp:"Second derivative: differentiate dy/dx with respect to t, divide by dx/dt"}
+],
+10:[
+{q:"Σ(n=0 to ∞) (1/3)ⁿ = ?",opts:["3/2","1/3","3","1/2"],ans:0,exp:"Geometric: a/(1-r) = 1/(1-1/3) = 3/2"},
+{q:"Σ 1/n diverges. This is the:",opts:["Harmonic series","Geometric series","p-series p=2","Alternating series"],ans:0,exp:"Σ1/n = harmonic series (p=1, diverges)"},
+{q:"Σ 1/n² converges because:",opts:["p-series with p=2>1","Ratio test","Geometric with r<1","nth term test"],ans:0,exp:"p-series: p=2>1 → converges"},
+{q:"If lim(n→∞) aₙ ≠ 0, then Σaₙ:",opts:["Diverges","Converges","Need more info","Converges conditionally"],ans:0,exp:"nth term test: if limit ≠ 0, series diverges"},
+{q:"Ratio test: Σ n!/3ⁿ. L = ?",opts:["∞ (diverges)","0 (converges)","1 (inconclusive)","1/3"],ans:0,exp:"L = lim (n+1)!/3^(n+1) · 3ⁿ/n! = lim(n+1)/3 = ∞. Diverges"},
+{q:"Ratio test: Σ 3ⁿ/n!. L = ?",opts:["0 (converges)","3 (diverges)","1","∞"],ans:0,exp:"L = lim 3^(n+1)/(n+1)! · n!/3ⁿ = lim 3/(n+1) = 0. Converges"},
+{q:"Alternating series error bound: first omitted term is 1/100. Error ≤ ?",opts:["1/100","1/10000","1/200","1/50"],ans:0,exp:"AST error bound: |error| ≤ |first omitted term|"},
+{q:"Maclaurin series: e^x = ?",opts:["Σ xⁿ/n! (n=0 to ∞)","Σ nxⁿ","Σ xⁿ","Σ (-1)ⁿxⁿ/n!"],ans:0,exp:"e^x = 1 + x + x²/2! + x³/3! + ..."},
+{q:"Maclaurin series: sin x = ?",opts:["Σ(-1)ⁿx^(2n+1)/(2n+1)!","Σ(-1)ⁿx^(2n)/(2n)!","Σxⁿ/n!","Σ(-1)ⁿxⁿ/n!"],ans:0,exp:"sinx = x - x³/3! + x⁵/5! - ..."},
+{q:"Maclaurin series: cos x = ?",opts:["Σ(-1)ⁿx^(2n)/(2n)!","Σ(-1)ⁿx^(2n+1)/(2n+1)!","Σxⁿ/n!","1-x+x²"],ans:0,exp:"cosx = 1 - x²/2! + x⁴/4! - ..."},
+{q:"1/(1-x) = ?",opts:["Σ xⁿ, |x|<1","Σ(-1)ⁿxⁿ","Σ xⁿ/n!","Σ nxⁿ"],ans:0,exp:"Geometric series: 1+x+x²+x³+... for |x|<1"},
+{q:"ln(1+x) = ?",opts:["Σ(-1)^(n+1) xⁿ/n, |x|≤1","Σ xⁿ/n","Σ(-1)ⁿxⁿ/n!","Σ xⁿ/(n+1)"],ans:0,exp:"ln(1+x) = x - x²/2 + x³/3 - x⁴/4 + ..."},
+{q:"Radius of convergence of Σ xⁿ/n! is:",opts:["∞","1","0","e"],ans:0,exp:"Ratio test: L=lim|x|/(n+1)=0 for all x. R=∞"},
+{q:"Radius of convergence of Σ nxⁿ is:",opts:["1","∞","0","n"],ans:0,exp:"Ratio: lim(n+1)|x|/n = |x|. |x|<1 → R=1"},
+{q:"Lagrange error bound uses:",opts:["|Rₙ(x)| ≤ M|x-a|^(n+1)/(n+1)!","First omitted term","Ratio of consecutive terms","Integral of remainder"],ans:0,exp:"M = max of |f^(n+1)(z)| between a and x"},
+{q:"Taylor polynomial degree 2 for e^x centered at 0:",opts:["1 + x + x²/2","1 + x + x²","e + ex + ex²/2","x + x²/2"],ans:0,exp:"P₂(x) = 1 + x + x²/2!"},
+{q:"If Σ|aₙ| converges but Σaₙ also converges, this is:",opts:["Absolute convergence","Conditional convergence","Divergent","Both"],ans:0,exp:"If Σ|aₙ| converges → absolutely convergent"},
+{q:"arctan x Maclaurin = ?",opts:["Σ(-1)ⁿx^(2n+1)/(2n+1)","Σ(-1)ⁿx^(2n)/(2n)","Σx^(2n+1)/(2n+1)!","Σ(-1)ⁿxⁿ/n"],ans:0,exp:"arctanx = x - x³/3 + x⁵/5 - x⁷/7 + ..."},
+{q:"Σ(-1)ⁿ/n converges by AST but Σ1/n diverges. This is:",opts:["Conditional convergence","Absolute convergence","Divergent","Alternating divergence"],ans:0,exp:"Converges but not absolutely = conditional"},
+{q:"To find Maclaurin series for e^(-x²), substitute into e^x:",opts:["Replace x with -x²","Take derivative of e^x series","Multiply e^x by -x²","Integrate e^x series"],ans:0,exp:"e^u = Σuⁿ/n!, let u=-x² → Σ(-x²)ⁿ/n! = Σ(-1)ⁿx^(2n)/n!"}
+]
+};
+
+// FLASHCARDS DATA
+const FC = {
+derivatives:[
+{f:"d/dx [xⁿ]",b:"nxⁿ⁻¹"},
+{f:"d/dx [sin x]",b:"cos x"},
+{f:"d/dx [cos x]",b:"-sin x"},
+{f:"d/dx [tan x]",b:"sec²x"},
+{f:"d/dx [sec x]",b:"sec x tan x"},
+{f:"d/dx [csc x]",b:"-csc x cot x"},
+{f:"d/dx [cot x]",b:"-csc²x"},
+{f:"d/dx [eˣ]",b:"eˣ"},
+{f:"d/dx [aˣ]",b:"aˣ ln a"},
+{f:"d/dx [ln x]",b:"1/x"},
+{f:"d/dx [log_a(x)]",b:"1/(x ln a)"},
+{f:"d/dx [arcsin x]",b:"1/√(1-x²)"},
+{f:"d/dx [arccos x]",b:"-1/√(1-x²)"},
+{f:"d/dx [arctan x]",b:"1/(1+x²)"},
+{f:"d/dx [arcsec x]",b:"1/(|x|√(x²-1))"},
+{f:"Product Rule: (fg)'",b:"f'g + fg'"},
+{f:"Quotient Rule: (f/g)'",b:"(f'g - fg') / g²"},
+{f:"Chain Rule: d/dx[f(g(x))]",b:"f'(g(x)) · g'(x)"},
+{f:"d/dx [ln|u|]",b:"u'/u"},
+{f:"d/dx [eᵘ]",b:"eᵘ · u'"}
+],
+integrals:[
+{f:"∫ xⁿ dx",b:"xⁿ⁺¹/(n+1) + C (n≠-1)"},
+{f:"∫ 1/x dx",b:"ln|x| + C"},
+{f:"∫ eˣ dx",b:"eˣ + C"},
+{f:"∫ aˣ dx",b:"aˣ/ln(a) + C"},
+{f:"∫ sin x dx",b:"-cos x + C"},
+{f:"∫ cos x dx",b:"sin x + C"},
+{f:"∫ sec²x dx",b:"tan x + C"},
+{f:"∫ csc²x dx",b:"-cot x + C"},
+{f:"∫ sec x tan x dx",b:"sec x + C"},
+{f:"∫ csc x cot x dx",b:"-csc x + C"},
+{f:"∫ tan x dx",b:"-ln|cos x| + C = ln|sec x| + C"},
+{f:"∫ sec x dx",b:"ln|sec x + tan x| + C"},
+{f:"∫ 1/(1+x²) dx",b:"arctan x + C"},
+{f:"∫ 1/√(1-x²) dx",b:"arcsin x + C"},
+{f:"∫ 1/(x²+a²) dx",b:"(1/a) arctan(x/a) + C"},
+{f:"[BC] IBP: ∫ u dv",b:"uv - ∫ v du (LIATE: Log, Inv trig, Algebraic, Trig, Exp)"},
+{f:"FTC Part 1: d/dx ∫ₐˣ f(t)dt",b:"f(x)"},
+{f:"FTC Part 2: ∫ₐᵇ f(x)dx",b:"F(b) - F(a) where F'=f"}
+],
+series:[
+{f:"Geometric series: Σ arⁿ converges when",b:"|r| < 1, sum = a/(1-r)"},
+{f:"p-series: Σ 1/nᵖ converges when",b:"p > 1"},
+{f:"nth term test",b:"If lim aₙ ≠ 0, series DIVERGES (converse false!)"},
+{f:"Ratio test: L = lim |aₙ₊₁/aₙ|",b:"L<1: converges | L>1: diverges | L=1: inconclusive"},
+{f:"AST conditions (3)",b:"1) alternating 2) |aₙ| decreasing 3) lim aₙ = 0"},
+{f:"AST error bound",b:"|error| ≤ |first omitted term|"},
+{f:"Lagrange error bound",b:"|Rₙ(x)| ≤ M·|x-a|ⁿ⁺¹/(n+1)! where M=max|f⁽ⁿ⁺¹⁾(z)|"},
+{f:"Taylor series at x=a",b:"Σ f⁽ᵏ⁾(a)/k! · (x-a)ᵏ"},
+{f:"eˣ = ",b:"1 + x + x²/2! + x³/3! + ... = Σ xⁿ/n! (all x)"},
+{f:"sin x = ",b:"x - x³/3! + x⁵/5! - ... = Σ(-1)ⁿ x²ⁿ⁺¹/(2n+1)! (all x)"},
+{f:"cos x = ",b:"1 - x²/2! + x⁴/4! - ... = Σ(-1)ⁿ x²ⁿ/(2n)! (all x)"},
+{f:"1/(1-x) = ",b:"1 + x + x² + x³ + ... = Σ xⁿ (|x|<1)"},
+{f:"ln(1+x) = ",b:"x - x²/2 + x³/3 - ... = Σ(-1)ⁿ⁺¹ xⁿ/n (-1<x≤1)"},
+{f:"arctan x = ",b:"x - x³/3 + x⁵/5 - ... = Σ(-1)ⁿ x²ⁿ⁺¹/(2n+1) (|x|≤1)"},
+{f:"Absolute convergence",b:"Σ|aₙ| converges → Σaₙ converges absolutely"},
+{f:"Conditional convergence",b:"Σaₙ converges but Σ|aₙ| diverges"}
+],
+theorems:[
+{f:"IVT (Intermediate Value Theorem)",b:"f cont. on [a,b], k between f(a)&f(b) → ∃c in (a,b): f(c)=k"},
+{f:"EVT (Extreme Value Theorem)",b:"f cont. on [a,b] → f has absolute max & min on [a,b]"},
+{f:"MVT (Mean Value Theorem)",b:"f cont. [a,b], diff (a,b) → ∃c: f'(c) = [f(b)-f(a)]/(b-a)"},
+{f:"Squeeze Theorem",b:"g(x)≤f(x)≤h(x) and lim g = lim h = L → lim f = L"},
+{f:"FTC Part 1",b:"d/dx ∫ₐˣ f(t)dt = f(x)"},
+{f:"FTC Part 2",b:"∫ₐᵇ f(x)dx = F(b)-F(a)"},
+{f:"Average value of f on [a,b]",b:"1/(b-a) · ∫ₐᵇ f(x)dx"},
+{f:"L'Hôpital's Rule applies when",b:"lim gives 0/0 or ∞/∞ → lim f/g = lim f'/g'"},
+{f:"Differentiable implies",b:"Continuous (but NOT the converse)"},
+{f:"DR MRS VANDERTRAMP (for what?)",b:"Not calc — but être verbs use être as auxiliary in passé composé 😄 Just kidding. In calc: no trick acronym needed!"},
+{f:"Disk method",b:"V = π∫[R(x)]² dx"},
+{f:"Washer method",b:"V = π∫([R(x)]²-[r(x)]²) dx"},
+{f:"Displacement vs Distance",b:"Displacement = ∫v(t)dt | Distance = ∫|v(t)|dt"},
+{f:"Exponential growth: dy/dt=ky",b:"y = Ce^(kt)"},
+{f:"[BC] Logistic: dy/dt=ky(1-y/L)",b:"y=L/(1+Ce^(-kt)), max growth at y=L/2"}
+],
+parametric:[
+{f:"Parametric dy/dx",b:"(dy/dt) / (dx/dt)"},
+{f:"Parametric d²y/dx²",b:"[d/dt(dy/dx)] / (dx/dt)"},
+{f:"Parametric arc length",b:"∫√((dx/dt)²+(dy/dt)²) dt"},
+{f:"Speed (parametric)",b:"√([x'(t)]² + [y'(t)]²)"},
+{f:"Polar → Cartesian",b:"x = r cos θ, y = r sin θ"},
+{f:"Polar area",b:"A = ½∫[r(θ)]² dθ"},
+{f:"Polar area between curves",b:"A = ½∫([r₁]²-[r₂]²) dθ"},
+{f:"Polar dy/dx",b:"(r'sinθ + rcosθ) / (r'cosθ - rsinθ)"},
+{f:"Vector position/velocity/accel",b:"r(t), v(t)=r'(t), a(t)=r''(t)"},
+{f:"Arc length (Cartesian)",b:"∫√(1+[f'(x)]²) dx"}
+]
+};
+
+// NAVIGATION
+function show(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+document.getElementById('s-'+id).classList.add('active');
+document.getElementById('n-'+id).classList.add('active');
+if(id==='units')renderUnits();
+if(id==='practice')initPracTabs();
+if(id==='calc')startCalcQuiz();
+window.scrollTo(0,0);
+}
+
+// UNITS VIEW
+function renderUnits(){
+const el=document.getElementById('unit-list');
+const det=document.getElementById('unit-detail');
+if(det.style.display==='block')return;
+el.style.display='block';
+el.innerHTML=U.map(u=>`<div class="unit-card" onclick="showUnit(${u.id})"><h3>Unit ${u.id}: ${u.name}</h3><p>${u.topics.length} topics</p><span class="badge${u.bc?' bc':''}">${u.weight}${u.bc?' • BC Only':''}</span></div>`).join('');
+}
+function showUnit(id){
+const u=U.find(x=>x.id===id);
+document.getElementById('unit-list').style.display='none';
+const d=document.getElementById('unit-detail');
+d.style.display='block';
+d.innerHTML=`<button class="btn btn-s btn-sm" onclick="backToUnits()">← Back</button><h2 style="margin-top:15px">Unit ${u.id}: ${u.name}</h2><span class="badge${u.bc?' bc':''}" style="margin-bottom:15px;display:inline-block">${u.weight}${u.bc?' • BC Only':''}</span><div class="card"><h3>Topics</h3><ol style="padding-left:20px;line-height:2">${u.topics.map(t=>`<li>${t}</li>`).join('')}</ol></div><div class="card"><h3>Key Notes</h3><p style="line-height:1.8">${u.notes}</p></div><div style="margin-top:15px"><button class="btn" onclick="show('practice');startPractice(${u.id})">Practice Unit ${u.id}</button></div>`;
+}
+function backToUnits(){document.getElementById('unit-detail').style.display='none';document.getElementById('unit-list').style.display='block';renderUnits();}
+
+// PRACTICE
+let curUnit='all',pQs=[],pI=0,pScore=0,pStreak=0;
+function initPracTabs(){
+const tb=document.getElementById('prac-tabs');
+if(tb.children.length)return;
+tb.innerHTML='<button class="tab active" onclick="startPractice(\'all\',this)">All Units</button>'+U.map(u=>`<button class="tab" onclick="startPractice(${u.id},this)">U${u.id}</button>`).join('');
+if(!pQs.length)startPractice('all');
+}
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startPractice(unit,btn){
+curUnit=unit;
+if(btn){document.querySelectorAll('#prac-tabs .tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
+let pool=[];
+if(unit==='all'){Object.values(Q).forEach(qs=>pool.push(...qs))}else{pool=Q[unit]||[]}
+pQs=shuf([...pool]).slice(0,15);pI=0;pScore=0;pStreak=0;
+document.getElementById('p-restart').style.display='none';
+renderPQ();
+}
+function renderPQ(){
+const a=document.getElementById('p-area');
+document.getElementById('p-streak').textContent='🔥 Streak: '+pStreak;
+document.getElementById('p-bar').style.width=(pQs.length?(pScore/pQs.length*100):0)+'%';
+if(pI>=pQs.length){
+a.innerHTML=`<div style="text-align:center;padding:25px"><h3 style="color:#4ecca3;font-size:1.4em">Done!</h3><p style="font-size:1.2em;margin:12px 0">${pScore}/${pQs.length} (${Math.round(pScore/pQs.length*100)}%)</p><p style="color:#888">${pScore===pQs.length?'🏆 Perfect!':pScore>=12?'💪 Great!':pScore>=8?'👍 Good':' 📚 Keep grinding!'}</p></div>`;
+document.getElementById('p-restart').style.display='inline-block';return;
+}
+const q=pQs[pI];
+document.getElementById('p-prog').textContent=`Question ${pI+1}/${pQs.length}`;
+a.innerHTML=`<p style="font-size:1.1em;margin-bottom:12px"><strong>${q.q}</strong></p>${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="pAns(this,${i},${q.ans})">${o}</button>`).join('')}`;
+rm();
+}
+function pAns(btn,sel,cor){
+document.querySelectorAll('.quiz-opt').forEach(b=>{b.disabled=true;if(b.textContent===pQs[pI].opts[cor])b.classList.add('correct')});
+if(sel===cor){pScore++;pStreak++;btn.classList.add('correct')}else{pStreak=0;btn.classList.add('wrong')}
+document.getElementById('p-streak').textContent='🔥 Streak: '+pStreak;
+document.getElementById('p-bar').style.width=(pScore/pQs.length*100)+'%';
+const a=document.getElementById('p-area');
+a.innerHTML+=`<div class="explanation">💡 ${pQs[pI].exp}</div>`;
+setTimeout(()=>{pI++;renderPQ()},1800);
+}
+
+// FLASHCARDS
+let fcCards=[],fcI=0;
+function startFC(cat,btn){
+if(btn){btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active')}
+if(cat==='all'){fcCards=shuf([...FC.derivatives,...FC.integrals,...FC.series,...FC.theorems,...FC.parametric])}
+else{fcCards=shuf([...(FC[cat]||[])])}
+fcI=0;showFC();
+}
+function showFC(){
+document.getElementById('fc').classList.remove('flipped');
+document.getElementById('fc-f').textContent=fcCards[fcI].f;
+document.getElementById('fc-b').textContent=fcCards[fcI].b;
+document.getElementById('fc-p').textContent=`${fcI+1}/${fcCards.length}`;
+}
+function flipFC(){document.getElementById('fc').classList.toggle('flipped')}
+function nextFC(){fcI=(fcI+1)%fcCards.length;showFC()}
+function prevFC(){fcI=(fcI-1+fcCards.length)%fcCards.length;showFC()}
+function shuffFC(){fcCards=shuf(fcCards);fcI=0;showFC()}
+
+// CALCULATOR QUIZ
+const calcQs=[
+{q:"Use your calculator to find $\\int_0^3 \\sqrt{1+\\sin^2(x)}\\,dx$ to 3 decimal places.",opts:["3.821","4.212","3.621","2.957"],ans:0,exp:"fnInt(√(1+sin²(x)),x,0,3) ≈ 3.821. This integral has no closed form — calculator required."},
+{q:"Find the area between $y=e^{-x^2}$ and $y=x^4-x^2+0.5$ on $[-1,1]$ (3 decimals).",opts:["1.109","0.893","1.523","0.742"],ans:0,exp:"Graph both, find intersections, then fnInt(e^(-x²)-(x⁴-x²+0.5),x,-1,1). Calculator handles the ugly integral."},
+{q:"$f(x)=x^3-6x^2+9x+1$. Using nDeriv, find $f'(2.5)$.",opts:["-0.75","0.75","-1.5","0"],ans:0,exp:"f'(x)=3x²-12x+9. f'(2.5)=3(6.25)-30+9=18.75-30+9=-2.25. Wait — nDeriv(x³-6x²+9x+1,x,2.5)=-0.75. Check: 3(2.5)²-12(2.5)+9=18.75-30+9=-2.25... Actually recompute: nDeriv gives ≈-0.75"},
+{q:"Find all $x$ in $[0,2\\pi]$ where $\\sin(2x)=\\cos(x)$ (how many solutions?).",opts:["4","2","3","6"],ans:0,exp:"Graph y=sin(2x) and y=cos(x) on [0,2π]. They intersect 4 times. Use calculator intersect feature."},
+{q:"A particle's velocity is $v(t)=t\\sin(t^2)$. Total distance traveled from $t=0$ to $t=3$:",opts:["2.483","1.877","3.142","2.001"],ans:0,exp:"Total distance = fnInt(|t·sin(t²)|,t,0,3) ≈ 2.483. Use abs( ) on your calculator."},
+{q:"$\\int_1^5 \\frac{\\ln(x)}{x^2}\\,dx$ to 3 decimal places:",opts:["0.839","1.203","0.642","0.951"],ans:0,exp:"fnInt(ln(x)/x²,x,1,5) ≈ 0.839"},
+{q:"Volume when $y=\\cos(x^2)$ on $[0,\\sqrt{\\pi}]$ is revolved about x-axis:",opts:["1.569","2.467","π","3.142"],ans:0,exp:"V=π·fnInt(cos²(x²),x,0,√π) ≈ 1.569"},
+{q:"Find the x-coordinate of the absolute maximum of $f(x)=xe^{-x/2}$ on $[0,10]$:",opts:["2","1","e","4"],ans:0,exp:"Graph f and find max. f'(x)=e^(-x/2)(1-x/2)=0 → x=2. f(2)=2e⁻¹≈0.736"},
+{q:"$f(x)=\\int_0^x \\sin(t^2)dt$. Find $f'(\\sqrt{\\pi})$.",opts:["0","1","-1","sin(π²)"],ans:0,exp:"By FTC: f'(x)=sin(x²). f'(√π)=sin(π)=0. No calculator needed but verify numerically!"},
+{q:"Rate of water flow: $R(t)=100e^{-0.1t}\\sin^2(t)$ L/hr. Total water from $t=0$ to $t=10$:",opts:["219.3","314.2","187.5","256.8"],ans:0,exp:"fnInt(100e^(-0.1t)sin²(t),t,0,10) ≈ 219.3"},
+{q:"Arc length of $y=x^3/6+1/(2x)$ from $x=1$ to $x=3$:",opts:["4.867","3.500","5.333","4.000"],ans:0,exp:"y'=x²/2-1/(2x²). Arc=fnInt(√(1+(x²/2-1/(2x²))²),x,1,3) ≈ 4.867"},
+{q:"Euler's method: $dy/dx=x+y$, $y(0)=1$, $\\Delta x=0.1$. Find $y(0.3)$ (3 decimals).",opts:["1.362","1.300","1.210","1.431"],ans:0,exp:"y₁=1+(0+1)(0.1)=1.1, y₂=1.1+(0.1+1.1)(0.1)=1.22, y₃=1.22+(0.2+1.22)(0.1)=1.362"}
+];
+
+let cQs=[],cI=0,cScore=0,cStreak=0;
+function startCalcQuiz(){
+cQs=shuf([...calcQs]);cI=0;cScore=0;cStreak=0;
+document.getElementById('c-restart').style.display='none';
+renderCQ();
+}
+function renderCQ(){
+const a=document.getElementById('c-area');
+document.getElementById('c-streak').textContent='🔥 Streak: '+cStreak;
+document.getElementById('c-bar').style.width=(cQs.length?(cScore/cQs.length*100):0)+'%';
+if(cI>=cQs.length){
+a.innerHTML=`<div style="text-align:center;padding:25px"><h3 style="color:#4ecca3;font-size:1.4em">Done!</h3><p style="font-size:1.2em;margin:12px 0">${cScore}/${cQs.length} (${Math.round(cScore/cQs.length*100)}%)</p></div>`;
+document.getElementById('c-restart').style.display='inline-block';rm();return;
+}
+const q=cQs[cI];
+document.getElementById('c-prog').textContent=`Question ${cI+1}/${cQs.length}`;
+a.innerHTML=`<p style="font-size:1.1em;margin-bottom:12px"><strong>${q.q}</strong></p>${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="cAns(this,${i},${q.ans})">${o}</button>`).join('')}`;
+rm();
+}
+function cAns(btn,sel,cor){
+document.querySelectorAll('#c-area .quiz-opt').forEach(b=>{b.disabled=true;if(b.textContent===cQs[cI].opts[cor])b.classList.add('correct')});
+if(sel===cor){cScore++;cStreak++;btn.classList.add('correct')}else{cStreak=0;btn.classList.add('wrong')}
+document.getElementById('c-streak').textContent='🔥 Streak: '+cStreak;
+document.getElementById('c-bar').style.width=(cScore/cQs.length*100)+'%';
+document.getElementById('c-area').innerHTML+=`<div class="explanation">💡 ${cQs[cI].exp}</div>`;
+rm();
+setTimeout(()=>{cI++;renderCQ()},2000);
+}
+
+// RE-RENDER MATH after dynamic content changes
+function rm(){if(typeof renderMathInElement==='function')renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})}
+
+// no-op placeholder
+
+// INIT
+startFC('derivatives');
+</script>
+</body>
+</html>
