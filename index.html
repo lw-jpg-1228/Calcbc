@@ -164,6 +164,7 @@ tr:hover{background:#1a1a2a}
 <a href="#" onclick="cShow('practice')" id="cn-practice">Practice</a>
 <a href="#" onclick="cShow('flash')" id="cn-flash">Flashcards</a>
 <a href="#" onclick="cShow('calc')" id="cn-calc">Calculator</a>
+<a href="#" onclick="cShow('notes')" id="cn-notes">📝 Notes</a>
 </div>
 </nav>
 <!-- HOME -->
@@ -277,6 +278,632 @@ tr:hover{background:#1a1a2a}
 </div>
 </div>
 </div>
+</div>
+</div>
+
+
+<!-- NOTES -->
+<div class="c-section" id="s-notes">
+<div class="container">
+<h2>📝 Full Course Notes</h2>
+<div class="card">
+<p style="color:#f0a500;margin-bottom:15px;">Comprehensive notes for every unit — click a unit below to expand.</p>
+<p style="color:#888;">Based on the AP Calculus BC curriculum. Use alongside practice questions and flashcards.</p>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 0: Precalculus Review</h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Precalculus Review — What You Need Before Calc</h4>
+<b>🔢 Algebra Essentials</b><br>
+• Factoring: difference of squares (a²-b² = (a-b)(a+b)), sum/difference of cubes, grouping<br>
+• Completing the square: x² + bx + (b/2)² = (x + b/2)²<br>
+• Rationalizing: multiply by conjugate to clear radicals<br>
+• Domain: all x where function is defined (watch for ÷0, √negative, log(≤0))<br><br>
+
+<b>📐 Trigonometry</b><br>
+• <b>Unit circle:</b> Know exact values for 0, π/6, π/4, π/3, π/2 and all quadrants<br>
+• <b>Identities you MUST know:</b><br>
+&nbsp;&nbsp;sin²x + cos²x = 1<br>
+&nbsp;&nbsp;tan²x + 1 = sec²x<br>
+&nbsp;&nbsp;1 + cot²x = csc²x<br>
+&nbsp;&nbsp;sin(2x) = 2sinx·cosx<br>
+&nbsp;&nbsp;cos(2x) = cos²x - sin²x = 2cos²x - 1 = 1 - 2sin²x<br>
+&nbsp;&nbsp;sin²x = (1 - cos2x)/2 &nbsp;(power-reducing, used in integration)<br>
+&nbsp;&nbsp;cos²x = (1 + cos2x)/2<br><br>
+
+<b>📈 Functions</b><br>
+• Polynomial end behavior: leading term determines behavior as x→±∞<br>
+• Rational functions: horizontal asymptotes (compare degrees), vertical asymptotes (denominator = 0)<br>
+• Exponential: y = aˣ grows/decays; y = eˣ is its own derivative (key for calc!)<br>
+• Logarithmic: y = ln(x) is inverse of eˣ; domain x > 0<br>
+• Piecewise functions: check behavior at boundary points<br>
+• Composition: (f∘g)(x) = f(g(x)) — crucial for chain rule<br>
+• Inverse functions: f(f⁻¹(x)) = x, reflect over y = x<br><br>
+
+<b>⚡ Key Skills for Calc</b><br>
+• Simplify complex fractions (common denominator, then flip)<br>
+• Work with absolute value: |x| = x if x≥0, -x if x<0<br>
+• Understand function transformations (shifts, stretches, reflections)<br>
+• Convert between radians and degrees (π rad = 180°)</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 1: Limits & Continuity <span style="color:#888;font-size:.7em;">(4-7%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 1: Limits & Continuity (4-7% of exam)</h4>
+
+<b>🎯 What is a Limit?</b><br>
+The value f(x) <em>approaches</em> as x gets close to c — even if f(c) doesn't exist there.<br>
+• lim(x→c) f(x) = L means: as x → c from BOTH sides, f(x) → L<br>
+• The limit can exist even if f(c) is undefined or different from L<br><br>
+
+<b>📊 Finding Limits</b><br>
+<b>1. Direct substitution</b> — always try this first. If you get a number, that's the answer.<br>
+<b>2. Indeterminate form 0/0?</b> Try these techniques:<br>
+&nbsp;&nbsp;• <b>Factor and cancel:</b> lim(x→3) (x²-9)/(x-3) = lim(x→3) (x+3) = 6<br>
+&nbsp;&nbsp;• <b>Rationalize:</b> multiply by conjugate (great for √ expressions)<br>
+&nbsp;&nbsp;• <b>Common denominator:</b> combine complex fractions first<br>
+<b>3. Limits at infinity (horizontal asymptotes):</b><br>
+&nbsp;&nbsp;• deg(top) < deg(bottom) → limit = 0<br>
+&nbsp;&nbsp;• deg(top) = deg(bottom) → limit = leading coefficients ratio<br>
+&nbsp;&nbsp;• deg(top) > deg(bottom) → limit = ±∞ (no HA)<br><br>
+
+<b>⭐ Special Limits (MEMORIZE)</b><br>
+• lim(x→0) sin(x)/x = <b>1</b><br>
+• lim(x→0) (1-cos x)/x = <b>0</b><br>
+• lim(x→0) (1-cos x)/x² = <b>1/2</b><br>
+• lim(x→∞) (1+1/n)ⁿ = <b>e</b><br>
+• lim(x→0) (eˣ-1)/x = <b>1</b><br><br>
+
+<b>↔️ One-Sided Limits</b><br>
+• lim(x→c⁺) = limit from the RIGHT<br>
+• lim(x→c⁻) = limit from the LEFT<br>
+• Two-sided limit exists ⟺ left limit = right limit<br><br>
+
+<b>🔗 Continuity</b><br>
+f is continuous at x = c if ALL THREE hold:<br>
+&nbsp;&nbsp;1. f(c) is defined<br>
+&nbsp;&nbsp;2. lim(x→c) f(x) exists<br>
+&nbsp;&nbsp;3. lim(x→c) f(x) = f(c)<br><br>
+
+<b>Types of discontinuity:</b><br>
+• <b>Removable (hole):</b> limit exists but f(c) is missing or wrong value<br>
+• <b>Jump:</b> left and right limits exist but aren't equal<br>
+• <b>Infinite:</b> function → ±∞ (vertical asymptote)<br><br>
+
+<b>📌 Squeeze Theorem</b><br>
+If g(x) ≤ f(x) ≤ h(x) near c, and lim g(x) = lim h(x) = L, then lim f(x) = L<br>
+Classic example: lim(x→0) x·sin(1/x) = 0 (squeeze between -|x| and |x|)<br><br>
+
+<b>📌 Intermediate Value Theorem (IVT)</b><br>
+If f is continuous on [a,b] and k is between f(a) and f(b), then ∃ c in (a,b) with f(c) = k.<br>
+• Used to guarantee a root exists: if f(a) and f(b) have opposite signs → f(c) = 0 for some c<br>
+• <b>Requirements:</b> f must be CONTINUOUS on the closed interval<br><br>
+
+<b>⚠️ Common Exam Mistakes</b><br>
+• Forgetting that limit ≠ function value (limit can exist at a hole)<br>
+• Not checking BOTH sides for piecewise functions<br>
+• Misidentifying asymptotes: HA is about x→∞, VA is where denominator→0</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 2: Differentiation: Definition & Properties <span style="color:#888;font-size:.7em;">(4-7%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 2: Differentiation — Definition & Basic Rules (4-7%)</h4>
+
+<b>📐 What is a Derivative?</b><br>
+The derivative f'(x) gives the <b>instantaneous rate of change</b> (slope of tangent line) at any point.<br>
+• <b>Limit definition:</b> f'(x) = lim(h→0) [f(x+h) - f(x)] / h<br>
+• <b>Alternate form:</b> f'(a) = lim(x→a) [f(x) - f(a)] / (x - a)<br>
+• Geometrically: slope of the tangent line at x = a<br><br>
+
+<b>⚡ Differentiability</b><br>
+• Differentiable at a point ⟹ Continuous at that point (but NOT the reverse!)<br>
+• NOT differentiable at: corners/cusps, vertical tangents, discontinuities<br><br>
+
+<b>📋 Basic Derivative Rules</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Derivative</th></tr>
+<tr><td>c (constant)</td><td>0</td></tr>
+<tr><td>xⁿ</td><td>nxⁿ⁻¹ (Power Rule)</td></tr>
+<tr><td>cf(x)</td><td>cf'(x)</td></tr>
+<tr><td>f(x) ± g(x)</td><td>f'(x) ± g'(x)</td></tr>
+<tr><td>f(x)·g(x)</td><td>f'g + fg' (Product Rule)</td></tr>
+<tr><td>f(x)/g(x)</td><td>(f'g - fg')/g² (Quotient Rule)</td></tr>
+</table><br>
+
+<b>📋 Trig Derivatives (MEMORIZE ALL)</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Derivative</th></tr>
+<tr><td>sin x</td><td>cos x</td></tr>
+<tr><td>cos x</td><td>-sin x</td></tr>
+<tr><td>tan x</td><td>sec²x</td></tr>
+<tr><td>cot x</td><td>-csc²x</td></tr>
+<tr><td>sec x</td><td>sec x tan x</td></tr>
+<tr><td>csc x</td><td>-csc x cot x</td></tr>
+</table><br>
+
+<b>📋 Exponential & Log Derivatives</b><br>
+• d/dx[eˣ] = eˣ<br>
+• d/dx[aˣ] = aˣ · ln(a)<br>
+• d/dx[ln x] = 1/x<br>
+• d/dx[log_a(x)] = 1/(x·ln a)<br><br>
+
+<b>💡 Product Rule Memory Trick</b><br>
+(fg)' = "first times derivative of second + second times derivative of first"<br>
+Example: d/dx[x²·sin x] = x²·cos x + 2x·sin x<br><br>
+
+<b>💡 Quotient Rule Memory Trick</b><br>
+"Lo d-Hi minus Hi d-Lo over Lo-Lo" = (g·f' - f·g') / g²<br><br>
+
+<b>⚠️ Exam Tips</b><br>
+• Know the limit definition — it appears on FRQs<br>
+• Power rule works for negative and fractional exponents: d/dx[1/x] = d/dx[x⁻¹] = -x⁻²<br>
+• d/dx[√x] = d/dx[x^(1/2)] = 1/(2√x)</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 3: Differentiation: Composite, Implicit, Inverse <span style="color:#888;font-size:.7em;">(4-7%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 3: Differentiation — Composite, Implicit, Inverse (4-7%)</h4>
+
+<b>⛓️ Chain Rule (THE most important rule)</b><br>
+d/dx[f(g(x))] = f'(g(x)) · g'(x)<br>
+"Derivative of the outside (keep inside) × derivative of the inside"<br><br>
+
+<b>Examples:</b><br>
+• d/dx[sin(3x)] = cos(3x) · 3 = 3cos(3x)<br>
+• d/dx[e^(2x)] = e^(2x) · 2 = 2e^(2x)<br>
+• d/dx[(x²+1)⁵] = 5(x²+1)⁴ · 2x = 10x(x²+1)⁴<br>
+• d/dx[ln(x²)] = (1/x²) · 2x = 2/x<br>
+• d/dx[√(sin x)] = cos x / (2√(sin x))<br><br>
+
+<b>🔄 Implicit Differentiation</b><br>
+When y is not isolated — differentiate both sides with respect to x, treat y as a function of x.<br>
+• Every time you differentiate a y term, multiply by dy/dx<br>
+• Then solve for dy/dx<br><br>
+<b>Example:</b> x² + y² = 25<br>
+2x + 2y·(dy/dx) = 0 → dy/dx = -x/y<br><br>
+
+<b>🔀 Inverse Function Derivatives</b><br>
+If g = f⁻¹, then: <b>g'(x) = 1 / f'(g(x))</b><br>
+• You need to know f' AND the value of g(x) = f⁻¹(x)<br>
+• Example: f(2) = 5, f'(2) = 3 → g'(5) = 1/f'(g(5)) = 1/f'(2) = 1/3<br><br>
+
+<b>📋 Inverse Trig Derivatives (MEMORIZE)</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Derivative</th></tr>
+<tr><td>arcsin x</td><td>1/√(1-x²)</td></tr>
+<tr><td>arccos x</td><td>-1/√(1-x²)</td></tr>
+<tr><td>arctan x</td><td>1/(1+x²)</td></tr>
+<tr><td>arcsec x</td><td>1/(|x|√(x²-1))</td></tr>
+</table><br>
+
+<b>📈 Higher-Order Derivatives</b><br>
+• f''(x) = derivative of f'(x) → gives acceleration, concavity<br>
+• Example: f(x) = e^(3x) → f'(x) = 3e^(3x) → f''(x) = 9e^(3x)<br><br>
+
+<b>🧮 Logarithmic Differentiation</b><br>
+For y = xˣ or complex products: take ln of both sides first<br>
+y = xˣ → ln y = x·ln x → y'/y = ln x + 1 → y' = xˣ(ln x + 1)<br><br>
+
+<b>⚠️ Common Mistakes</b><br>
+• Forgetting the chain rule (the #1 error on the AP exam!)<br>
+• Implicit: forgetting dy/dx when differentiating y terms<br>
+• Inverse trig: mixing up arcsin and arctan derivatives</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 4: Contextual Applications of Differentiation <span style="color:#888;font-size:.7em;">(6-9%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 4: Contextual Applications of Differentiation (6-9%)</h4>
+
+<b>🚗 Motion Problems (Position/Velocity/Acceleration)</b><br>
+• Position: s(t) → where the particle IS<br>
+• Velocity: v(t) = s'(t) → how fast and which direction<br>
+• Acceleration: a(t) = v'(t) = s''(t) → how velocity changes<br>
+• <b>Speed</b> = |v(t)| (always positive)<br>
+• <b>Speeding up:</b> v(t) and a(t) have SAME sign<br>
+• <b>Slowing down:</b> v(t) and a(t) have OPPOSITE signs<br>
+• <b>At rest:</b> v(t) = 0<br>
+• <b>Changes direction:</b> v(t) changes sign<br><br>
+
+<b>🔗 Related Rates (4-step process)</b><br>
+1. Draw a picture, identify all variables and rates<br>
+2. Write an equation relating the variables<br>
+3. Differentiate BOTH sides with respect to time (d/dt) — chain rule!<br>
+4. Plug in known values and solve for the unknown rate<br><br>
+<b>Common setups:</b><br>
+• Ladder sliding: x² + y² = L² → 2x(dx/dt) + 2y(dy/dt) = 0<br>
+• Expanding circle: A = πr² → dA/dt = 2πr(dr/dt)<br>
+• Cone filling: V = (1/3)πr²h (often r and h are related)<br>
+• Shadow problems: use similar triangles<br><br>
+
+<b>📏 Linearization (Local Linear Approximation)</b><br>
+L(x) = f(a) + f'(a)(x - a)<br>
+• This is the tangent line at x = a, used to approximate f(x) near a<br>
+• Example: approximate √4.1: f(x)=√x, a=4, f'(x)=1/(2√x)<br>
+&nbsp;&nbsp;L(4.1) = 2 + (1/4)(0.1) = 2.025<br><br>
+
+<b>🏥 L'Hôpital's Rule</b><br>
+If lim f(x)/g(x) gives <b>0/0</b> or <b>∞/∞</b>, then:<br>
+lim f(x)/g(x) = lim f'(x)/g'(x)<br><br>
+• Can apply multiple times if still indeterminate<br>
+• <b>Other forms:</b> 0·∞ → rewrite as fraction. ∞-∞ → combine fractions. 1^∞, 0⁰, ∞⁰ → take ln first<br>
+• lim(x→∞)(1+k/x)ˣ = eᵏ (standard form)<br>
+• lim(x→0) x·ln x = 0 (rewrite as ln x/(1/x), then L'Hôp)<br><br>
+
+<b>⚠️ Exam Traps</b><br>
+• Related rates: don't plug in values BEFORE differentiating<br>
+• L'Hôpital: only works for 0/0 or ∞/∞ — check the form first!<br>
+• Speed ≠ velocity (speed = |velocity|)</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 5: Analytical Applications of Differentiation <span style="color:#888;font-size:.7em;">(8-11%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 5: Analytical Applications of Differentiation (8-11%)</h4>
+
+<b>📌 Mean Value Theorem (MVT)</b><br>
+If f is continuous on [a,b] and differentiable on (a,b), then:<br>
+∃ c in (a,b) such that f'(c) = [f(b) - f(a)] / (b - a)<br>
+• "There's a point where the instantaneous rate = the average rate"<br>
+• <b>Rolle's Theorem:</b> special case where f(a) = f(b) → f'(c) = 0<br><br>
+
+<b>📌 Extreme Value Theorem (EVT)</b><br>
+If f is continuous on [a,b], then f has an absolute max AND absolute min on [a,b].<br><br>
+
+<b>🔍 Finding Extrema</b><br>
+<b>Critical points:</b> where f'(x) = 0 or f'(x) is undefined<br><br>
+<b>Candidates Test (closed interval [a,b]):</b><br>
+1. Find all critical points in (a,b)<br>
+2. Evaluate f at each critical point AND at endpoints a, b<br>
+3. Largest = absolute max, smallest = absolute min<br><br>
+
+<b>First Derivative Test:</b><br>
+• f' changes + to − at c → local MAX<br>
+• f' changes − to + at c → local MIN<br>
+• f' doesn't change sign → neither<br><br>
+
+<b>Second Derivative Test:</b><br>
+At critical point c (where f'(c) = 0):<br>
+• f''(c) < 0 → concave DOWN → local MAX 🏔️<br>
+• f''(c) > 0 → concave UP → local MIN 🏜️<br>
+• f''(c) = 0 → inconclusive (use first derivative test)<br><br>
+
+<b>📈 Curve Sketching Checklist</b><br>
+<table style="margin:8px 0">
+<tr><th>f'(x)</th><th>Meaning for f</th></tr>
+<tr><td>f' > 0</td><td>f is INCREASING ↗</td></tr>
+<tr><td>f' < 0</td><td>f is DECREASING ↘</td></tr>
+<tr><td>f' = 0 or DNE</td><td>Critical point (possible max/min)</td></tr>
+</table>
+<table style="margin:8px 0">
+<tr><th>f''(x)</th><th>Meaning for f</th></tr>
+<tr><td>f'' > 0</td><td>f is CONCAVE UP ∪ (holds water)</td></tr>
+<tr><td>f'' < 0</td><td>f is CONCAVE DOWN ∩</td></tr>
+<tr><td>f'' = 0 and sign change</td><td>INFLECTION POINT</td></tr>
+</table><br>
+
+<b>🎯 Optimization Problems (5-step process)</b><br>
+1. Draw a picture, define variables<br>
+2. Write the function to optimize<br>
+3. Write a constraint equation, use it to get one variable<br>
+4. Take derivative, set = 0, solve for critical point<br>
+5. Verify it's a max/min (second derivative test or domain argument)<br><br>
+
+<b>⚠️ Common Mistakes</b><br>
+• Forgetting endpoints in candidates test<br>
+• Confusing f, f', and f'' (what each tells you)<br>
+• Inflection point: f'' must CHANGE SIGN (f''=0 alone is not enough)</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 6: Integration & Accumulation <span style="color:#888;font-size:.7em;">(17-20%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 6: Integration & Accumulation of Change (17-20%) — BIGGEST unit!</h4>
+
+<b>🧱 Riemann Sums</b><br>
+Approximate ∫f(x)dx by rectangles:<br>
+• <b>Left sum:</b> use left endpoints → overestimates if f is DECREASING<br>
+• <b>Right sum:</b> use right endpoints → overestimates if f is INCREASING<br>
+• <b>Midpoint sum:</b> use midpoint of each subinterval<br>
+• <b>Trapezoidal:</b> (Δx/2)[f(x₀) + 2f(x₁) + 2f(x₂) + ... + 2f(xₙ₋₁) + f(xₙ)]<br>
+&nbsp;&nbsp;→ overestimates if f is CONCAVE UP<br><br>
+
+<b>⭐ Fundamental Theorem of Calculus</b><br>
+<b>FTC Part 1:</b> d/dx[∫ₐˣ f(t) dt] = f(x)<br>
+• With chain rule: d/dx[∫ₐ^(g(x)) f(t) dt] = f(g(x)) · g'(x)<br>
+• Variable bounds on BOTH ends: split into two integrals from 0<br><br>
+<b>FTC Part 2:</b> ∫ₐᵇ f(x) dx = F(b) - F(a) where F'(x) = f(x)<br><br>
+
+<b>📋 Basic Antiderivatives (MEMORIZE ALL)</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Antiderivative</th></tr>
+<tr><td>xⁿ</td><td>xⁿ⁺¹/(n+1) + C &nbsp;(n≠-1)</td></tr>
+<tr><td>1/x</td><td>ln|x| + C</td></tr>
+<tr><td>eˣ</td><td>eˣ + C</td></tr>
+<tr><td>aˣ</td><td>aˣ/ln(a) + C</td></tr>
+<tr><td>sin x</td><td>-cos x + C</td></tr>
+<tr><td>cos x</td><td>sin x + C</td></tr>
+<tr><td>sec²x</td><td>tan x + C</td></tr>
+<tr><td>csc²x</td><td>-cot x + C</td></tr>
+<tr><td>sec x tan x</td><td>sec x + C</td></tr>
+<tr><td>1/(1+x²)</td><td>arctan x + C</td></tr>
+<tr><td>1/√(1-x²)</td><td>arcsin x + C</td></tr>
+</table><br>
+
+<b>🔧 u-Substitution</b><br>
+When you see a composite function: let u = inside, du = derivative of inside · dx<br>
+• Example: ∫x·cos(x²) dx → u = x², du = 2x dx → ½∫cos(u) du = ½sin(x²) + C<br>
+• <b>Definite integrals:</b> change the bounds too! Or back-substitute at the end.<br><br>
+
+<b>🔧 [BC] Integration by Parts (IBP)</b><br>
+∫u dv = uv - ∫v du<br>
+• <b>LIATE</b> rule for choosing u: <b>L</b>og, <b>I</b>nverse trig, <b>A</b>lgebraic, <b>T</b>rig, <b>E</b>xponential<br>
+• Pick u from left of LIATE (it gets differentiated)<br>
+• Examples: ∫x·eˣ dx (u=x, dv=eˣdx), ∫ln x dx (u=lnx, dv=dx)<br>
+• <b>Tabular method:</b> for ∫xⁿ·eˣ or ∫xⁿ·sinx — repeated IBP in a table<br>
+• <b>Cycling:</b> ∫eˣ·sinx dx — IBP twice, get original integral, solve algebraically<br><br>
+
+<b>🔧 [BC] Partial Fractions</b><br>
+For rational functions P(x)/Q(x) where degree P < degree Q:<br>
+• Factor denominator completely<br>
+• <b>Distinct linear:</b> A/(x-a) + B/(x-b)<br>
+• Multiply through, solve for A, B by plugging in strategic x values<br>
+• Example: 1/(x²-1) = ½/(x-1) - ½/(x+1)<br><br>
+
+<b>🔧 [BC] Improper Integrals</b><br>
+<b>Type 1 — Infinite bounds:</b> ∫₁^∞ f(x)dx = lim(t→∞) ∫₁ᵗ f(x)dx<br>
+<b>Type 2 — Discontinuity in interval:</b> ∫₀¹ 1/√x dx = lim(a→0⁺) ∫ₐ¹ 1/√x dx<br>
+• If the limit exists → <b>CONVERGES</b>. If limit = ±∞ → <b>DIVERGES</b>.<br>
+• Key: ∫₁^∞ 1/xᵖ dx converges iff p > 1<br><br>
+
+<b>📐 Properties of Definite Integrals</b><br>
+• ∫ₐᵃ f(x)dx = 0<br>
+• ∫ₐᵇ f(x)dx = -∫ᵇₐ f(x)dx<br>
+• ∫ₐᵇ [f±g]dx = ∫ₐᵇ f dx ± ∫ₐᵇ g dx<br>
+• ∫ₐᵇ cf(x)dx = c·∫ₐᵇ f(x)dx<br>
+• ∫ₐᵇ f dx + ∫ᵇᶜ f dx = ∫ₐᶜ f dx (additivity)</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 7: Differential Equations <span style="color:#888;font-size:.7em;">(6-9%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 7: Differential Equations (6-9%)</h4>
+
+<b>📝 What is a DE?</b><br>
+An equation involving a derivative: dy/dx = f(x,y)<br>
+• <b>Solution:</b> a function y(x) that satisfies the equation<br>
+• <b>General solution:</b> has a constant C<br>
+• <b>Particular solution:</b> uses initial condition to find C<br><br>
+
+<b>🖼️ Slope Fields</b><br>
+Visual representation: draw tiny line segments with slope = dy/dx at each point<br>
+• If dy/dx depends only on x → vertical strips of equal slopes<br>
+• If dy/dx depends only on y → horizontal strips of equal slopes<br>
+• Solution curves follow the flow of the slope field<br><br>
+
+<b>✂️ Separation of Variables (most common technique)</b><br>
+1. Get all y stuff on left, all x stuff on right: g(y) dy = f(x) dx<br>
+2. Integrate both sides<br>
+3. Solve for y (if possible)<br>
+4. Use initial condition to find C<br><br>
+<b>Example:</b> dy/dx = 2y, y(0) = 3<br>
+dy/y = 2dx → ln|y| = 2x + C → y = Ae^(2x) → y(0)=3 → A=3 → y = 3e^(2x)<br><br>
+
+<b>📈 Exponential Growth/Decay</b><br>
+dy/dt = ky → y = Ce^(kt)<br>
+• k > 0: growth (population, compound interest)<br>
+• k < 0: decay (radioactive, cooling)<br>
+• <b>Doubling time:</b> t = ln(2)/k<br>
+• <b>Half-life:</b> t = ln(2)/|k|<br><br>
+
+<b>📈 [BC] Logistic Growth</b><br>
+dy/dt = ky(1 - y/L) where L = carrying capacity<br>
+• <b>Solution:</b> y = L / (1 + Ce^(-kt))<br>
+• <b>Maximum growth rate</b> at y = L/2 (inflection point)<br>
+• As t → ∞, y → L (approaches carrying capacity)<br>
+• Starts slow, speeds up, then slows down (S-curve)<br><br>
+
+<b>🔢 [BC] Euler's Method</b><br>
+Numerical approximation: y_{n+1} = yₙ + f(xₙ, yₙ) · Δx<br>
+• Start with initial point (x₀, y₀)<br>
+• Use the slope at current point to step forward<br>
+• Smaller Δx = better approximation<br>
+• <b>Exam tip:</b> usually 2-3 steps, show your work in a table<br><br>
+<b>Example:</b> dy/dx = x+y, y(0)=1, Δx=0.5<br>
+Step 1: y₁ = 1 + (0+1)(0.5) = 1.5 at x=0.5<br>
+Step 2: y₂ = 1.5 + (0.5+1.5)(0.5) = 2.5 at x=1.0</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 8: Applications of Integration <span style="color:#888;font-size:.7em;">(6-9%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 8: Applications of Integration (6-9%)</h4>
+
+<b>📊 Average Value of a Function</b><br>
+f_avg = (1/(b-a)) · ∫ₐᵇ f(x) dx<br>
+• "The height of a rectangle with same area as under the curve"<br><br>
+
+<b>🚗 Motion (Displacement vs Distance)</b><br>
+• <b>Displacement</b> (net change in position): ∫ₐᵇ v(t) dt — can be negative<br>
+• <b>Total distance traveled:</b> ∫ₐᵇ |v(t)| dt — always positive<br>
+• <b>Net change:</b> ∫ₐᵇ R(t) dt = total accumulated change (FTC interpretation)<br><br>
+
+<b>📐 Area Between Curves</b><br>
+<b>Horizontal slices (integrating with respect to x):</b><br>
+A = ∫ₐᵇ [f(x) - g(x)] dx &nbsp;&nbsp;where f(x) ≥ g(x) on [a,b]<br>
+• "Top minus bottom"<br><br>
+<b>Vertical slices (integrating with respect to y):</b><br>
+A = ∫ᶜᵈ [f(y) - g(y)] dy &nbsp;&nbsp;where f(y) ≥ g(y) (right minus left)<br><br>
+
+<b>🏛️ Volumes of Revolution</b><br>
+<b>Disk method</b> (solid, no hole): V = π∫ₐᵇ [R(x)]² dx<br>
+• R(x) = distance from axis of rotation to the curve<br><br>
+<b>Washer method</b> (with hole): V = π∫ₐᵇ ([R(x)]² - [r(x)]²) dx<br>
+• R = outer radius, r = inner radius<br><br>
+<b>⚠️ Rotation about y-axis or other lines:</b><br>
+• About y-axis: convert to functions of y, OR use shell method<br>
+• About y = k or x = k: adjust radii (distance from curve to axis)<br><br>
+
+<b>🔷 Volumes with Cross Sections</b><br>
+V = ∫ₐᵇ A(x) dx where A(x) = area of cross-section at x<br>
+• <b>Squares:</b> A = s² where s = distance between curves<br>
+• <b>Equilateral triangles:</b> A = (√3/4)s²<br>
+• <b>Semicircles:</b> A = (π/8)s² (diameter = s, so r = s/2)<br>
+• <b>Isosceles right triangles:</b> A = s²/2 (leg = s)<br><br>
+
+<b>📏 [BC] Arc Length</b><br>
+<b>Cartesian:</b> L = ∫ₐᵇ √(1 + [f'(x)]²) dx<br>
+• Usually requires calculator (ugly integrals)<br>
+• Know the formula setup even if you can't evaluate by hand<br><br>
+
+<b>⚠️ Common Mistakes</b><br>
+• Disk vs washer: draw the cross-section! If there's a gap → washer<br>
+• Rotation about a non-axis line: R ≠ f(x), R = |f(x) - axis|<br>
+• Distance vs displacement: |v(t)| for distance, v(t) for displacement</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 9: Parametric, Polar & Vectors [BC] <span style="color:#888;font-size:.7em;">(11-12%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 9: Parametric, Polar & Vectors [BC Only] (11-12%)</h4>
+
+<b>📐 Parametric Equations</b><br>
+x = f(t), y = g(t) — both coordinates depend on parameter t<br><br>
+
+<b>Parametric Derivatives:</b><br>
+• <b>First derivative:</b> dy/dx = (dy/dt) / (dx/dt)<br>
+• <b>Second derivative:</b> d²y/dx² = [d/dt(dy/dx)] / (dx/dt)<br>
+&nbsp;&nbsp;⚠️ It is NOT (d²y/dt²)/(d²x/dt²) — this is a common mistake!<br><br>
+
+<b>Parametric Arc Length:</b><br>
+L = ∫ₐᵇ √[(dx/dt)² + (dy/dt)²] dt<br><br>
+
+<b>Speed:</b> |v(t)| = √[(x'(t))² + (y'(t))²]<br>
+<b>Total distance:</b> ∫ₐᵇ √[(x'(t))² + (y'(t))²] dt (same as arc length!)<br><br>
+
+<b>🎯 Vector-Valued Functions</b><br>
+• Position: r⃗(t) = ⟨x(t), y(t)⟩<br>
+• Velocity: v⃗(t) = r⃗'(t) = ⟨x'(t), y'(t)⟩<br>
+• Acceleration: a⃗(t) = v⃗'(t) = ⟨x''(t), y''(t)⟩<br>
+• Speed = magnitude of velocity = |v⃗(t)|<br>
+• Displacement from t=a to t=b: ∫ₐᵇ v⃗(t) dt = ⟨∫x'(t)dt, ∫y'(t)dt⟩<br><br>
+
+<b>🌀 Polar Coordinates</b><br>
+Point described by (r, θ): distance from origin and angle<br>
+• <b>Convert to Cartesian:</b> x = r cos θ, &nbsp; y = r sin θ<br>
+• <b>Convert to Polar:</b> r² = x² + y², &nbsp; tan θ = y/x<br><br>
+
+<b>Common Polar Curves:</b><br>
+• r = a → circle of radius a<br>
+• r = a cos θ or a sin θ → circle (diameter a)<br>
+• r = a ± b cos θ (or sin θ):<br>
+&nbsp;&nbsp;- a = b → <b>cardioid</b> (heart shape)<br>
+&nbsp;&nbsp;- a > b → limaçon without loop<br>
+&nbsp;&nbsp;- a < b → limaçon with inner loop<br>
+• r = a cos(nθ) or a sin(nθ) → <b>rose</b> (n petals if n odd, 2n petals if n even)<br><br>
+
+<b>Polar dy/dx:</b><br>
+dy/dx = (dy/dθ) / (dx/dθ) = (r'sin θ + r cos θ) / (r'cos θ - r sin θ)<br><br>
+
+<b>Polar Area:</b><br>
+A = ½ ∫ₐᵇ [r(θ)]² dθ<br>
+• Area between two polar curves: A = ½ ∫ₐᵇ ([r₁(θ)]² - [r₂(θ)]²) dθ<br>
+• <b>Finding bounds:</b> set r = 0 (for one curve) or r₁ = r₂ (for intersections)<br><br>
+
+<b>⚠️ Big Mistakes to Avoid</b><br>
+• d²y/dx² ≠ (d²y/dt²)/(d²x/dt²) — use the correct formula!<br>
+• Polar area uses r², not r — and don't forget the ½<br>
+• Finding all intersection points: also check where r = 0 (origin)</div>
+</div>
+
+<div class="card" style="cursor:pointer" onclick="toggleNote(this)">
+<h3 style="margin:0;">📋 Unit 10: Infinite Sequences & Series [BC] <span style="color:#888;font-size:.7em;">(17-18%)</span></h3>
+<div class="note-content" style="display:none;margin-top:15px;line-height:1.8;"><h4>Unit 10: Infinite Sequences & Series [BC Only] (17-18%) — BIGGEST BC unit!</h4>
+
+<b>📝 Sequences vs Series</b><br>
+• <b>Sequence:</b> ordered list {aₙ} = a₁, a₂, a₃, ...<br>
+• <b>Series:</b> sum Σaₙ = a₁ + a₂ + a₃ + ...<br>
+• A sequence converges if lim(n→∞) aₙ exists<br>
+• A series converges if its partial sums approach a finite limit<br><br>
+
+<b>⭐ Convergence Tests (in order of usefulness)</b><br><br>
+
+<b>1. nth Term Test (Divergence Test)</b><br>
+If lim(n→∞) aₙ ≠ 0 → series DIVERGES<br>
+⚠️ If lim = 0, this tells you NOTHING (need another test)<br><br>
+
+<b>2. Geometric Series</b><br>
+Σ arⁿ: converges iff |r| < 1, sum = a/(1-r)<br>
+• First term a, common ratio r<br><br>
+
+<b>3. p-Series</b><br>
+Σ 1/nᵖ: converges iff p > 1<br>
+• p = 1: harmonic series (DIVERGES!)<br>
+• p = 2: converges to π²/6<br><br>
+
+<b>4. Integral Test</b><br>
+If f(x) is positive, continuous, decreasing for x ≥ 1:<br>
+Σ f(n) converges ⟺ ∫₁^∞ f(x) dx converges<br><br>
+
+<b>5. Comparison Tests</b><br>
+<b>Direct:</b> If 0 ≤ aₙ ≤ bₙ:<br>
+&nbsp;&nbsp;• Σbₙ converges → Σaₙ converges (smaller than convergent)<br>
+&nbsp;&nbsp;• Σaₙ diverges → Σbₙ diverges (bigger than divergent)<br><br>
+<b>Limit Comparison:</b> If lim(aₙ/bₙ) = L where 0 < L < ∞:<br>
+&nbsp;&nbsp;Both series do the same thing (both converge or both diverge)<br><br>
+
+<b>6. Alternating Series Test (AST)</b><br>
+Σ(-1)ⁿbₙ converges if: 1) bₙ > 0, 2) bₙ is decreasing, 3) lim bₙ = 0<br>
+• <b>AST Error Bound:</b> |error| ≤ |first omitted term| — very useful on FRQs!<br><br>
+
+<b>7. Ratio Test (best for factorials and exponentials)</b><br>
+L = lim |aₙ₊₁/aₙ|<br>
+• L < 1 → converges absolutely<br>
+• L > 1 → diverges<br>
+• L = 1 → inconclusive<br><br>
+
+<b>🔄 Absolute vs Conditional Convergence</b><br>
+• <b>Absolute:</b> Σ|aₙ| converges → Σaₙ converges absolutely<br>
+• <b>Conditional:</b> Σaₙ converges but Σ|aₙ| diverges<br>
+• Example: Σ(-1)ⁿ/n converges conditionally (alt. harmonic)<br><br>
+
+<b>📐 Power Series & Radius of Convergence</b><br>
+Σ cₙ(x-a)ⁿ — centered at x = a<br>
+• Use <b>ratio test</b> to find radius R: |x-a| < R<br>
+• <b>Interval of convergence:</b> check endpoints separately!<br>
+• R = 0: converges only at center. R = ∞: converges everywhere.<br><br>
+
+<b>⭐ Taylor & Maclaurin Series</b><br>
+Taylor series of f(x) centered at a:<br>
+f(x) = Σ [f⁽ⁿ⁾(a)/n!] · (x-a)ⁿ<br>
+• <b>Maclaurin</b> = Taylor centered at a = 0<br><br>
+
+<b>⭐ MUST MEMORIZE (6 Maclaurin Series):</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Series</th><th>Interval</th></tr>
+<tr><td>eˣ</td><td>Σ xⁿ/n! = 1 + x + x²/2! + x³/3! + ...</td><td>all x</td></tr>
+<tr><td>sin x</td><td>Σ (-1)ⁿx²ⁿ⁺¹/(2n+1)! = x - x³/3! + x⁵/5! - ...</td><td>all x</td></tr>
+<tr><td>cos x</td><td>Σ (-1)ⁿx²ⁿ/(2n)! = 1 - x²/2! + x⁴/4! - ...</td><td>all x</td></tr>
+<tr><td>1/(1-x)</td><td>Σ xⁿ = 1 + x + x² + x³ + ...</td><td>|x| < 1</td></tr>
+<tr><td>ln(1+x)</td><td>Σ (-1)ⁿ⁺¹xⁿ/n = x - x²/2 + x³/3 - ...</td><td>-1 < x ≤ 1</td></tr>
+<tr><td>arctan x</td><td>Σ (-1)ⁿx²ⁿ⁺¹/(2n+1) = x - x³/3 + x⁵/5 - ...</td><td>|x| ≤ 1</td></tr>
+</table><br>
+
+<b>🔧 Series Manipulation</b><br>
+• <b>Substitution:</b> e^(-x²) → replace x with -x² in eˣ series<br>
+• <b>Differentiation:</b> differentiate term by term<br>
+• <b>Integration:</b> integrate term by term<br>
+• <b>Multiply by x:</b> x·sin x = x·(x - x³/3! + ...) = x² - x⁴/3! + ...<br><br>
+
+<b>📌 Lagrange Error Bound</b><br>
+|Rₙ(x)| ≤ M·|x-a|ⁿ⁺¹ / (n+1)!<br>
+where M = max|f⁽ⁿ⁺¹⁾(z)| for z between a and x<br>
+• For alternating series: |error| ≤ |first omitted term| (simpler!)<br><br>
+
+<b>🗺️ Which Test to Use? (Decision flowchart)</b><br>
+1. Is lim aₙ ≠ 0? → <b>nth term test: DIVERGES</b><br>
+2. Is it geometric (arⁿ)? → check |r|<br>
+3. Is it p-series (1/nᵖ)? → check p > 1<br>
+4. Does it alternate? → try <b>AST</b><br>
+5. Has factorials or nⁿ? → try <b>Ratio Test</b><br>
+6. Looks like a known series? → try <b>Comparison</b><br>
+7. f(x) is easy to integrate? → try <b>Integral Test</b></div>
+</div>
+
 </div>
 </div>
 
@@ -1348,68 +1975,482 @@ const U = [
 "Limits from graphs & tables","Algebraic limits (factor, rationalize, complex fractions)","Squeeze Theorem",
 "Continuity at a point (3 conditions)","Types of discontinuity (removable, jump, infinite)",
 "IVT (Intermediate Value Theorem)","Limits at infinity / horizontal asymptotes","Infinite limits / vertical asymptotes"
-],notes:`<b>Key formulas:</b><br>
-• lim(x→0) sin(x)/x = 1<br>
-• lim(x→0) (1-cos x)/x = 0<br>
-• lim(x→∞) (1+1/n)^n = e<br>
-<b>IVT:</b> If f continuous on [a,b] and k between f(a) and f(b), then ∃ c in (a,b) with f(c)=k`},
+],notes:`<h4>Unit 1: Limits & Continuity (4-7% of exam)</h4>
+
+<b>🎯 What is a Limit?</b><br>
+The value f(x) <em>approaches</em> as x gets close to c — even if f(c) doesn't exist there.<br>
+• lim(x→c) f(x) = L means: as x → c from BOTH sides, f(x) → L<br>
+• The limit can exist even if f(c) is undefined or different from L<br><br>
+
+<b>📊 Finding Limits</b><br>
+<b>1. Direct substitution</b> — always try this first. If you get a number, that's the answer.<br>
+<b>2. Indeterminate form 0/0?</b> Try these techniques:<br>
+&nbsp;&nbsp;• <b>Factor and cancel:</b> lim(x→3) (x²-9)/(x-3) = lim(x→3) (x+3) = 6<br>
+&nbsp;&nbsp;• <b>Rationalize:</b> multiply by conjugate (great for √ expressions)<br>
+&nbsp;&nbsp;• <b>Common denominator:</b> combine complex fractions first<br>
+<b>3. Limits at infinity (horizontal asymptotes):</b><br>
+&nbsp;&nbsp;• deg(top) < deg(bottom) → limit = 0<br>
+&nbsp;&nbsp;• deg(top) = deg(bottom) → limit = leading coefficients ratio<br>
+&nbsp;&nbsp;• deg(top) > deg(bottom) → limit = ±∞ (no HA)<br><br>
+
+<b>⭐ Special Limits (MEMORIZE)</b><br>
+• lim(x→0) sin(x)/x = <b>1</b><br>
+• lim(x→0) (1-cos x)/x = <b>0</b><br>
+• lim(x→0) (1-cos x)/x² = <b>1/2</b><br>
+• lim(x→∞) (1+1/n)ⁿ = <b>e</b><br>
+• lim(x→0) (eˣ-1)/x = <b>1</b><br><br>
+
+<b>↔️ One-Sided Limits</b><br>
+• lim(x→c⁺) = limit from the RIGHT<br>
+• lim(x→c⁻) = limit from the LEFT<br>
+• Two-sided limit exists ⟺ left limit = right limit<br><br>
+
+<b>🔗 Continuity</b><br>
+f is continuous at x = c if ALL THREE hold:<br>
+&nbsp;&nbsp;1. f(c) is defined<br>
+&nbsp;&nbsp;2. lim(x→c) f(x) exists<br>
+&nbsp;&nbsp;3. lim(x→c) f(x) = f(c)<br><br>
+
+<b>Types of discontinuity:</b><br>
+• <b>Removable (hole):</b> limit exists but f(c) is missing or wrong value<br>
+• <b>Jump:</b> left and right limits exist but aren't equal<br>
+• <b>Infinite:</b> function → ±∞ (vertical asymptote)<br><br>
+
+<b>📌 Squeeze Theorem</b><br>
+If g(x) ≤ f(x) ≤ h(x) near c, and lim g(x) = lim h(x) = L, then lim f(x) = L<br>
+Classic example: lim(x→0) x·sin(1/x) = 0 (squeeze between -|x| and |x|)<br><br>
+
+<b>📌 Intermediate Value Theorem (IVT)</b><br>
+If f is continuous on [a,b] and k is between f(a) and f(b), then ∃ c in (a,b) with f(c) = k.<br>
+• Used to guarantee a root exists: if f(a) and f(b) have opposite signs → f(c) = 0 for some c<br>
+• <b>Requirements:</b> f must be CONTINUOUS on the closed interval<br><br>
+
+<b>⚠️ Common Exam Mistakes</b><br>
+• Forgetting that limit ≠ function value (limit can exist at a hole)<br>
+• Not checking BOTH sides for piecewise functions<br>
+• Misidentifying asymptotes: HA is about x→∞, VA is where denominator→0`},
 {id:2,name:"Differentiation: Definition & Properties",weight:"4-7%",topics:[
 "Limit definition of derivative","Differentiability vs continuity","Power rule","Sum/difference/constant multiple rules",
 "Product rule","Quotient rule","Derivatives of trig functions","Derivatives of e^x, ln x"
-],notes:`<b>Limit def:</b> f'(x) = lim(h→0) [f(x+h)-f(x)]/h<br>
-<b>Product:</b> (fg)' = f'g + fg'<br>
-<b>Quotient:</b> (f/g)' = (f'g - fg')/g²`},
+],notes:`<h4>Unit 2: Differentiation — Definition & Basic Rules (4-7%)</h4>
+
+<b>📐 What is a Derivative?</b><br>
+The derivative f'(x) gives the <b>instantaneous rate of change</b> (slope of tangent line) at any point.<br>
+• <b>Limit definition:</b> f'(x) = lim(h→0) [f(x+h) - f(x)] / h<br>
+• <b>Alternate form:</b> f'(a) = lim(x→a) [f(x) - f(a)] / (x - a)<br>
+• Geometrically: slope of the tangent line at x = a<br><br>
+
+<b>⚡ Differentiability</b><br>
+• Differentiable at a point ⟹ Continuous at that point (but NOT the reverse!)<br>
+• NOT differentiable at: corners/cusps, vertical tangents, discontinuities<br><br>
+
+<b>📋 Basic Derivative Rules</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Derivative</th></tr>
+<tr><td>c (constant)</td><td>0</td></tr>
+<tr><td>xⁿ</td><td>nxⁿ⁻¹ (Power Rule)</td></tr>
+<tr><td>cf(x)</td><td>cf'(x)</td></tr>
+<tr><td>f(x) ± g(x)</td><td>f'(x) ± g'(x)</td></tr>
+<tr><td>f(x)·g(x)</td><td>f'g + fg' (Product Rule)</td></tr>
+<tr><td>f(x)/g(x)</td><td>(f'g - fg')/g² (Quotient Rule)</td></tr>
+</table><br>
+
+<b>📋 Trig Derivatives (MEMORIZE ALL)</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Derivative</th></tr>
+<tr><td>sin x</td><td>cos x</td></tr>
+<tr><td>cos x</td><td>-sin x</td></tr>
+<tr><td>tan x</td><td>sec²x</td></tr>
+<tr><td>cot x</td><td>-csc²x</td></tr>
+<tr><td>sec x</td><td>sec x tan x</td></tr>
+<tr><td>csc x</td><td>-csc x cot x</td></tr>
+</table><br>
+
+<b>📋 Exponential & Log Derivatives</b><br>
+• d/dx[eˣ] = eˣ<br>
+• d/dx[aˣ] = aˣ · ln(a)<br>
+• d/dx[ln x] = 1/x<br>
+• d/dx[log_a(x)] = 1/(x·ln a)<br><br>
+
+<b>💡 Product Rule Memory Trick</b><br>
+(fg)' = "first times derivative of second + second times derivative of first"<br>
+Example: d/dx[x²·sin x] = x²·cos x + 2x·sin x<br><br>
+
+<b>💡 Quotient Rule Memory Trick</b><br>
+"Lo d-Hi minus Hi d-Lo over Lo-Lo" = (g·f' - f·g') / g²<br><br>
+
+<b>⚠️ Exam Tips</b><br>
+• Know the limit definition — it appears on FRQs<br>
+• Power rule works for negative and fractional exponents: d/dx[1/x] = d/dx[x⁻¹] = -x⁻²<br>
+• d/dx[√x] = d/dx[x^(1/2)] = 1/(2√x)`},
 {id:3,name:"Differentiation: Composite, Implicit, Inverse",weight:"4-7%",topics:[
 "Chain rule","Implicit differentiation","Derivatives of inverse functions",
 "Derivatives of inverse trig (arcsin, arctan, arcsec)","Higher-order derivatives"
-],notes:`<b>Chain:</b> d/dx[f(g(x))] = f'(g(x))·g'(x)<br>
-<b>Inverse:</b> g'(x) = 1/f'(g(x)) where g = f⁻¹<br>
-<b>d/dx[arcsin x]</b> = 1/√(1-x²)<br>
-<b>d/dx[arctan x]</b> = 1/(1+x²)`},
+],notes:`<h4>Unit 3: Differentiation — Composite, Implicit, Inverse (4-7%)</h4>
+
+<b>⛓️ Chain Rule (THE most important rule)</b><br>
+d/dx[f(g(x))] = f'(g(x)) · g'(x)<br>
+"Derivative of the outside (keep inside) × derivative of the inside"<br><br>
+
+<b>Examples:</b><br>
+• d/dx[sin(3x)] = cos(3x) · 3 = 3cos(3x)<br>
+• d/dx[e^(2x)] = e^(2x) · 2 = 2e^(2x)<br>
+• d/dx[(x²+1)⁵] = 5(x²+1)⁴ · 2x = 10x(x²+1)⁴<br>
+• d/dx[ln(x²)] = (1/x²) · 2x = 2/x<br>
+• d/dx[√(sin x)] = cos x / (2√(sin x))<br><br>
+
+<b>🔄 Implicit Differentiation</b><br>
+When y is not isolated — differentiate both sides with respect to x, treat y as a function of x.<br>
+• Every time you differentiate a y term, multiply by dy/dx<br>
+• Then solve for dy/dx<br><br>
+<b>Example:</b> x² + y² = 25<br>
+2x + 2y·(dy/dx) = 0 → dy/dx = -x/y<br><br>
+
+<b>🔀 Inverse Function Derivatives</b><br>
+If g = f⁻¹, then: <b>g'(x) = 1 / f'(g(x))</b><br>
+• You need to know f' AND the value of g(x) = f⁻¹(x)<br>
+• Example: f(2) = 5, f'(2) = 3 → g'(5) = 1/f'(g(5)) = 1/f'(2) = 1/3<br><br>
+
+<b>📋 Inverse Trig Derivatives (MEMORIZE)</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Derivative</th></tr>
+<tr><td>arcsin x</td><td>1/√(1-x²)</td></tr>
+<tr><td>arccos x</td><td>-1/√(1-x²)</td></tr>
+<tr><td>arctan x</td><td>1/(1+x²)</td></tr>
+<tr><td>arcsec x</td><td>1/(|x|√(x²-1))</td></tr>
+</table><br>
+
+<b>📈 Higher-Order Derivatives</b><br>
+• f''(x) = derivative of f'(x) → gives acceleration, concavity<br>
+• Example: f(x) = e^(3x) → f'(x) = 3e^(3x) → f''(x) = 9e^(3x)<br><br>
+
+<b>🧮 Logarithmic Differentiation</b><br>
+For y = xˣ or complex products: take ln of both sides first<br>
+y = xˣ → ln y = x·ln x → y'/y = ln x + 1 → y' = xˣ(ln x + 1)<br><br>
+
+<b>⚠️ Common Mistakes</b><br>
+• Forgetting the chain rule (the #1 error on the AP exam!)<br>
+• Implicit: forgetting dy/dx when differentiating y terms<br>
+• Inverse trig: mixing up arcsin and arctan derivatives`},
 {id:4,name:"Contextual Applications of Differentiation",weight:"6-9%",topics:[
 "Interpreting derivatives in context","Position/velocity/acceleration","Related rates",
 "Linearization / local linear approximation","L'Hôpital's Rule"
-],notes:`<b>Motion:</b> v(t) = s'(t), a(t) = v'(t)<br>
-<b>Speed</b> = |v(t)|<br>
-<b>Linearization:</b> L(x) = f(a) + f'(a)(x-a)<br>
-<b>L'Hôpital:</b> 0/0 or ∞/∞ → lim f/g = lim f'/g'`},
+],notes:`<h4>Unit 4: Contextual Applications of Differentiation (6-9%)</h4>
+
+<b>🚗 Motion Problems (Position/Velocity/Acceleration)</b><br>
+• Position: s(t) → where the particle IS<br>
+• Velocity: v(t) = s'(t) → how fast and which direction<br>
+• Acceleration: a(t) = v'(t) = s''(t) → how velocity changes<br>
+• <b>Speed</b> = |v(t)| (always positive)<br>
+• <b>Speeding up:</b> v(t) and a(t) have SAME sign<br>
+• <b>Slowing down:</b> v(t) and a(t) have OPPOSITE signs<br>
+• <b>At rest:</b> v(t) = 0<br>
+• <b>Changes direction:</b> v(t) changes sign<br><br>
+
+<b>🔗 Related Rates (4-step process)</b><br>
+1. Draw a picture, identify all variables and rates<br>
+2. Write an equation relating the variables<br>
+3. Differentiate BOTH sides with respect to time (d/dt) — chain rule!<br>
+4. Plug in known values and solve for the unknown rate<br><br>
+<b>Common setups:</b><br>
+• Ladder sliding: x² + y² = L² → 2x(dx/dt) + 2y(dy/dt) = 0<br>
+• Expanding circle: A = πr² → dA/dt = 2πr(dr/dt)<br>
+• Cone filling: V = (1/3)πr²h (often r and h are related)<br>
+• Shadow problems: use similar triangles<br><br>
+
+<b>📏 Linearization (Local Linear Approximation)</b><br>
+L(x) = f(a) + f'(a)(x - a)<br>
+• This is the tangent line at x = a, used to approximate f(x) near a<br>
+• Example: approximate √4.1: f(x)=√x, a=4, f'(x)=1/(2√x)<br>
+&nbsp;&nbsp;L(4.1) = 2 + (1/4)(0.1) = 2.025<br><br>
+
+<b>🏥 L'Hôpital's Rule</b><br>
+If lim f(x)/g(x) gives <b>0/0</b> or <b>∞/∞</b>, then:<br>
+lim f(x)/g(x) = lim f'(x)/g'(x)<br><br>
+• Can apply multiple times if still indeterminate<br>
+• <b>Other forms:</b> 0·∞ → rewrite as fraction. ∞-∞ → combine fractions. 1^∞, 0⁰, ∞⁰ → take ln first<br>
+• lim(x→∞)(1+k/x)ˣ = eᵏ (standard form)<br>
+• lim(x→0) x·ln x = 0 (rewrite as ln x/(1/x), then L'Hôp)<br><br>
+
+<b>⚠️ Exam Traps</b><br>
+• Related rates: don't plug in values BEFORE differentiating<br>
+• L'Hôpital: only works for 0/0 or ∞/∞ — check the form first!<br>
+• Speed ≠ velocity (speed = |velocity|)`},
 {id:5,name:"Analytical Applications of Differentiation",weight:"8-11%",topics:[
 "Mean Value Theorem","Extreme Value Theorem","Finding critical points",
 "First derivative test","Second derivative test","Concavity & inflection points",
 "Curve sketching","Optimization problems","Candidates test (closed interval)"
-],notes:`<b>MVT:</b> f continuous [a,b], differentiable (a,b) → ∃ c: f'(c) = [f(b)-f(a)]/(b-a)<br>
-<b>f'>0:</b> increasing | <b>f'<0:</b> decreasing<br>
-<b>f''>0:</b> concave up | <b>f''<0:</b> concave down`},
+],notes:`<h4>Unit 5: Analytical Applications of Differentiation (8-11%)</h4>
+
+<b>📌 Mean Value Theorem (MVT)</b><br>
+If f is continuous on [a,b] and differentiable on (a,b), then:<br>
+∃ c in (a,b) such that f'(c) = [f(b) - f(a)] / (b - a)<br>
+• "There's a point where the instantaneous rate = the average rate"<br>
+• <b>Rolle's Theorem:</b> special case where f(a) = f(b) → f'(c) = 0<br><br>
+
+<b>📌 Extreme Value Theorem (EVT)</b><br>
+If f is continuous on [a,b], then f has an absolute max AND absolute min on [a,b].<br><br>
+
+<b>🔍 Finding Extrema</b><br>
+<b>Critical points:</b> where f'(x) = 0 or f'(x) is undefined<br><br>
+<b>Candidates Test (closed interval [a,b]):</b><br>
+1. Find all critical points in (a,b)<br>
+2. Evaluate f at each critical point AND at endpoints a, b<br>
+3. Largest = absolute max, smallest = absolute min<br><br>
+
+<b>First Derivative Test:</b><br>
+• f' changes + to − at c → local MAX<br>
+• f' changes − to + at c → local MIN<br>
+• f' doesn't change sign → neither<br><br>
+
+<b>Second Derivative Test:</b><br>
+At critical point c (where f'(c) = 0):<br>
+• f''(c) < 0 → concave DOWN → local MAX 🏔️<br>
+• f''(c) > 0 → concave UP → local MIN 🏜️<br>
+• f''(c) = 0 → inconclusive (use first derivative test)<br><br>
+
+<b>📈 Curve Sketching Checklist</b><br>
+<table style="margin:8px 0">
+<tr><th>f'(x)</th><th>Meaning for f</th></tr>
+<tr><td>f' > 0</td><td>f is INCREASING ↗</td></tr>
+<tr><td>f' < 0</td><td>f is DECREASING ↘</td></tr>
+<tr><td>f' = 0 or DNE</td><td>Critical point (possible max/min)</td></tr>
+</table>
+<table style="margin:8px 0">
+<tr><th>f''(x)</th><th>Meaning for f</th></tr>
+<tr><td>f'' > 0</td><td>f is CONCAVE UP ∪ (holds water)</td></tr>
+<tr><td>f'' < 0</td><td>f is CONCAVE DOWN ∩</td></tr>
+<tr><td>f'' = 0 and sign change</td><td>INFLECTION POINT</td></tr>
+</table><br>
+
+<b>🎯 Optimization Problems (5-step process)</b><br>
+1. Draw a picture, define variables<br>
+2. Write the function to optimize<br>
+3. Write a constraint equation, use it to get one variable<br>
+4. Take derivative, set = 0, solve for critical point<br>
+5. Verify it's a max/min (second derivative test or domain argument)<br><br>
+
+<b>⚠️ Common Mistakes</b><br>
+• Forgetting endpoints in candidates test<br>
+• Confusing f, f', and f'' (what each tells you)<br>
+• Inflection point: f'' must CHANGE SIGN (f''=0 alone is not enough)`},
 {id:6,name:"Integration & Accumulation",weight:"17-20%",topics:[
 "Riemann sums (left, right, midpoint, trapezoidal)","Definite integral as limit of Riemann sums",
 "FTC Part 1: d/dx ∫ₐˣ f(t)dt = f(x)","FTC Part 2: ∫ₐᵇ f(x)dx = F(b)-F(a)",
 "Properties of definite integrals","Basic antiderivatives","u-substitution",
 "[BC] Integration by parts","[BC] Partial fractions","[BC] Improper integrals"
-],notes:`<b>IBP:</b> ∫u dv = uv - ∫v du (LIATE)<br>
-<b>Partial fractions:</b> decompose P(x)/Q(x)<br>
-<b>Improper:</b> replace ∞ or bad point with limit variable`},
+],notes:`<h4>Unit 6: Integration & Accumulation of Change (17-20%) — BIGGEST unit!</h4>
+
+<b>🧱 Riemann Sums</b><br>
+Approximate ∫f(x)dx by rectangles:<br>
+• <b>Left sum:</b> use left endpoints → overestimates if f is DECREASING<br>
+• <b>Right sum:</b> use right endpoints → overestimates if f is INCREASING<br>
+• <b>Midpoint sum:</b> use midpoint of each subinterval<br>
+• <b>Trapezoidal:</b> (Δx/2)[f(x₀) + 2f(x₁) + 2f(x₂) + ... + 2f(xₙ₋₁) + f(xₙ)]<br>
+&nbsp;&nbsp;→ overestimates if f is CONCAVE UP<br><br>
+
+<b>⭐ Fundamental Theorem of Calculus</b><br>
+<b>FTC Part 1:</b> d/dx[∫ₐˣ f(t) dt] = f(x)<br>
+• With chain rule: d/dx[∫ₐ^(g(x)) f(t) dt] = f(g(x)) · g'(x)<br>
+• Variable bounds on BOTH ends: split into two integrals from 0<br><br>
+<b>FTC Part 2:</b> ∫ₐᵇ f(x) dx = F(b) - F(a) where F'(x) = f(x)<br><br>
+
+<b>📋 Basic Antiderivatives (MEMORIZE ALL)</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Antiderivative</th></tr>
+<tr><td>xⁿ</td><td>xⁿ⁺¹/(n+1) + C &nbsp;(n≠-1)</td></tr>
+<tr><td>1/x</td><td>ln|x| + C</td></tr>
+<tr><td>eˣ</td><td>eˣ + C</td></tr>
+<tr><td>aˣ</td><td>aˣ/ln(a) + C</td></tr>
+<tr><td>sin x</td><td>-cos x + C</td></tr>
+<tr><td>cos x</td><td>sin x + C</td></tr>
+<tr><td>sec²x</td><td>tan x + C</td></tr>
+<tr><td>csc²x</td><td>-cot x + C</td></tr>
+<tr><td>sec x tan x</td><td>sec x + C</td></tr>
+<tr><td>1/(1+x²)</td><td>arctan x + C</td></tr>
+<tr><td>1/√(1-x²)</td><td>arcsin x + C</td></tr>
+</table><br>
+
+<b>🔧 u-Substitution</b><br>
+When you see a composite function: let u = inside, du = derivative of inside · dx<br>
+• Example: ∫x·cos(x²) dx → u = x², du = 2x dx → ½∫cos(u) du = ½sin(x²) + C<br>
+• <b>Definite integrals:</b> change the bounds too! Or back-substitute at the end.<br><br>
+
+<b>🔧 [BC] Integration by Parts (IBP)</b><br>
+∫u dv = uv - ∫v du<br>
+• <b>LIATE</b> rule for choosing u: <b>L</b>og, <b>I</b>nverse trig, <b>A</b>lgebraic, <b>T</b>rig, <b>E</b>xponential<br>
+• Pick u from left of LIATE (it gets differentiated)<br>
+• Examples: ∫x·eˣ dx (u=x, dv=eˣdx), ∫ln x dx (u=lnx, dv=dx)<br>
+• <b>Tabular method:</b> for ∫xⁿ·eˣ or ∫xⁿ·sinx — repeated IBP in a table<br>
+• <b>Cycling:</b> ∫eˣ·sinx dx — IBP twice, get original integral, solve algebraically<br><br>
+
+<b>🔧 [BC] Partial Fractions</b><br>
+For rational functions P(x)/Q(x) where degree P < degree Q:<br>
+• Factor denominator completely<br>
+• <b>Distinct linear:</b> A/(x-a) + B/(x-b)<br>
+• Multiply through, solve for A, B by plugging in strategic x values<br>
+• Example: 1/(x²-1) = ½/(x-1) - ½/(x+1)<br><br>
+
+<b>🔧 [BC] Improper Integrals</b><br>
+<b>Type 1 — Infinite bounds:</b> ∫₁^∞ f(x)dx = lim(t→∞) ∫₁ᵗ f(x)dx<br>
+<b>Type 2 — Discontinuity in interval:</b> ∫₀¹ 1/√x dx = lim(a→0⁺) ∫ₐ¹ 1/√x dx<br>
+• If the limit exists → <b>CONVERGES</b>. If limit = ±∞ → <b>DIVERGES</b>.<br>
+• Key: ∫₁^∞ 1/xᵖ dx converges iff p > 1<br><br>
+
+<b>📐 Properties of Definite Integrals</b><br>
+• ∫ₐᵃ f(x)dx = 0<br>
+• ∫ₐᵇ f(x)dx = -∫ᵇₐ f(x)dx<br>
+• ∫ₐᵇ [f±g]dx = ∫ₐᵇ f dx ± ∫ₐᵇ g dx<br>
+• ∫ₐᵇ cf(x)dx = c·∫ₐᵇ f(x)dx<br>
+• ∫ₐᵇ f dx + ∫ᵇᶜ f dx = ∫ₐᶜ f dx (additivity)`},
 {id:7,name:"Differential Equations",weight:"6-9%",topics:[
 "Modeling with DEs","Slope fields","Separation of variables",
 "Exponential growth/decay (dy/dt = ky)","[BC] Euler's method","[BC] Logistic growth (dy/dt = ky(1-y/L))"
-],notes:`<b>Exponential:</b> y = Ce^(kt)<br>
-<b>Logistic:</b> y = L/(1+Ce^(-kt)), max growth at y=L/2<br>
-<b>Euler's:</b> y_(n+1) = y_n + f(x_n,y_n)·Δx`},
+],notes:`<h4>Unit 7: Differential Equations (6-9%)</h4>
+
+<b>📝 What is a DE?</b><br>
+An equation involving a derivative: dy/dx = f(x,y)<br>
+• <b>Solution:</b> a function y(x) that satisfies the equation<br>
+• <b>General solution:</b> has a constant C<br>
+• <b>Particular solution:</b> uses initial condition to find C<br><br>
+
+<b>🖼️ Slope Fields</b><br>
+Visual representation: draw tiny line segments with slope = dy/dx at each point<br>
+• If dy/dx depends only on x → vertical strips of equal slopes<br>
+• If dy/dx depends only on y → horizontal strips of equal slopes<br>
+• Solution curves follow the flow of the slope field<br><br>
+
+<b>✂️ Separation of Variables (most common technique)</b><br>
+1. Get all y stuff on left, all x stuff on right: g(y) dy = f(x) dx<br>
+2. Integrate both sides<br>
+3. Solve for y (if possible)<br>
+4. Use initial condition to find C<br><br>
+<b>Example:</b> dy/dx = 2y, y(0) = 3<br>
+dy/y = 2dx → ln|y| = 2x + C → y = Ae^(2x) → y(0)=3 → A=3 → y = 3e^(2x)<br><br>
+
+<b>📈 Exponential Growth/Decay</b><br>
+dy/dt = ky → y = Ce^(kt)<br>
+• k > 0: growth (population, compound interest)<br>
+• k < 0: decay (radioactive, cooling)<br>
+• <b>Doubling time:</b> t = ln(2)/k<br>
+• <b>Half-life:</b> t = ln(2)/|k|<br><br>
+
+<b>📈 [BC] Logistic Growth</b><br>
+dy/dt = ky(1 - y/L) where L = carrying capacity<br>
+• <b>Solution:</b> y = L / (1 + Ce^(-kt))<br>
+• <b>Maximum growth rate</b> at y = L/2 (inflection point)<br>
+• As t → ∞, y → L (approaches carrying capacity)<br>
+• Starts slow, speeds up, then slows down (S-curve)<br><br>
+
+<b>🔢 [BC] Euler's Method</b><br>
+Numerical approximation: y_{n+1} = yₙ + f(xₙ, yₙ) · Δx<br>
+• Start with initial point (x₀, y₀)<br>
+• Use the slope at current point to step forward<br>
+• Smaller Δx = better approximation<br>
+• <b>Exam tip:</b> usually 2-3 steps, show your work in a table<br><br>
+<b>Example:</b> dy/dx = x+y, y(0)=1, Δx=0.5<br>
+Step 1: y₁ = 1 + (0+1)(0.5) = 1.5 at x=0.5<br>
+Step 2: y₂ = 1.5 + (0.5+1.5)(0.5) = 2.5 at x=1.0`},
 {id:8,name:"Applications of Integration",weight:"6-9%",topics:[
 "Average value of a function","Displacement vs total distance","Net change (accumulation)",
 "Area between curves (dx and dy)","Volumes: cross sections (squares, semicircles, triangles)",
 "Volumes: disk method","Volumes: washer method","[BC] Arc length"
-],notes:`<b>Avg value:</b> 1/(b-a) ∫ₐᵇ f(x)dx<br>
-<b>Displacement:</b> ∫v(t)dt | <b>Distance:</b> ∫|v(t)|dt<br>
-<b>Disk:</b> π∫[R(x)]²dx | <b>Washer:</b> π∫([R]²-[r]²)dx<br>
-<b>Arc:</b> ∫√(1+[f'(x)]²)dx`},
+],notes:`<h4>Unit 8: Applications of Integration (6-9%)</h4>
+
+<b>📊 Average Value of a Function</b><br>
+f_avg = (1/(b-a)) · ∫ₐᵇ f(x) dx<br>
+• "The height of a rectangle with same area as under the curve"<br><br>
+
+<b>🚗 Motion (Displacement vs Distance)</b><br>
+• <b>Displacement</b> (net change in position): ∫ₐᵇ v(t) dt — can be negative<br>
+• <b>Total distance traveled:</b> ∫ₐᵇ |v(t)| dt — always positive<br>
+• <b>Net change:</b> ∫ₐᵇ R(t) dt = total accumulated change (FTC interpretation)<br><br>
+
+<b>📐 Area Between Curves</b><br>
+<b>Horizontal slices (integrating with respect to x):</b><br>
+A = ∫ₐᵇ [f(x) - g(x)] dx &nbsp;&nbsp;where f(x) ≥ g(x) on [a,b]<br>
+• "Top minus bottom"<br><br>
+<b>Vertical slices (integrating with respect to y):</b><br>
+A = ∫ᶜᵈ [f(y) - g(y)] dy &nbsp;&nbsp;where f(y) ≥ g(y) (right minus left)<br><br>
+
+<b>🏛️ Volumes of Revolution</b><br>
+<b>Disk method</b> (solid, no hole): V = π∫ₐᵇ [R(x)]² dx<br>
+• R(x) = distance from axis of rotation to the curve<br><br>
+<b>Washer method</b> (with hole): V = π∫ₐᵇ ([R(x)]² - [r(x)]²) dx<br>
+• R = outer radius, r = inner radius<br><br>
+<b>⚠️ Rotation about y-axis or other lines:</b><br>
+• About y-axis: convert to functions of y, OR use shell method<br>
+• About y = k or x = k: adjust radii (distance from curve to axis)<br><br>
+
+<b>🔷 Volumes with Cross Sections</b><br>
+V = ∫ₐᵇ A(x) dx where A(x) = area of cross-section at x<br>
+• <b>Squares:</b> A = s² where s = distance between curves<br>
+• <b>Equilateral triangles:</b> A = (√3/4)s²<br>
+• <b>Semicircles:</b> A = (π/8)s² (diameter = s, so r = s/2)<br>
+• <b>Isosceles right triangles:</b> A = s²/2 (leg = s)<br><br>
+
+<b>📏 [BC] Arc Length</b><br>
+<b>Cartesian:</b> L = ∫ₐᵇ √(1 + [f'(x)]²) dx<br>
+• Usually requires calculator (ugly integrals)<br>
+• Know the formula setup even if you can't evaluate by hand<br><br>
+
+<b>⚠️ Common Mistakes</b><br>
+• Disk vs washer: draw the cross-section! If there's a gap → washer<br>
+• Rotation about a non-axis line: R ≠ f(x), R = |f(x) - axis|<br>
+• Distance vs displacement: |v(t)| for distance, v(t) for displacement`},
 {id:9,name:"Parametric, Polar & Vectors [BC]",weight:"11-12%",bc:true,topics:[
 "Parametric derivatives: dy/dx = (dy/dt)/(dx/dt)","Second derivative of parametric",
 "Parametric arc length","Vector-valued functions","Speed = |v(t)|",
 "Polar coordinates","dy/dx in polar","Polar area: ½∫r²dθ","Area between polar curves"
-],notes:`<b>Parametric arc:</b> ∫√((dx/dt)²+(dy/dt)²)dt<br>
-<b>Speed:</b> √([x'(t)]²+[y'(t)]²)<br>
-<b>Polar area:</b> ½∫[r(θ)]²dθ<br>
-<b>Polar dy/dx:</b> (r'sinθ+rcosθ)/(r'cosθ-rsinθ)`},
+],notes:`<h4>Unit 9: Parametric, Polar & Vectors [BC Only] (11-12%)</h4>
+
+<b>📐 Parametric Equations</b><br>
+x = f(t), y = g(t) — both coordinates depend on parameter t<br><br>
+
+<b>Parametric Derivatives:</b><br>
+• <b>First derivative:</b> dy/dx = (dy/dt) / (dx/dt)<br>
+• <b>Second derivative:</b> d²y/dx² = [d/dt(dy/dx)] / (dx/dt)<br>
+&nbsp;&nbsp;⚠️ It is NOT (d²y/dt²)/(d²x/dt²) — this is a common mistake!<br><br>
+
+<b>Parametric Arc Length:</b><br>
+L = ∫ₐᵇ √[(dx/dt)² + (dy/dt)²] dt<br><br>
+
+<b>Speed:</b> |v(t)| = √[(x'(t))² + (y'(t))²]<br>
+<b>Total distance:</b> ∫ₐᵇ √[(x'(t))² + (y'(t))²] dt (same as arc length!)<br><br>
+
+<b>🎯 Vector-Valued Functions</b><br>
+• Position: r⃗(t) = ⟨x(t), y(t)⟩<br>
+• Velocity: v⃗(t) = r⃗'(t) = ⟨x'(t), y'(t)⟩<br>
+• Acceleration: a⃗(t) = v⃗'(t) = ⟨x''(t), y''(t)⟩<br>
+• Speed = magnitude of velocity = |v⃗(t)|<br>
+• Displacement from t=a to t=b: ∫ₐᵇ v⃗(t) dt = ⟨∫x'(t)dt, ∫y'(t)dt⟩<br><br>
+
+<b>🌀 Polar Coordinates</b><br>
+Point described by (r, θ): distance from origin and angle<br>
+• <b>Convert to Cartesian:</b> x = r cos θ, &nbsp; y = r sin θ<br>
+• <b>Convert to Polar:</b> r² = x² + y², &nbsp; tan θ = y/x<br><br>
+
+<b>Common Polar Curves:</b><br>
+• r = a → circle of radius a<br>
+• r = a cos θ or a sin θ → circle (diameter a)<br>
+• r = a ± b cos θ (or sin θ):<br>
+&nbsp;&nbsp;- a = b → <b>cardioid</b> (heart shape)<br>
+&nbsp;&nbsp;- a > b → limaçon without loop<br>
+&nbsp;&nbsp;- a < b → limaçon with inner loop<br>
+• r = a cos(nθ) or a sin(nθ) → <b>rose</b> (n petals if n odd, 2n petals if n even)<br><br>
+
+<b>Polar dy/dx:</b><br>
+dy/dx = (dy/dθ) / (dx/dθ) = (r'sin θ + r cos θ) / (r'cos θ - r sin θ)<br><br>
+
+<b>Polar Area:</b><br>
+A = ½ ∫ₐᵇ [r(θ)]² dθ<br>
+• Area between two polar curves: A = ½ ∫ₐᵇ ([r₁(θ)]² - [r₂(θ)]²) dθ<br>
+• <b>Finding bounds:</b> set r = 0 (for one curve) or r₁ = r₂ (for intersections)<br><br>
+
+<b>⚠️ Big Mistakes to Avoid</b><br>
+• d²y/dx² ≠ (d²y/dt²)/(d²x/dt²) — use the correct formula!<br>
+• Polar area uses r², not r — and don't forget the ½<br>
+• Finding all intersection points: also check where r = 0 (origin)`},
 {id:10,name:"Infinite Sequences & Series [BC]",weight:"17-18%",bc:true,topics:[
 "Convergent vs divergent series","Geometric series (a/(1-r), |r|<1)",
 "nth term test (divergence)","Integral test","p-series (1/n^p, p>1 converges)",
@@ -1418,12 +2459,96 @@ const U = [
 "Taylor/Maclaurin polynomials","Lagrange error bound",
 "Radius & interval of convergence","Power series operations",
 "Known Maclaurin series (e^x, sin, cos, 1/(1-x), ln(1+x), arctan)"
-],notes:`<b>Geometric:</b> Σar^n = a/(1-r) if |r|<1<br>
-<b>p-series:</b> Σ1/n^p converges iff p>1<br>
-<b>Ratio test:</b> L=lim|a_(n+1)/a_n|, L<1→converge<br>
-<b>Taylor:</b> Σ f^(k)(a)/k! · (x-a)^k<br>
-<b>Lagrange:</b> |Rn|≤M|x-a|^(n+1)/(n+1)!<br>
-<b>Must know:</b> e^x = Σx^n/n!, sinx = Σ(-1)^n x^(2n+1)/(2n+1)!, cosx = Σ(-1)^n x^(2n)/(2n)!, 1/(1-x) = Σx^n, ln(1+x) = Σ(-1)^(n+1) x^n/n, arctanx = Σ(-1)^n x^(2n+1)/(2n+1)`}
+],notes:`<h4>Unit 10: Infinite Sequences & Series [BC Only] (17-18%) — BIGGEST BC unit!</h4>
+
+<b>📝 Sequences vs Series</b><br>
+• <b>Sequence:</b> ordered list {aₙ} = a₁, a₂, a₃, ...<br>
+• <b>Series:</b> sum Σaₙ = a₁ + a₂ + a₃ + ...<br>
+• A sequence converges if lim(n→∞) aₙ exists<br>
+• A series converges if its partial sums approach a finite limit<br><br>
+
+<b>⭐ Convergence Tests (in order of usefulness)</b><br><br>
+
+<b>1. nth Term Test (Divergence Test)</b><br>
+If lim(n→∞) aₙ ≠ 0 → series DIVERGES<br>
+⚠️ If lim = 0, this tells you NOTHING (need another test)<br><br>
+
+<b>2. Geometric Series</b><br>
+Σ arⁿ: converges iff |r| < 1, sum = a/(1-r)<br>
+• First term a, common ratio r<br><br>
+
+<b>3. p-Series</b><br>
+Σ 1/nᵖ: converges iff p > 1<br>
+• p = 1: harmonic series (DIVERGES!)<br>
+• p = 2: converges to π²/6<br><br>
+
+<b>4. Integral Test</b><br>
+If f(x) is positive, continuous, decreasing for x ≥ 1:<br>
+Σ f(n) converges ⟺ ∫₁^∞ f(x) dx converges<br><br>
+
+<b>5. Comparison Tests</b><br>
+<b>Direct:</b> If 0 ≤ aₙ ≤ bₙ:<br>
+&nbsp;&nbsp;• Σbₙ converges → Σaₙ converges (smaller than convergent)<br>
+&nbsp;&nbsp;• Σaₙ diverges → Σbₙ diverges (bigger than divergent)<br><br>
+<b>Limit Comparison:</b> If lim(aₙ/bₙ) = L where 0 < L < ∞:<br>
+&nbsp;&nbsp;Both series do the same thing (both converge or both diverge)<br><br>
+
+<b>6. Alternating Series Test (AST)</b><br>
+Σ(-1)ⁿbₙ converges if: 1) bₙ > 0, 2) bₙ is decreasing, 3) lim bₙ = 0<br>
+• <b>AST Error Bound:</b> |error| ≤ |first omitted term| — very useful on FRQs!<br><br>
+
+<b>7. Ratio Test (best for factorials and exponentials)</b><br>
+L = lim |aₙ₊₁/aₙ|<br>
+• L < 1 → converges absolutely<br>
+• L > 1 → diverges<br>
+• L = 1 → inconclusive<br><br>
+
+<b>🔄 Absolute vs Conditional Convergence</b><br>
+• <b>Absolute:</b> Σ|aₙ| converges → Σaₙ converges absolutely<br>
+• <b>Conditional:</b> Σaₙ converges but Σ|aₙ| diverges<br>
+• Example: Σ(-1)ⁿ/n converges conditionally (alt. harmonic)<br><br>
+
+<b>📐 Power Series & Radius of Convergence</b><br>
+Σ cₙ(x-a)ⁿ — centered at x = a<br>
+• Use <b>ratio test</b> to find radius R: |x-a| < R<br>
+• <b>Interval of convergence:</b> check endpoints separately!<br>
+• R = 0: converges only at center. R = ∞: converges everywhere.<br><br>
+
+<b>⭐ Taylor & Maclaurin Series</b><br>
+Taylor series of f(x) centered at a:<br>
+f(x) = Σ [f⁽ⁿ⁾(a)/n!] · (x-a)ⁿ<br>
+• <b>Maclaurin</b> = Taylor centered at a = 0<br><br>
+
+<b>⭐ MUST MEMORIZE (6 Maclaurin Series):</b><br>
+<table style="margin:8px 0">
+<tr><th>Function</th><th>Series</th><th>Interval</th></tr>
+<tr><td>eˣ</td><td>Σ xⁿ/n! = 1 + x + x²/2! + x³/3! + ...</td><td>all x</td></tr>
+<tr><td>sin x</td><td>Σ (-1)ⁿx²ⁿ⁺¹/(2n+1)! = x - x³/3! + x⁵/5! - ...</td><td>all x</td></tr>
+<tr><td>cos x</td><td>Σ (-1)ⁿx²ⁿ/(2n)! = 1 - x²/2! + x⁴/4! - ...</td><td>all x</td></tr>
+<tr><td>1/(1-x)</td><td>Σ xⁿ = 1 + x + x² + x³ + ...</td><td>|x| < 1</td></tr>
+<tr><td>ln(1+x)</td><td>Σ (-1)ⁿ⁺¹xⁿ/n = x - x²/2 + x³/3 - ...</td><td>-1 < x ≤ 1</td></tr>
+<tr><td>arctan x</td><td>Σ (-1)ⁿx²ⁿ⁺¹/(2n+1) = x - x³/3 + x⁵/5 - ...</td><td>|x| ≤ 1</td></tr>
+</table><br>
+
+<b>🔧 Series Manipulation</b><br>
+• <b>Substitution:</b> e^(-x²) → replace x with -x² in eˣ series<br>
+• <b>Differentiation:</b> differentiate term by term<br>
+• <b>Integration:</b> integrate term by term<br>
+• <b>Multiply by x:</b> x·sin x = x·(x - x³/3! + ...) = x² - x⁴/3! + ...<br><br>
+
+<b>📌 Lagrange Error Bound</b><br>
+|Rₙ(x)| ≤ M·|x-a|ⁿ⁺¹ / (n+1)!<br>
+where M = max|f⁽ⁿ⁺¹⁾(z)| for z between a and x<br>
+• For alternating series: |error| ≤ |first omitted term| (simpler!)<br><br>
+
+<b>🗺️ Which Test to Use? (Decision flowchart)</b><br>
+1. Is lim aₙ ≠ 0? → <b>nth term test: DIVERGES</b><br>
+2. Is it geometric (arⁿ)? → check |r|<br>
+3. Is it p-series (1/nᵖ)? → check p > 1<br>
+4. Does it alternate? → try <b>AST</b><br>
+5. Has factorials or nⁿ? → try <b>Ratio Test</b><br>
+6. Looks like a known series? → try <b>Comparison</b><br>
+7. f(x) is easy to integrate? → try <b>Integral Test</b>`}
 ];
 
 // QUESTIONS - organized by unit
@@ -1819,6 +2944,17 @@ function rm(){if(typeof renderMathInElement==='function')renderMathInElement(doc
 // no-op placeholder
 
 // INIT
+
+function toggleNote(card) {
+  const content = card.querySelector('.note-content');
+  if(content.style.display === 'none') {
+    content.style.display = 'block';
+    card.style.borderColor = '#1e90ff';
+  } else {
+    content.style.display = 'none';
+    card.style.borderColor = '#222';
+  }
+}
 
 function calcInit() { if(!cFcCards.length) cStartFC('derivatives'); }
 
