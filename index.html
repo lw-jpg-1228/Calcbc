@@ -240,8 +240,8 @@ tr:hover{background:#1a1a2a}
 <button class="tab" onclick="cStartFC('all',this)">All Formulas</button>
 </div>
 <div class="fc" id="fc" onclick="cFlipFC()">
-<div class="front" id="fc-f">d/dx [sin x]</div>
-<div class="back" id="fc-b">cos x</div>
+<div class="front" id="fc-f">Loading...</div>
+<div class="back" id="fc-b">...</div>
 <div class="hint">Click to flip</div>
 </div>
 <div style="text-align:center;margin-top:15px">
@@ -2884,10 +2884,12 @@ cFcI=0;cShowFC();
 }
 function cShowFC(){
 var fc=document.getElementById('fc');fc.classList.remove('flipped');
-document.getElementById('fc-f').innerHTML=cFcCards[cFcI].f;
-document.getElementById('fc-b').innerHTML=cFcCards[cFcI].b;
+var ff=document.getElementById('fc-f'),fb=document.getElementById('fc-b');
+ff.innerHTML=cFcCards[cFcI].f;
+fb.innerHTML=cFcCards[cFcI].b;
 document.getElementById('fc-p').textContent=`${cFcI+1}/${cFcCards.length}`;
-rm(fc);
+try{renderMathInElement(ff,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],ignoredTags:['script','noscript','style','textarea','pre','code'],throwOnError:false})}catch(e){}
+try{renderMathInElement(fb,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],ignoredTags:['script','noscript','style','textarea','pre','code'],throwOnError:false})}catch(e){}
 }
 function cFlipFC(){document.getElementById('fc').classList.toggle('flipped')}
 function cNextFC(){cFcI=(cFcI+1)%cFcCards.length;cShowFC()}
