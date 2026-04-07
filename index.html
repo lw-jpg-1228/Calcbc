@@ -2883,10 +2883,11 @@ else{cFcCards=shuf([...(FC[cat]||[])])}
 cFcI=0;cShowFC();
 }
 function cShowFC(){
-document.getElementById('fc').classList.remove('flipped');
-document.getElementById('fc-f').textContent=cFcCards[cFcI].f;
-document.getElementById('fc-b').textContent=cFcCards[cFcI].b;
+var fc=document.getElementById('fc');fc.classList.remove('flipped');
+document.getElementById('fc-f').innerHTML=cFcCards[cFcI].f;
+document.getElementById('fc-b').innerHTML=cFcCards[cFcI].b;
 document.getElementById('fc-p').textContent=`${cFcI+1}/${cFcCards.length}`;
+rm(fc);
 }
 function cFlipFC(){document.getElementById('fc').classList.toggle('flipped')}
 function cNextFC(){cFcI=(cFcI+1)%cFcCards.length;cShowFC()}
