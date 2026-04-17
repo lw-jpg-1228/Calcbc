@@ -919,6 +919,7 @@ where M = max|f⁽ⁿ⁺¹⁾(z)| for z between a and x<br>
 <a href="#" onclick="fShow('vocab')" id="fn-vocab">Vocab</a>
 <a href="#" onclick="fShow('quiz')" id="fn-quiz">Quiz</a>
 <a href="#" onclick="fShow('flashcards')" id="fn-flashcards">Flashcards</a>
+<a href="#" onclick="fShow('spelling')" id="fn-spelling">Spelling</a>
 </div>
 </nav>
 
@@ -1879,6 +1880,47 @@ where M = max|f⁽ⁿ⁺¹⁾(z)| for z between a and x<br>
       <li>⚽ <strong>Le sport:</strong> Le sport est-il essentiel dans la vie des jeunes? Pourquoi?</li>
     </ol>
   </div>
+</div>
+</div>
+
+<!-- SPELLING -->
+<div class="f-section" id="fs-spelling">
+<div class="container">
+<h2>✏️ Accent Spelling Test</h2>
+<div class="card">
+  <p style="margin-bottom:15px;">Type the French word with the <strong>correct accents</strong>. Use the accent buttons below or your keyboard.</p>
+  <div class="tab-bar">
+    <button class="tab active" onclick="fStartSpelling('all',this)">All Words</button>
+    <button class="tab" onclick="fStartSpelling('accents',this)">Accent Words Only</button>
+    <button class="tab" onclick="fStartSpelling('hard',this)">Hard Mode</button>
+  </div>
+  <p id="fsp-progress" class="quiz-progress">Question 1/20</p>
+  <div class="score-bar"><div class="score-fill" id="fsp-score-bar" style="width:0%"></div></div>
+  <p id="fsp-streak" class="streak">🔥 Streak: 0</p>
+  <div id="fsp-area">
+    <p id="fsp-prompt" style="font-size:1.4em;margin:20px 0;"><strong></strong></p>
+    <p id="fsp-hint" style="color:#888;margin-bottom:10px;"></p>
+    <input type="text" id="fsp-input" class="quiz-input" placeholder="Type the French word..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <div style="margin:10px 0;display:flex;gap:5px;flex-wrap:wrap;">
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('é')">é</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('è')">è</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('ê')">ê</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('ë')">ë</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('à')">à</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('â')">â</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('ù')">ù</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('û')">û</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('ô')">ô</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('î')">î</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('ï')">ï</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('ç')">ç</button>
+      <button class="btn btn-small btn-secondary" onclick="fInsertAccent('œ')">œ</button>
+    </div>
+    <button class="btn" onclick="fCheckSpelling()" id="fsp-check-btn">Check</button>
+    <p id="fsp-feedback" style="margin-top:15px;font-size:1.1em;"></p>
+  </div>
+  <button class="btn" onclick="fStartSpelling(fCurSpType)" id="fsp-restart" style="display:none;margin-top:15px;">🔄 New Test</button>
+</div>
 </div>
 </div>
 
@@ -3198,6 +3240,7 @@ function fShow(id) {
   document.getElementById('fn-'+id).classList.add('active');
   if(id === 'quiz') startQuiz(currentQuizType || 'meaning');
   if(id === 'flashcards') startFlashcards(currentFCType || 'verbs');
+  if(id === 'spelling') fStartSpelling(fCurSpType || 'all');
   window.scrollTo(0,0);
 }
 
@@ -3402,6 +3445,132 @@ function flipCard() { document.getElementById('flashcard').classList.toggle('fli
 function nextCard() { fcIndex = (fcIndex+1) % fcCards.length; showCard(); }
 function prevCard() { fcIndex = (fcIndex-1+fcCards.length) % fcCards.length; showCard(); }
 function shuffleFlashcards() { fcCards = shuffle(fcCards); fcIndex = 0; showCard(); }
+
+// SPELLING TEST
+const fSpWords = [
+  {fr:"étudier",en:"to study",hint:"to study"},{fr:"école",en:"school",hint:"school"},
+  {fr:"écrire",en:"to write",hint:"to write"},{fr:"écouter",en:"to listen",hint:"to listen"},
+  {fr:"été",en:"summer",hint:"summer"},{fr:"éléphant",en:"elephant",hint:"elephant"},
+  {fr:"étage",en:"floor/story",hint:"floor of a building"},{fr:"événement",en:"event",hint:"event"},
+  {fr:"énergie",en:"energy",hint:"energy"},{fr:"équipe",en:"team",hint:"team"},
+  {fr:"étoile",en:"star",hint:"star"},{fr:"épicerie",en:"grocery store",hint:"grocery store"},
+  {fr:"répondre",en:"to answer",hint:"to answer"},{fr:"répéter",en:"to repeat",hint:"to repeat"},
+  {fr:"réussir",en:"to succeed",hint:"to succeed"},{fr:"résultat",en:"result",hint:"result"},
+  {fr:"général",en:"general",hint:"general"},{fr:"différent",en:"different",hint:"different"},
+  {fr:"préférer",en:"to prefer",hint:"to prefer"},{fr:"intéressant",en:"interesting",hint:"interesting"},
+  {fr:"expérience",en:"experience",hint:"experience"},{fr:"activité",en:"activity",hint:"activity"},
+  {fr:"liberté",en:"freedom",hint:"freedom"},{fr:"société",en:"society",hint:"society"},
+  {fr:"sécurité",en:"security",hint:"security"},{fr:"café",en:"coffee/café",hint:"coffee"},
+  {fr:"marché",en:"market",hint:"market"},{fr:"idée",en:"idea",hint:"idea"},
+  {fr:"mère",en:"mother",hint:"mother"},{fr:"père",en:"father",hint:"father"},
+  {fr:"frère",en:"brother",hint:"brother"},{fr:"première",en:"first (f)",hint:"first (feminine)"},
+  {fr:"dernière",en:"last (f)",hint:"last (feminine)"},{fr:"problème",en:"problem",hint:"problem"},
+  {fr:"système",en:"system",hint:"system"},{fr:"bibliothèque",en:"library",hint:"library"},
+  {fr:"après",en:"after",hint:"after"},{fr:"très",en:"very",hint:"very"},
+  {fr:"succès",en:"success",hint:"success"},{fr:"accès",en:"access",hint:"access"},
+  {fr:"forêt",en:"forest",hint:"forest"},{fr:"fête",en:"party/holiday",hint:"party or celebration"},
+  {fr:"tête",en:"head",hint:"head"},{fr:"être",en:"to be",hint:"to be"},
+  {fr:"fenêtre",en:"window",hint:"window"},{fr:"peut-être",en:"maybe",hint:"maybe"},
+  {fr:"rêve",en:"dream",hint:"dream"},{fr:"arrêter",en:"to stop",hint:"to stop"},
+  {fr:"français",en:"French",hint:"French (language)"},{fr:"garçon",en:"boy",hint:"boy"},
+  {fr:"leçon",en:"lesson",hint:"lesson"},{fr:"ça",en:"that/it",hint:"that (informal)"},
+  {fr:"reçu",en:"received/receipt",hint:"received"},{fr:"commençons",en:"let's begin",hint:"let's begin (nous)"},
+  {fr:"façon",en:"way/manner",hint:"way or manner"},{fr:"déçu",en:"disappointed",hint:"disappointed"},
+  {fr:"aperçu",en:"glimpse/overview",hint:"overview"},
+  {fr:"à",en:"to/at",hint:"to or at (preposition)"},{fr:"là",en:"there",hint:"there"},
+  {fr:"déjà",en:"already",hint:"already"},{fr:"voilà",en:"there it is",hint:"there it is"},
+  {fr:"âge",en:"age",hint:"age"},{fr:"gâteau",en:"cake",hint:"cake"},
+  {fr:"château",en:"castle",hint:"castle"},{fr:"théâtre",en:"theater",hint:"theater"},
+  {fr:"où",en:"where",hint:"where"},{fr:"hôpital",en:"hospital",hint:"hospital"},
+  {fr:"hôtel",en:"hotel",hint:"hotel"},{fr:"rôle",en:"role",hint:"role"},
+  {fr:"contrôle",en:"control/test",hint:"control or test"},{fr:"côté",en:"side",hint:"side"},
+  {fr:"île",en:"island",hint:"island"},{fr:"dîner",en:"dinner/to dine",hint:"dinner"},
+  {fr:"sûr",en:"sure/safe",hint:"sure or safe"},{fr:"coût",en:"cost",hint:"cost"},
+  {fr:"mais",en:"but",hint:"but (conjunction)"},{fr:"jamais",en:"never",hint:"never"},
+  {fr:"aussi",en:"also",hint:"also"},{fr:"maintenant",en:"now",hint:"now"},
+  {fr:"toujours",en:"always",hint:"always"},{fr:"beaucoup",en:"a lot",hint:"a lot"},
+  {fr:"nouveau",en:"new (m)",hint:"new (masculine)"},
+  {fr:"nécessaire",en:"necessary",hint:"necessary"},{fr:"février",en:"February",hint:"month #2"},
+  {fr:"pièce",en:"room/piece",hint:"room or piece"},{fr:"inquiète",en:"worried (f)",hint:"worried (feminine)"},
+  {fr:"complètement",en:"completely",hint:"completely"},{fr:"immédiatement",en:"immediately",hint:"immediately"},
+  {fr:"particulièrement",en:"particularly",hint:"particularly"},
+  {fr:"possibilité",en:"possibility",hint:"possibility"},{fr:"université",en:"university",hint:"university"},
+  {fr:"vérité",en:"truth",hint:"truth"},{fr:"beauté",en:"beauty",hint:"beauty"},
+  {fr:"santé",en:"health",hint:"health"},{fr:"qualité",en:"quality",hint:"quality"},
+  {fr:"réalité",en:"reality",hint:"reality"},{fr:"égalité",en:"equality",hint:"equality"},
+  {fr:"créer",en:"to create",hint:"to create"},{fr:"espérer",en:"to hope",hint:"to hope"},
+  {fr:"considérer",en:"to consider",hint:"to consider"},{fr:"célèbre",en:"famous",hint:"famous"},
+  {fr:"sincère",en:"sincere",hint:"sincere"}
+];
+
+let fSpList=[], fSpIdx=0, fSpScore=0, fSpStreak=0, fCurSpType='all';
+
+function fStartSpelling(type,btn){
+  fCurSpType=type;
+  if(btn){btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
+  let pool;
+  if(type==='accents') pool=fSpWords.filter(w=>/[éèêëàâùûôîïçœ]/.test(w.fr));
+  else if(type==='hard') pool=fSpWords.filter(w=>(w.fr.match(/[éèêëàâùûôîïçœ]/g)||[]).length>=2);
+  else pool=[...fSpWords];
+  fSpList=shuffle([...pool]).slice(0,20);
+  fSpIdx=0;fSpScore=0;fSpStreak=0;
+  document.getElementById('fsp-restart').style.display='none';
+  fShowSpelling();
+}
+
+function fShowSpelling(){
+  document.getElementById('fsp-progress').textContent=`Question ${fSpIdx+1}/${fSpList.length}`;
+  document.getElementById('fsp-streak').textContent='🔥 Streak: '+fSpStreak;
+  document.getElementById('fsp-score-bar').style.width=(fSpScore/fSpList.length*100)+'%';
+  document.getElementById('fsp-feedback').textContent='';
+  document.getElementById('fsp-check-btn').style.display='inline-block';
+  if(fSpIdx>=fSpList.length){
+    const pct=Math.round(fSpScore/fSpList.length*100);
+    document.getElementById('fsp-area').innerHTML=`<div style="text-align:center;padding:30px;"><h3 style="color:#4ecca3;font-size:1.5em;">Spelling Test Complete!</h3><p style="font-size:1.3em;margin:15px 0;">${fSpScore}/${fSpList.length} correct (${pct}%)</p><p style="color:#888;">${pct===100?'🏆 Perfect accents!':pct>=80?'💪 Great job!':pct>=60?'👍 Getting there!':'📚 Keep practicing those accents!'}</p></div>`;
+    document.getElementById('fsp-restart').style.display='inline-block';
+    return;
+  }
+  const w=fSpList[fSpIdx];
+  document.getElementById('fsp-prompt').innerHTML=`<strong>English:</strong> ${w.en}`;
+  document.getElementById('fsp-hint').textContent=`💡 Hint: ${w.hint}`;
+  const input=document.getElementById('fsp-input');
+  input.value='';input.disabled=false;input.focus();
+}
+
+function fInsertAccent(ch){
+  const input=document.getElementById('fsp-input');
+  const s=input.selectionStart,e=input.selectionEnd;
+  input.value=input.value.substring(0,s)+ch+input.value.substring(e);
+  input.selectionStart=input.selectionEnd=s+ch.length;
+  input.focus();
+}
+
+function fCheckSpelling(){
+  const input=document.getElementById('fsp-input');
+  const answer=input.value.trim().toLowerCase();
+  const correct=fSpList[fSpIdx].fr.toLowerCase();
+  const fb=document.getElementById('fsp-feedback');
+  if(!answer)return;
+  input.disabled=true;
+  document.getElementById('fsp-check-btn').style.display='none';
+  if(answer===correct){
+    fSpScore++;fSpStreak++;
+    fb.innerHTML=`<span style="color:#4ecca3;">✅ Correct!</span>`;
+  } else {
+    fSpStreak=0;
+    fb.innerHTML=`<span style="color:#e94560;">❌ Wrong!</span> Correct: <strong style="color:#4ecca3;font-size:1.2em;">${fSpList[fSpIdx].fr}</strong>`;
+  }
+  document.getElementById('fsp-streak').textContent='🔥 Streak: '+fSpStreak;
+  document.getElementById('fsp-score-bar').style.width=(fSpScore/fSpList.length*100)+'%';
+  setTimeout(()=>{fSpIdx++;fShowSpelling();},1500);
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.getElementById('fs-spelling')&&document.getElementById('fs-spelling').style.display!=='none'){
+    const btn=document.getElementById('fsp-check-btn');
+    if(btn&&btn.style.display!=='none')fCheckSpelling();
+  }
+});
 
 // INIT
 startFlashcards('verbs');

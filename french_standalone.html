@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>French Pre-IB Study Hub</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #0f0f1a; color: #e0e0e0; min-height: 100vh; }
+
+/* NAV */
+nav { background: #1a1a2e; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #533483; position: sticky; top: 0; z-index: 100; }
+nav h1 { color: #e94560; font-size: 1.4em; }
+nav .nav-links { display: flex; gap: 15px; flex-wrap: wrap; }
+nav a { color: #b0b0cc; text-decoration: none; padding: 8px 16px; border-radius: 8px; transition: all 0.3s; font-size: 0.9em; }
+nav a:hover, nav a.active { background: #533483; color: white; }
+
+/* MAIN */
+.container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+h2 { color: #e94560; margin-bottom: 20px; font-size: 1.8em; }
+h3 { color: #b06ab3; margin: 20px 0 10px; }
+
+/* CARDS */
+.card { background: #1a1a2e; border-radius: 12px; padding: 25px; margin-bottom: 20px; border: 1px solid #2a2a4a; }
+.card:hover { border-color: #533483; }
+
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+th { background: #533483; color: white; padding: 12px; text-align: left; }
+td { padding: 10px 12px; border-bottom: 1px solid #2a2a4a; }
+tr:hover { background: #1f1f3a; }
+
+/* BUTTONS */
+.btn { background: #e94560; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 1em; transition: all 0.3s; margin: 5px; }
+.btn:hover { background: #c73652; transform: translateY(-2px); }
+.btn-secondary { background: #533483; }
+.btn-secondary:hover { background: #6b44a0; }
+.btn-small { padding: 8px 16px; font-size: 0.85em; }
+
+/* QUIZ */
+.quiz-option { display: block; width: 100%; text-align: left; background: #16213e; color: #e0e0e0; border: 2px solid #2a2a4a; padding: 14px 20px; border-radius: 10px; cursor: pointer; margin: 8px 0; font-size: 1em; transition: all 0.2s; }
+.quiz-option:hover { border-color: #533483; background: #1a2744; }
+.quiz-option.correct { border-color: #4ecca3; background: #1a3a2a; color: #4ecca3; }
+.quiz-option.wrong { border-color: #e94560; background: #3a1a1a; color: #e94560; }
+.quiz-option:disabled { cursor: default; opacity: 0.7; }
+
+.score-bar { background: #2a2a4a; border-radius: 20px; height: 12px; margin: 15px 0; overflow: hidden; }
+.score-fill { background: linear-gradient(90deg, #e94560, #b06ab3); height: 100%; border-radius: 20px; transition: width 0.5s; }
+
+.streak { font-size: 1.2em; color: #f0a500; margin: 10px 0; }
+.quiz-progress { color: #888; margin-bottom: 15px; }
+.quiz-input { background: #16213e; border: 2px solid #2a2a4a; color: white; padding: 12px 18px; border-radius: 8px; font-size: 1em; width: 100%; margin: 10px 0; }
+.quiz-input:focus { outline: none; border-color: #533483; }
+
+/* CONJUGATION TABLE */
+.conj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+.conj-item { background: #16213e; padding: 10px 15px; border-radius: 8px; }
+.conj-item .pronoun { color: #b06ab3; font-weight: bold; }
+.conj-item .form { color: #4ecca3; }
+
+/* TABS */
+.tab-bar { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab { padding: 10px 20px; background: #16213e; border: none; color: #888; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 0.9em; }
+.tab.active { background: #533483; color: white; }
+
+/* FLASHCARD */
+.flashcard { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 2px solid #533483; border-radius: 16px; padding: 60px 40px; text-align: center; cursor: pointer; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: transform 0.3s; user-select: none; }
+.flashcard:hover { transform: scale(1.02); }
+.flashcard .front { font-size: 2em; color: #e94560; }
+.flashcard .back { font-size: 1.5em; color: #4ecca3; display: none; }
+.flashcard .hint { color: #666; font-size: 0.9em; margin-top: 15px; }
+.flashcard.flipped .front { display: none; }
+.flashcard.flipped .back { display: block; }
+.flashcard.flipped .hint { display: none; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  nav { flex-direction: column; gap: 10px; }
+  .conj-grid { grid-template-columns: 1fr; }
+  .flashcard { padding: 40px 20px; }
+  .flashcard .front { font-size: 1.5em; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <h1>🇫🇷 French Pre-IB</h1>
+  <div class="nav-links">
+    <a href="#" onclick="showSection('home')" class="active" id="nav-home">Home</a>
+    <a href="#" onclick="showSection('verbs')" id="nav-verbs">Verbs</a>
+    <a href="#" onclick="showSection('tenses')" id="nav-tenses">Tenses</a>
+    <a href="#" onclick="showSection('vocab')" id="nav-vocab">Vocab</a>
+    <a href="#" onclick="showSection('grammar')" id="nav-grammar">Grammar</a>
+    <a href="#" onclick="showSection('quiz')" id="nav-quiz">Quiz</a>
+    <a href="#" onclick="showSection('flashcards')" id="nav-flashcards">Flashcards</a>
+    <a href="#" onclick="showSection('writing')" id="nav-writing">Writing</a>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="section active" id="sec-home">
+<div class="container">
+  <h2>Welcome back 👋</h2>
+  <div class="card">
+    <h3>Quick Start</h3>
+    <p style="margin-bottom:15px;">Pick a mode to start studying:</p>
+    <button class="btn" onclick="showSection('quiz')">🧠 Take a Quiz</button>
+    <button class="btn btn-secondary" onclick="showSection('flashcards')">🃏 Flashcards</button>
+    <button class="btn btn-secondary" onclick="showSection('verbs')">📖 Study Verbs</button>
+  </div>
+  <div class="card">
+    <h3>What's Covered</h3>
+    <ul style="list-style:none; line-height:2;">
+      <li>✅ 155+ verbs with conjugations (74 in lookup tool)</li>
+      <li>✅ Tenses: présent, passé composé, imparfait, futur simple, conditionnel</li>
+      <li>✅ Grammar: negation, questions, pronouns, prepositions</li>
+      <li>✅ Vocabulary: school, daily life, food, travel, opinions</li>
+      <li>✅ Interactive quizzes with streak tracking</li>
+      <li>✅ Flashcard mode</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- VERBS -->
+<div class="section" id="sec-verbs">
+<div class="container">
+  <h2>Common Verbs</h2>
+  
+  <div class="tab-bar">
+    <button class="tab active" onclick="showVerbGroup('er',this)">-ER Verbs</button>
+    <button class="tab" onclick="showVerbGroup('ir',this)">-IR Verbs</button>
+    <button class="tab" onclick="showVerbGroup('re',this)">-RE Verbs</button>
+    <button class="tab" onclick="showVerbGroup('irreg',this)">Irregular</button>
+  </div>
+
+  <div id="verb-er" class="card">
+    <table>
+      <tr><th>Verb</th><th>Meaning</th><th>Example</th></tr>
+      <tr><td>parler</td><td>to speak</td><td>Je parle français.</td></tr>
+      <tr><td>manger</td><td>to eat</td><td>Nous mang<b>e</b>ons à midi.</td></tr>
+      <tr><td>jouer</td><td>to play</td><td>Il joue au foot.</td></tr>
+      <tr><td>regarder</td><td>to watch</td><td>Elle regarde la télé.</td></tr>
+      <tr><td>écouter</td><td>to listen</td><td>J'écoute de la musique.</td></tr>
+      <tr><td>travailler</td><td>to work</td><td>Tu travailles trop.</td></tr>
+      <tr><td>étudier</td><td>to study</td><td>Nous étudions le français.</td></tr>
+      <tr><td>habiter</td><td>to live</td><td>J'habite à Toronto.</td></tr>
+      <tr><td>aimer</td><td>to like/love</td><td>J'aime le chocolat.</td></tr>
+      <tr><td>détester</td><td>to hate</td><td>Je déteste les examens.</td></tr>
+      <tr><td>acheter ⚠️</td><td>to buy</td><td>Elle ach<b>è</b>te un livre.</td></tr>
+      <tr><td>commencer ⚠️</td><td>to begin</td><td>Le cours commen<b>ç</b>ons.</td></tr>
+      <tr><td>donner</td><td>to give</td><td>Il donne un cadeau.</td></tr>
+      <tr><td>trouver</td><td>to find</td><td>Je trouve ça intéressant.</td></tr>
+      <tr><td>arriver</td><td>to arrive</td><td>Nous arrivons demain.</td></tr>
+      <tr><td>chercher</td><td>to look for</td><td>Je cherche mes clés.</td></tr>
+      <tr><td>demander</td><td>to ask</td><td>Il demande une question.</td></tr>
+      <tr><td>penser</td><td>to think</td><td>Je pense que oui.</td></tr>
+      <tr><td>passer</td><td>to pass/spend</td><td>Nous passons du temps ici.</td></tr>
+      <tr><td>marcher</td><td>to walk</td><td>Elle marche au parc.</td></tr>
+      <tr><td>chanter</td><td>to sing</td><td>Tu chantes bien!</td></tr>
+      <tr><td>danser</td><td>to dance</td><td>Ils dansent ensemble.</td></tr>
+      <tr><td>nager</td><td>to swim</td><td>Nous nag<b>e</b>ons à la piscine.</td></tr>
+      <tr><td>voyager</td><td>to travel</td><td>Nous voyag<b>e</b>ons en Europe.</td></tr>
+      <tr><td>dessiner</td><td>to draw</td><td>Elle dessine un chat.</td></tr>
+      <tr><td>cuisiner</td><td>to cook</td><td>Je cuisine ce soir.</td></tr>
+      <tr><td>porter</td><td>to wear/carry</td><td>Il porte un chapeau.</td></tr>
+      <tr><td>montrer</td><td>to show</td><td>Montre-moi ton travail.</td></tr>
+      <tr><td>fermer</td><td>to close</td><td>Ferme la fenêtre!</td></tr>
+      <tr><td>laisser</td><td>to leave/let</td><td>Laisse-moi tranquille.</td></tr>
+      <tr><td>tomber</td><td>to fall</td><td>Il est tombé. (être!)</td></tr>
+      <tr><td>rester</td><td>to stay</td><td>Je reste à la maison. (être!)</td></tr>
+      <tr><td>retourner</td><td>to return</td><td>Elle est retournée. (être!)</td></tr>
+      <tr><td>monter</td><td>to go up</td><td>Nous montons l'escalier. (être!)</td></tr>
+      <tr><td>entrer</td><td>to enter</td><td>Il est entré dans la salle. (être!)</td></tr>
+      <tr><td>quitter</td><td>to leave/quit</td><td>Elle quitte la maison.</td></tr>
+      <tr><td>expliquer</td><td>to explain</td><td>Le prof explique la leçon.</td></tr>
+      <tr><td>raconter</td><td>to tell (story)</td><td>Raconte-moi une histoire.</td></tr>
+      <tr><td>essayer ⚠️</td><td>to try</td><td>J'essa<b>ie</b> de comprendre.</td></tr>
+      <tr><td>appeler ⚠️</td><td>to call</td><td>J'appe<b>ll</b>e mon ami.</td></tr>
+    </table>
+    <p style="color:#f0a500;margin-top:10px;">⚠️ = spelling change verb (stem changes in some forms)</p>
+  </div>
+
+  <div id="verb-ir" class="card" style="display:none;">
+    <table>
+      <tr><th>Verb</th><th>Meaning</th><th>Example</th></tr>
+      <tr><td>finir</td><td>to finish</td><td>Je finis mes devoirs.</td></tr>
+      <tr><td>choisir</td><td>to choose</td><td>Tu choisis un film.</td></tr>
+      <tr><td>réussir</td><td>to succeed</td><td>Elle réussit l'examen.</td></tr>
+      <tr><td>réfléchir</td><td>to think/reflect</td><td>Nous réfléchissons.</td></tr>
+      <tr><td>remplir</td><td>to fill</td><td>Remplis le formulaire.</td></tr>
+      <tr><td>grandir</td><td>to grow up</td><td>Les enfants grandissent vite.</td></tr>
+      <tr><td>obéir</td><td>to obey</td><td>Il obéit à ses parents.</td></tr>
+      <tr><td>punir</td><td>to punish</td><td>Le prof punit l'élève.</td></tr>
+      <tr><td>bâtir</td><td>to build</td><td>On bâtit une maison.</td></tr>
+      <tr><td>guérir</td><td>to heal/cure</td><td>Le médecin guérit le patient.</td></tr>
+      <tr><td>agir</td><td>to act</td><td>Il faut agir maintenant.</td></tr>
+      <tr><td>réagir</td><td>to react</td><td>Comment réagis-tu?</td></tr>
+      <tr><td>avertir</td><td>to warn</td><td>Je t'avertis!</td></tr>
+      <tr><td>applaudir</td><td>to applaud</td><td>Le public applaudit.</td></tr>
+      <tr><td>nourrir</td><td>to feed</td><td>Elle nourrit le chat.</td></tr>
+      <tr><td>ralentir</td><td>to slow down</td><td>Ralentis! C'est dangereux.</td></tr>
+      <tr><td>établir</td><td>to establish</td><td>On établit les règles.</td></tr>
+      <tr><td>saisir</td><td>to seize/grab</td><td>Saisis ta chance!</td></tr>
+      <tr><td>grossir</td><td>to gain weight</td><td>Je grossis en hiver.</td></tr>
+      <tr><td>maigrir</td><td>to lose weight</td><td>Elle maigrit en été.</td></tr>
+      <tr><td>atterrir</td><td>to land (plane)</td><td>L'avion atterrit à midi.</td></tr>
+      <tr><td>réunir</td><td>to gather/reunite</td><td>On réunit l'équipe.</td></tr>
+      <tr><td>accomplir</td><td>to accomplish</td><td>Il accomplit sa mission.</td></tr>
+      <tr><td>élargir</td><td>to widen</td><td>On élargit la route.</td></tr>
+      <tr><td>approfondir</td><td>to deepen</td><td>J'approfondis mes connaissances.</td></tr>
+      <tr><td>enrichir</td><td>to enrich</td><td>La lecture enrichit l'esprit.</td></tr>
+      <tr><td>embellir</td><td>to beautify</td><td>Elle embellit le jardin.</td></tr>
+      <tr><td>vieillir</td><td>to age/grow old</td><td>Nous vieillissons tous.</td></tr>
+      <tr><td>adoucir</td><td>to soften</td><td>La musique adoucit les mœurs.</td></tr>
+      <tr><td>rafraîchir</td><td>to refresh</td><td>La pluie rafraîchit l'air.</td></tr>
+      <tr><td>fournir</td><td>to provide</td><td>Il fournit les matériaux.</td></tr>
+      <tr><td>définir</td><td>to define</td><td>Définis ce mot.</td></tr>
+    </table>
+    <p style="color:#4ecca3;margin-top:10px;">Pattern: je fini<b>s</b>, tu fini<b>s</b>, il fini<b>t</b>, nous fini<b>ssons</b>, vous fini<b>ssez</b>, ils fini<b>ssent</b></p>
+    <p style="color:#f0a500;margin-top:8px;">⚠️ Impératif: <b>Finis !</b> / <b>Finissons !</b> / <b>Finissez !</b> (keep the -s for -IR verbs)</p>
+  </div>
+
+  <div id="verb-re" class="card" style="display:none;">
+    <table>
+      <tr><th>Verb</th><th>Meaning</th><th>Example</th></tr>
+      <tr><td>vendre</td><td>to sell</td><td>Il vend sa voiture.</td></tr>
+      <tr><td>attendre</td><td>to wait</td><td>J'attends le bus.</td></tr>
+      <tr><td>répondre</td><td>to answer</td><td>Elle répond à la question.</td></tr>
+      <tr><td>perdre</td><td>to lose</td><td>Ne perds pas tes clés!</td></tr>
+      <tr><td>entendre</td><td>to hear</td><td>J'entends de la musique.</td></tr>
+      <tr><td>descendre</td><td>to go down</td><td>Nous descendons l'escalier.</td></tr>
+      <tr><td>rendre</td><td>to return/give back</td><td>Rends-moi mon livre!</td></tr>
+      <tr><td>mordre</td><td>to bite</td><td>Le chien mord.</td></tr>
+      <tr><td>fondre</td><td>to melt</td><td>La neige fond au soleil.</td></tr>
+      <tr><td>confondre</td><td>to confuse</td><td>Ne confonds pas les deux!</td></tr>
+      <tr><td>défendre</td><td>to defend/forbid</td><td>Je défends mon opinion.</td></tr>
+      <tr><td>tendre</td><td>to stretch/hand</td><td>Il tend la main.</td></tr>
+      <tr><td>répandre</td><td>to spread/spill</td><td>La nouvelle se répand vite.</td></tr>
+      <tr><td>interrompre</td><td>to interrupt</td><td>Ne m'interromps pas!</td></tr>
+      <tr><td>rompre</td><td>to break (up)</td><td>Il rompt le silence.</td></tr>
+      <tr><td>prétendre</td><td>to claim/pretend</td><td>Il prétend être malade.</td></tr>
+      <tr><td>suspendre</td><td>to suspend/hang</td><td>On suspend le tableau.</td></tr>
+      <tr><td>correspondre</td><td>to correspond</td><td>Ça correspond à la réalité.</td></tr>
+      <tr><td>dépendre</td><td>to depend</td><td>Ça dépend de toi.</td></tr>
+      <tr><td>étendre</td><td>to extend/spread</td><td>Il étend le linge.</td></tr>
+      <tr><td>fendre</td><td>to split/crack</td><td>Il fend le bois.</td></tr>
+      <tr><td>tondre</td><td>to mow</td><td>Je tonds la pelouse.</td></tr>
+      <tr><td>pondre</td><td>to lay (eggs)</td><td>La poule pond un œuf.</td></tr>
+      <tr><td>pendre</td><td>to hang</td><td>Le manteau pend au crochet.</td></tr>
+    </table>
+    <p style="color:#4ecca3;margin-top:10px;">Pattern: je vend<b>s</b>, tu vend<b>s</b>, il vend<b>—</b>, nous vend<b>ons</b>, vous vend<b>ez</b>, ils vend<b>ent</b></p>
+    <p style="color:#f0a500;margin-top:8px;">⚠️ Impératif: <b>Vends !</b> / <b>Vendons !</b> / <b>Vendez !</b></p>
+  </div>
+
+  <div id="verb-irreg" class="card" style="display:none;">
+    <table>
+      <tr><th>Verb</th><th>Meaning</th><th>Example</th></tr>
+      <tr style="background:#1a1a2a"><td colspan="3" style="color:#1e90ff;font-weight:bold">🔑 Essential (être, avoir, aller, faire)</td></tr>
+      <tr><td>être</td><td>to be</td><td>Je suis étudiant.</td></tr>
+      <tr><td>avoir</td><td>to have</td><td>J'ai 16 ans.</td></tr>
+      <tr><td>aller</td><td>to go</td><td>Je vais à l'école.</td></tr>
+      <tr><td>faire</td><td>to do/make</td><td>Qu'est-ce que tu fais?</td></tr>
+      <tr style="background:#1a1a2a"><td colspan="3" style="color:#1e90ff;font-weight:bold">💪 Modal / Helper verbs</td></tr>
+      <tr><td>pouvoir</td><td>can/to be able</td><td>Je peux t'aider.</td></tr>
+      <tr><td>vouloir</td><td>to want</td><td>Je veux un café.</td></tr>
+      <tr><td>devoir</td><td>must/to have to</td><td>Tu dois étudier.</td></tr>
+      <tr><td>savoir</td><td>to know (fact)</td><td>Je sais la réponse.</td></tr>
+      <tr><td>connaître</td><td>to know (person)</td><td>Je connais Paris.</td></tr>
+      <tr><td>falloir</td><td>to be necessary</td><td>Il faut travailler. (il only)</td></tr>
+      <tr><td>valoir</td><td>to be worth</td><td>Ça vaut la peine.</td></tr>
+      <tr style="background:#1a1a2a"><td colspan="3" style="color:#1e90ff;font-weight:bold">🚶 DR MRS VANDERTRAMP (être verbs)</td></tr>
+      <tr><td>venir</td><td>to come</td><td>Il vient demain.</td></tr>
+      <tr><td>devenir</td><td>to become</td><td>Elle devient médecin.</td></tr>
+      <tr><td>revenir</td><td>to come back</td><td>Je reviens à 5h.</td></tr>
+      <tr><td>partir</td><td>to leave</td><td>Elle part à 8h.</td></tr>
+      <tr><td>sortir</td><td>to go out</td><td>Nous sortons ce soir.</td></tr>
+      <tr><td>mourir</td><td>to die</td><td>La plante meurt.</td></tr>
+      <tr><td>naître</td><td>to be born</td><td>Il est né en 2010.</td></tr>
+      <tr style="background:#1a1a2a"><td colspan="3" style="color:#1e90ff;font-weight:bold">✍️ Communication</td></tr>
+      <tr><td>dire</td><td>to say</td><td>Qu'est-ce que tu dis?</td></tr>
+      <tr><td>lire</td><td>to read</td><td>Elle lit un roman.</td></tr>
+      <tr><td>écrire</td><td>to write</td><td>J'écris une lettre.</td></tr>
+      <tr><td>rire</td><td>to laugh</td><td>Nous rions ensemble.</td></tr>
+      <tr><td>sourire</td><td>to smile</td><td>Elle sourit toujours.</td></tr>
+      <tr style="background:#1a1a2a"><td colspan="3" style="color:#1e90ff;font-weight:bold">👁️ Perception / Body</td></tr>
+      <tr><td>voir</td><td>to see</td><td>Je vois la mer.</td></tr>
+      <tr><td>croire</td><td>to believe</td><td>Je crois que oui.</td></tr>
+      <tr><td>courir</td><td>to run</td><td>Il court très vite.</td></tr>
+      <tr><td>dormir</td><td>to sleep</td><td>Je dors 8 heures.</td></tr>
+      <tr><td>sentir</td><td>to feel/smell</td><td>Je sens le parfum.</td></tr>
+      <tr><td>boire</td><td>to drink</td><td>Je bois de l'eau.</td></tr>
+      <tr><td>ouvrir</td><td>to open</td><td>Ouvre la porte!</td></tr>
+      <tr style="background:#1a1a2a"><td colspan="3" style="color:#1e90ff;font-weight:bold">🤲 Taking / Giving</td></tr>
+      <tr><td>prendre</td><td>to take</td><td>Je prends le métro.</td></tr>
+      <tr><td>apprendre</td><td>to learn</td><td>J'apprends le français.</td></tr>
+      <tr><td>comprendre</td><td>to understand</td><td>Tu comprends?</td></tr>
+      <tr><td>surprendre</td><td>to surprise</td><td>Ça me surprend!</td></tr>
+      <tr><td>mettre</td><td>to put</td><td>Mets ton manteau.</td></tr>
+      <tr><td>permettre</td><td>to allow</td><td>Permettez-moi d'entrer.</td></tr>
+      <tr><td>promettre</td><td>to promise</td><td>Je te promets.</td></tr>
+      <tr><td>tenir</td><td>to hold</td><td>Tiens ma main.</td></tr>
+      <tr><td>obtenir</td><td>to obtain</td><td>Il obtient de bons résultats.</td></tr>
+      <tr><td>recevoir</td><td>to receive</td><td>Je reçois un message.</td></tr>
+      <tr><td>envoyer</td><td>to send</td><td>J'envoie un courriel.</td></tr>
+      <tr><td>servir</td><td>to serve</td><td>On sert le dîner.</td></tr>
+      <tr style="background:#1a1a2a"><td colspan="3" style="color:#1e90ff;font-weight:bold">🔨 Making / Doing</td></tr>
+      <tr><td>conduire</td><td>to drive</td><td>Il conduit bien.</td></tr>
+      <tr><td>construire</td><td>to build</td><td>On construit une maison.</td></tr>
+      <tr><td>traduire</td><td>to translate</td><td>Traduis cette phrase.</td></tr>
+      <tr><td>produire</td><td>to produce</td><td>La France produit du vin.</td></tr>
+      <tr><td>suivre</td><td>to follow</td><td>Suivez-moi!</td></tr>
+      <tr><td>vivre</td><td>to live</td><td>Nous vivons au Canada.</td></tr>
+      <tr style="background:#1a1a2a"><td colspan="3" style="color:#1e90ff;font-weight:bold">🌤️ Others</td></tr>
+      <tr><td>plaire</td><td>to please</td><td>Ce film me plaît.</td></tr>
+      <tr><td>craindre</td><td>to fear</td><td>Je crains le pire.</td></tr>
+      <tr><td>peindre</td><td>to paint</td><td>Elle peint un tableau.</td></tr>
+      <tr><td>rejoindre</td><td>to join/meet up</td><td>Je te rejoins au café.</td></tr>
+      <tr><td>paraître</td><td>to seem</td><td>Il paraît fatigué.</td></tr>
+      <tr><td>disparaître</td><td>to disappear</td><td>Le chat a disparu.</td></tr>
+      <tr><td>suffire</td><td>to suffice</td><td>Ça suffit!</td></tr>
+      <tr><td>pleuvoir</td><td>to rain</td><td>Il pleut aujourd'hui. (il only)</td></tr>
+      <tr><td>soumettre</td><td>to submit</td><td>Soumets ton devoir.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🔍 Conjugation Lookup</h3>
+    <p style="margin-bottom:10px;">Type any verb from the list to see its conjugations:</p>
+    <input type="text" class="quiz-input" id="conj-input" placeholder="e.g. aller, faire, courir..." oninput="showConjugation()">
+    <div id="conj-result"></div>
+  </div>
+</div>
+</div>
+
+<!-- TENSES -->
+<div class="section" id="sec-tenses">
+<div class="container">
+  <h2>Tenses</h2>
+
+  <div class="card">
+    <h3>Présent (Present)</h3>
+    <p><strong>Use:</strong> Actions happening now, habits, general truths.</p>
+    <div style="background:#1a1a2e; border-left:3px solid #4ecca3; padding:12px 15px; margin:10px 0; border-radius:4px;">
+      <p style="color:#4ecca3; font-weight:bold; margin-bottom:8px;">📋 5 Uses of Le Présent:</p>
+      <p><strong>1. Action happening now:</strong> Nous <strong>mangeons</strong> l'orange.</p>
+      <p><strong>2. Near future:</strong> Demain, j'<strong>arrive</strong> à l'école tôt.</p>
+      <p><strong>3. Recent past</strong> (venir de): Ma mère <strong>vient de</strong> partir sans moi.</p>
+      <p><strong>4. General truth/fact:</strong> Le Canada <strong>est</strong> un pays. / 2 et 2 <strong>font</strong> 4.</p>
+      <p><strong>5. Habitual action:</strong> Je me <strong>couche</strong> à 10h chaque soir.</p>
+    </div>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Regular -ER (parler)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">je</span> <span class="form">parle</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">parles</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle/on</span> <span class="form">parle</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">parlons</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">parlez</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">parlent</span></div>
+    </div>
+    <p style="color:#888; margin-top:10px;"><strong>Endings:</strong> -e, -es, -e, -ons, -ez, -ent</p>
+    
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Regular -IR (finir)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">je</span> <span class="form">finis</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">finis</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle/on</span> <span class="form">finit</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">finissons</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">finissez</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">finissent</span></div>
+    </div>
+    <p style="color:#888; margin-top:10px;"><strong>Endings:</strong> -is, -is, -it, -issons, -issez, -issent</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Regular -RE (vendre)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">je</span> <span class="form">vends</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">vends</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle/on</span> <span class="form">vend</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">vendons</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">vendez</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">vendent</span></div>
+    </div>
+    <p style="color:#888; margin-top:10px;"><strong>Endings:</strong> -s, -s, (nothing), -ons, -ez, -ent</p>
+
+    <h4 style="color:#f0a500; margin:20px 0 10px;">⚠️ Spelling-Change Verbs (-cer / -ger)</h4>
+    <p>These verbs change spelling in the <strong>nous</strong> form to keep the soft pronunciation:</p>
+    <table>
+      <tr><th>Type</th><th>Change</th><th>Example</th><th>Why?</th></tr>
+      <tr><td><strong>-cer</strong></td><td>c → ç before -ons</td><td>commencer → nous commen<strong>ç</strong>ons</td><td>Without ç, "co" = hard K sound</td></tr>
+      <tr><td><strong>-ger</strong></td><td>add e before -ons</td><td>manger → nous mang<strong>e</strong>ons</td><td>Without e, "go" = hard G sound</td></tr>
+    </table>
+    <p style="margin-top:10px;"><strong>-cer verbs:</strong> placer, forcer, influencer, prononcer, remplacer, menacer, lancer</p>
+    <p><strong>-ger verbs:</strong> changer, voyager, nager, partager</p>
+  </div>
+
+  <div class="card">
+    <h3>Passé Composé (Past - completed actions)</h3>
+    <p><strong>Use:</strong> Specific completed actions in the past.</p>
+    <p><strong>Formula:</strong> subject + avoir/être (present) + past participle</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">With avoir (most verbs)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">j'</span><span class="form">ai parlé</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">as parlé</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle</span> <span class="form">a parlé</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">avons parlé</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">avez parlé</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">ont parlé</span></div>
+    </div>
+    <h4 style="color:#f0a500; margin:15px 0 10px;">Past Participles</h4>
+    <p>-ER → -é (parlé) | -IR → -i (fini) | -RE → -u (vendu)</p>
+    <p style="margin-top:10px;"><strong>Irregular:</strong> être→été, avoir→eu, faire→fait, dire→dit, lire→lu, écrire→écrit, courir→couru, mourir→mort, naître→né, venir→venu</p>
+
+    <h4 style="color:#f0a500; margin:15px 0 10px;">Irregular Past Participles — Grouped by Pattern</h4>
+    <table>
+      <tr><th>Pattern</th><th>Infinitif → Participe</th></tr>
+      <tr><td><strong>-is</strong></td><td>mettre→mis, admettre→admis, commettre→commis, permettre→permis, promettre→promis, prendre→pris, apprendre→appris, comprendre→compris, surprendre→surpris</td></tr>
+      <tr><td><strong>-ert</strong></td><td>ouvrir→ouvert, couvrir→couvert, découvrir→découvert, offrir→offert, souffrir→souffert</td></tr>
+      <tr><td><strong>-u</strong></td><td>connaître→connu, disparaître→disparu, boire→bu, voir→vu, savoir→su, vouloir→voulu, tenir→tenu, suivre→suivi, avoir→eu</td></tr>
+      <tr><td><strong>-it</strong></td><td>conduire→conduit, construire→construit, produire→produit</td></tr>
+    </table>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">DR MRS P VANDERTRAMP (use être)</h4>
+    <table>
+      <tr><th>Letter</th><th>Verb</th><th>Participe</th></tr>
+      <tr><td>D</td><td>Devenir</td><td>devenu</td></tr>
+      <tr><td>R</td><td>Revenir</td><td>revenu</td></tr>
+      <tr><td>M</td><td>Monter</td><td>monté</td></tr>
+      <tr><td>R</td><td>Rester</td><td>resté</td></tr>
+      <tr><td>S</td><td>Sortir</td><td>sorti</td></tr>
+      <tr><td>P</td><td>Passer</td><td>passé</td></tr>
+      <tr><td>V</td><td>Venir</td><td>venu</td></tr>
+      <tr><td>A</td><td>Aller</td><td>allé</td></tr>
+      <tr><td>N</td><td>Naître</td><td>né</td></tr>
+      <tr><td>D</td><td>Descendre</td><td>descendu</td></tr>
+      <tr><td>E</td><td>Entrer</td><td>entré</td></tr>
+      <tr><td>R</td><td>Rentrer</td><td>rentré</td></tr>
+      <tr><td>T</td><td>Tomber</td><td>tombé</td></tr>
+      <tr><td>R</td><td>Retourner</td><td>retourné</td></tr>
+      <tr><td>A</td><td>Arriver</td><td>arrivé</td></tr>
+      <tr><td>M</td><td>Mourir</td><td>mort</td></tr>
+      <tr><td>P</td><td>Partir</td><td>parti</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:10px;">⚠️ With être: past participle <strong>agrees</strong> with subject (add -e feminine, -s plural, -es fem. plural)</p>
+    <p>Elle est allé<strong>e</strong>. | Elles sont allé<strong>es</strong>. | Ils sont allé<strong>s</strong>.</p>
+
+    <h4 style="color:#f0a500; margin:15px 0 10px;">⚠️ Transitive vs Intransitive (avoir OR être)</h4>
+    <p>Some DR MRS P VANDERTRAMP verbs use <strong>avoir</strong> when they have a <strong>direct object</strong> — the meaning changes!</p>
+    <table>
+      <tr><th>Verb</th><th>With être (intransitive)</th><th>With avoir (transitive)</th></tr>
+      <tr><td>monter</td><td>Je <strong>suis monté(e)</strong>. (I went up)</td><td>J'<strong>ai monté</strong> les valises. (I brought up the suitcases)</td></tr>
+      <tr><td>descendre</td><td>Elle <strong>est descendue</strong>. (She went down)</td><td>Elle <strong>a descendu</strong> le sac. (She brought down the bag)</td></tr>
+      <tr><td>sortir</td><td>Nous <strong>sommes sortis</strong>. (We went out)</td><td>Pierre <strong>a sorti</strong> le chien. (Pierre took out the dog)</td></tr>
+      <tr><td>rentrer</td><td>Pierre <strong>est rentré</strong> tôt. (Pierre came home early)</td><td>Il <strong>a rentré</strong> la voiture. (He put the car in)</td></tr>
+      <tr><td>passer</td><td>Elle <strong>est passée</strong>. (She passed by)</td><td>Mon frère <strong>a passé</strong> une bonne journée. (My brother had a good day)</td></tr>
+    </table>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Negation & Inversion in Passé Composé</h4>
+    <p><strong>Negative:</strong> Sujet + <strong>ne</strong> + auxiliaire + <strong>pas/jamais/plus</strong> + participe passé</p>
+    <p style="color:#888;">Il <strong>n'a jamais mangé</strong> son dîner. | Elle <strong>n'est pas allée</strong> au cinéma.</p>
+    <p style="margin-top:10px;"><strong>Inversion:</strong> Mot interrogatif + auxiliaire + sujet + participe passé</p>
+    <p style="color:#888;">Quand <strong>a-t-elle fini</strong> son projet? | Pourquoi <strong>as-tu dormi</strong> tôt?</p>
+    <p style="color:#f0a500; margin-top:5px;">⚠️ The -t- in "a-t-elle" has no meaning — it's just for pronunciation flow between two vowels.</p>
+  </div>
+
+  <div class="card">
+    <h3>Imparfait (Imperfect - past descriptions/habits)</h3>
+    <p><strong>Use:</strong> Ongoing past actions, habits, descriptions, emotions, weather.</p>
+    <p><strong>Formula:</strong> nous form of présent (drop -ons) + imparfait endings</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">parler (nous parlons → parl-)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">je</span> <span class="form">parlais</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">parlais</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle/on</span> <span class="form">parlait</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">parlions</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">parliez</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">parlaient</span></div>
+    </div>
+    <p style="color:#888; margin-top:10px;"><strong>Endings:</strong> -ais, -ais, -ait, -ions, -iez, -aient</p>
+    <p style="color:#f0a500; margin-top:10px;">⚠️ Only exception: être → stem is ét- (j'étais, tu étais...)</p>
+  </div>
+
+  <div class="card">
+    <h3>Futur Simple (Simple Future)</h3>
+    <p><strong>Use:</strong> Actions that will happen in the future.</p>
+    <p><strong>Formula:</strong> infinitive + endings (for -RE verbs, drop the final -e)</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">parler</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">je</span> <span class="form">parlerai</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">parleras</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle/on</span> <span class="form">parlera</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">parlerons</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">parlerez</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">parleront</span></div>
+    </div>
+    <p style="color:#888; margin-top:10px;"><strong>Endings:</strong> -ai, -as, -a, -ons, -ez, -ont</p>
+    <h4 style="color:#f0a500; margin:15px 0 10px;">Irregular Stems (must memorize!)</h4>
+    <table>
+      <tr><th>Verb</th><th>Stem</th><th>Example (je)</th></tr>
+      <tr><td>être</td><td>ser-</td><td>je serai</td></tr>
+      <tr><td>avoir</td><td>aur-</td><td>j'aurai</td></tr>
+      <tr><td>aller</td><td>ir-</td><td>j'irai</td></tr>
+      <tr><td>faire</td><td>fer-</td><td>je ferai</td></tr>
+      <tr><td>pouvoir</td><td>pourr-</td><td>je pourrai</td></tr>
+      <tr><td>vouloir</td><td>voudr-</td><td>je voudrai</td></tr>
+      <tr><td>devoir</td><td>devr-</td><td>je devrai</td></tr>
+      <tr><td>savoir</td><td>saur-</td><td>je saurai</td></tr>
+      <tr><td>venir</td><td>viendr-</td><td>je viendrai</td></tr>
+      <tr><td>voir</td><td>verr-</td><td>je verrai</td></tr>
+      <tr><td>envoyer</td><td>enverr-</td><td>j'enverrai</td></tr>
+      <tr><td>courir</td><td>courr-</td><td>je courrai</td></tr>
+      <tr><td>mourir</td><td>mourr-</td><td>je mourrai</td></tr>
+      <tr><td>tenir</td><td>tiendr-</td><td>je tiendrai</td></tr>
+      <tr><td>s'asseoir</td><td>assiér-/assoir-</td><td>je m'assiérai</td></tr>
+      <tr><td>recevoir</td><td>recevr-</td><td>je recevrai</td></tr>
+    </table>
+    <h4 style="color:#f0a500; margin:15px 0 10px;">Spelling-Change Verbs in Futur</h4>
+    <p><strong>jeter</strong> → je jette<strong>r</strong>ai (double t) | <strong>nettoyer</strong> → je nettoie<strong>r</strong>ai (y→i) | <strong>essayer</strong> → j'essaie<strong>r</strong>ai OR j'essaye<strong>r</strong>ai (both accepted)</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Impersonal Verbs (only use "il")</h4>
+    <p><strong>falloir</strong> → il faudra | <strong>pleuvoir</strong> → il pleuvra</p>
+    <p style="color:#888;">These use "il" (neutral subject) because "we rain" or "I be necessary" makes no sense.</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Futur Négation</h4>
+    <p>Ne + verbe au futur simple + pas/jamais/plus</p>
+    <p style="color:#888;">Je <strong>ne parlerai pas</strong>. | Elle <strong>ne viendra jamais</strong>.</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Futur Simple vs Futur Proche</h4>
+    <p><strong>Futur simple</strong> (one verb): Je parler<strong>ai</strong>. — Used for both formal and informal speech.</p>
+    <p><strong>Futur proche</strong> (two verbs): Je <strong>vais</strong> parler. — Less formal, more conversational.</p>
+  </div>
+
+  <div class="card">
+    <h3>Conditionnel Présent (Conditional)</h3>
+    <p><strong>Use:</strong> Would do something, polite requests, hypotheticals.</p>
+    <p><strong>Formula:</strong> futur simple stem + imparfait endings</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">parler</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">je</span> <span class="form">parlerais</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">parlerais</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle/on</span> <span class="form">parlerait</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">parlerions</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">parleriez</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">parleraient</span></div>
+    </div>
+    <p style="color:#888; margin-top:10px;"><strong>Endings:</strong> -ais, -ais, -ait, -ions, -iez, -aient (same as imparfait!)</p>
+    <p style="color:#f0a500; margin-top:10px;">⚠️ Uses same irregular stems as futur simple (ser-, aur-, ir-, fer-, etc.)</p>
+    <p style="margin-top:10px;"><strong>Example:</strong> Si j'avais de l'argent, je <strong>voyagerais</strong>. (If I had money, I would travel.)</p>
+  </div>
+
+  <div class="card">
+    <h3>📊 Passé Composé vs Imparfait</h3>
+    <table>
+      <tr><th>Passé Composé</th><th>Imparfait</th></tr>
+      <tr><td>Specific, completed action</td><td>Ongoing, habitual, descriptive</td></tr>
+      <tr><td>"I ate lunch" (once)</td><td>"I was eating" / "I used to eat"</td></tr>
+      <tr><td>Has a clear start/end</td><td>Background, no clear endpoint</td></tr>
+      <tr><td>Interrupted action</td><td>Action that was interrupted</td></tr>
+      <tr><td>Sequence of events</td><td>Setting the scene</td></tr>
+    </table>
+    <p style="margin-top:15px; color:#4ecca3;"><strong>Example:</strong> Je <strong>regardais</strong> (imparfait) la télé quand le téléphone <strong>a sonné</strong> (passé composé).<br>I was watching TV when the phone rang.</p>
+  </div>
+
+  <div class="card">
+    <h3>Plus-que-parfait (Pluperfect — "had done")</h3>
+    <p><strong>Use:</strong> An action that happened BEFORE another past action.</p>
+    <p><strong>Formula:</strong> imparfait of avoir/être + past participle</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">parler (with avoir)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">j'</span><span class="form">avais parlé</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">avais parlé</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle</span> <span class="form">avait parlé</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">avions parlé</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">aviez parlé</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">avaient parlé</span></div>
+    </div>
+    <p style="color:#f0a500; margin-top:15px;">⚠️ Same rules as passé composé: DR MRS VANDERTRAMP verbs use être. Agreement rules apply.</p>
+    <p style="margin-top:10px; color:#4ecca3;"><strong>Example:</strong> J'<strong>avais déjà mangé</strong> quand il <strong>est arrivé</strong>.<br>I had already eaten when he arrived.</p>
+  </div>
+
+  <div class="card">
+    <h3>Subjonctif Présent (Subjunctive)</h3>
+    <p><strong>Use:</strong> Expresses doubt, emotion, necessity, desire, judgment — NOT facts.</p>
+    <p><strong>Formula:</strong> ils/elles form of présent (drop -ent) + endings: -e, -es, -e, -ions, -iez, -ent</p>
+    
+    <h4 style="color:#f0a500; margin:15px 0 10px;">Triggers (memorize these!)</h4>
+    <table>
+      <tr><th>Category</th><th>Expressions</th></tr>
+      <tr><td>Necessity</td><td>il faut que, il est nécessaire que, il est important que</td></tr>
+      <tr><td>Desire</td><td>je veux que, je souhaite que, je préfère que, j'aimerais que</td></tr>
+      <tr><td>Emotion</td><td>je suis content(e) que, j'ai peur que, c'est dommage que</td></tr>
+      <tr><td>Doubt</td><td>je doute que, il est possible que, je ne pense pas que</td></tr>
+      <tr><td>Conjunctions</td><td>pour que, avant que, bien que, à moins que, jusqu'à ce que</td></tr>
+    </table>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Regular: parler (ils parlent → parl-)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">que je</span> <span class="form">parle</span></div>
+      <div class="conj-item"><span class="pronoun">que tu</span> <span class="form">parles</span></div>
+      <div class="conj-item"><span class="pronoun">qu'il/elle</span> <span class="form">parle</span></div>
+      <div class="conj-item"><span class="pronoun">que nous</span> <span class="form">parlions</span></div>
+      <div class="conj-item"><span class="pronoun">que vous</span> <span class="form">parliez</span></div>
+      <div class="conj-item"><span class="pronoun">qu'ils/elles</span> <span class="form">parlent</span></div>
+    </div>
+
+    <h4 style="color:#f0a500; margin:15px 0 10px;">Irregular Subjunctives (must memorize!)</h4>
+    <table>
+      <tr><th>Verb</th><th>je</th><th>tu</th><th>il/elle</th><th>nous</th><th>vous</th><th>ils/elles</th></tr>
+      <tr><td>être</td><td>sois</td><td>sois</td><td>soit</td><td>soyons</td><td>soyez</td><td>soient</td></tr>
+      <tr><td>avoir</td><td>aie</td><td>aies</td><td>ait</td><td>ayons</td><td>ayez</td><td>aient</td></tr>
+      <tr><td>aller</td><td>aille</td><td>ailles</td><td>aille</td><td>allions</td><td>alliez</td><td>aillent</td></tr>
+      <tr><td>faire</td><td>fasse</td><td>fasses</td><td>fasse</td><td>fassions</td><td>fassiez</td><td>fassent</td></tr>
+      <tr><td>pouvoir</td><td>puisse</td><td>puisses</td><td>puisse</td><td>puissions</td><td>puissiez</td><td>puissent</td></tr>
+      <tr><td>savoir</td><td>sache</td><td>saches</td><td>sache</td><td>sachions</td><td>sachiez</td><td>sachent</td></tr>
+      <tr><td>vouloir</td><td>veuille</td><td>veuilles</td><td>veuille</td><td>voulions</td><td>vouliez</td><td>veuillent</td></tr>
+    </table>
+    <p style="margin-top:15px; color:#4ecca3;"><strong>Example:</strong> Il faut que tu <strong>fasses</strong> tes devoirs. (You must do your homework.)</p>
+  </div>
+
+  <div class="card">
+    <h3>Impératif (Imperative — Commands)</h3>
+    <p><strong>Use:</strong> Giving commands, instructions, advice, requests.</p>
+    <p style="color:#f0a500;margin:10px 0;">⚠️ Only 3 forms: <strong>tu</strong>, <strong>nous</strong>, <strong>vous</strong> — NO subject pronoun!</p>
+    
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Regular -ER (parler) — drop the -s for tu!</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">(tu)</span> <span class="form">Parle !</span></div>
+      <div class="conj-item"><span class="pronoun">(nous)</span> <span class="form">Parlons !</span></div>
+      <div class="conj-item"><span class="pronoun">(vous)</span> <span class="form">Parlez !</span></div>
+    </div>
+    <p style="color:#f0a500;margin-top:8px;">⚠️ For -ER verbs: the <strong>tu</strong> form drops the final <strong>-s</strong> (parle, not parles!)</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Regular -IR (finis)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">(tu)</span> <span class="form">Finis !</span></div>
+      <div class="conj-item"><span class="pronoun">(nous)</span> <span class="form">Finissons !</span></div>
+      <div class="conj-item"><span class="pronoun">(vous)</span> <span class="form">Finissez !</span></div>
+    </div>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Regular -RE (vendre)</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">(tu)</span> <span class="form">Vends !</span></div>
+      <div class="conj-item"><span class="pronoun">(nous)</span> <span class="form">Vendons !</span></div>
+      <div class="conj-item"><span class="pronoun">(vous)</span> <span class="form">Vendez !</span></div>
+    </div>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Irregular Imperatives</h4>
+    <table>
+      <tr><th>Verb</th><th>tu</th><th>nous</th><th>vous</th></tr>
+      <tr><td>être</td><td><strong>sois</strong></td><td><strong>soyons</strong></td><td><strong>soyez</strong></td></tr>
+      <tr><td>avoir</td><td><strong>aie</strong></td><td><strong>ayons</strong></td><td><strong>ayez</strong></td></tr>
+      <tr><td>savoir</td><td><strong>sache</strong></td><td><strong>sachons</strong></td><td><strong>sachez</strong></td></tr>
+      <tr><td>aller</td><td><strong>va</strong></td><td><strong>allons</strong></td><td><strong>allez</strong></td></tr>
+      <tr><td>faire</td><td><strong>fais</strong></td><td><strong>faisons</strong></td><td><strong>faites</strong></td></tr>
+      <tr><td>vouloir</td><td><strong>veuille</strong></td><td><strong>veuillons</strong></td><td><strong>veuillez</strong></td></tr>
+    </table>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Reflexive Imperative</h4>
+    <p>Reflexive pronoun goes <strong>after</strong> the verb with a hyphen (affirmative) or <strong>before</strong> (negative):</p>
+    <table>
+      <tr><th></th><th>Affirmative ✅</th><th>Negative ❌</th></tr>
+      <tr><td>tu</td><td><strong>Lève-toi !</strong> (Get up!)</td><td><strong>Ne te lève pas !</strong></td></tr>
+      <tr><td>nous</td><td><strong>Levons-nous !</strong></td><td><strong>Ne nous levons pas !</strong></td></tr>
+      <tr><td>vous</td><td><strong>Levez-vous !</strong></td><td><strong>Ne vous levez pas !</strong></td></tr>
+    </table>
+    <p style="color:#f0a500;margin-top:10px;">⚠️ <strong>te</strong> → <strong>toi</strong> in affirmative commands: Lève-<strong>toi</strong> ! (not Lève-te)</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Common Imperative Expressions</h4>
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>Écoute ! / Écoutez !</td><td>Listen!</td></tr>
+      <tr><td>Regarde ! / Regardez !</td><td>Look!</td></tr>
+      <tr><td>Fais attention !</td><td>Be careful! / Pay attention!</td></tr>
+      <tr><td>Dépêche-toi ! / Dépêchez-vous !</td><td>Hurry up!</td></tr>
+      <tr><td>Assieds-toi ! / Asseyez-vous !</td><td>Sit down!</td></tr>
+      <tr><td>Tais-toi ! / Taisez-vous !</td><td>Be quiet!</td></tr>
+      <tr><td>Allons-y !</td><td>Let's go!</td></tr>
+      <tr><td>N'oublie pas !</td><td>Don't forget!</td></tr>
+      <tr><td>Sois sage !</td><td>Be good/well-behaved!</td></tr>
+      <tr><td>Aie confiance !</td><td>Have confidence!</td></tr>
+      <tr><td>Dis-moi !</td><td>Tell me!</td></tr>
+      <tr><td>Arrête ! / Arrêtez !</td><td>Stop!</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Reflexive Verbs (Verbes Pronominaux)</h3>
+    <p><strong>Structure:</strong> subject + reflexive pronoun (me/te/se/nous/vous/se) + verb</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">se laver (to wash oneself) — Présent</h4>
+    <div class="conj-grid">
+      <div class="conj-item"><span class="pronoun">je</span> <span class="form">me lave</span></div>
+      <div class="conj-item"><span class="pronoun">tu</span> <span class="form">te laves</span></div>
+      <div class="conj-item"><span class="pronoun">il/elle</span> <span class="form">se lave</span></div>
+      <div class="conj-item"><span class="pronoun">nous</span> <span class="form">nous lavons</span></div>
+      <div class="conj-item"><span class="pronoun">vous</span> <span class="form">vous lavez</span></div>
+      <div class="conj-item"><span class="pronoun">ils/elles</span> <span class="form">se lavent</span></div>
+    </div>
+    <h4 style="color:#f0a500; margin:15px 0 10px;">Passé Composé: ALWAYS use être</h4>
+    <p>Je <strong>me suis lavé(e)</strong>. — Past participle agrees with subject!</p>
+    <p style="margin-top:10px;">Elle <strong>s'est brossé</strong> les dents. — No agreement when body part follows (dents is the direct object, not "elle").</p>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Common Reflexive Verbs</h4>
+    <table>
+      <tr><th>Verb</th><th>Meaning</th></tr>
+      <tr><td>se réveiller</td><td>to wake up</td></tr>
+      <tr><td>se lever</td><td>to get up</td></tr>
+      <tr><td>se laver</td><td>to wash oneself</td></tr>
+      <tr><td>se brosser (les dents)</td><td>to brush (teeth)</td></tr>
+      <tr><td>s'habiller</td><td>to get dressed</td></tr>
+      <tr><td>se coucher</td><td>to go to bed</td></tr>
+      <tr><td>se promener</td><td>to take a walk</td></tr>
+      <tr><td>se sentir</td><td>to feel</td></tr>
+      <tr><td>se souvenir (de)</td><td>to remember</td></tr>
+      <tr><td>se dépêcher</td><td>to hurry</td></tr>
+      <tr><td>s'amuser</td><td>to have fun</td></tr>
+      <tr><td>s'appeler</td><td>to be called</td></tr>
+      <tr><td>se doucher</td><td>to shower</td></tr>
+      <tr><td>s'inquiéter</td><td>to worry</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- VOCAB -->
+<div class="section" id="sec-vocab">
+<div class="container">
+  <h2>Vocabulary</h2>
+
+  <div class="tab-bar">
+    <button class="tab active" onclick="showVocabGroup('school',this)">School</button>
+    <button class="tab" onclick="showVocabGroup('daily',this)">Daily Life</button>
+    <button class="tab" onclick="showVocabGroup('food',this)">Food</button>
+    <button class="tab" onclick="showVocabGroup('travel',this)">Travel</button>
+    <button class="tab" onclick="showVocabGroup('opinions',this)">Opinions</button>
+    <button class="tab" onclick="showVocabGroup('connectors',this)">Connectors</button>
+    <button class="tab" onclick="showVocabGroup('environment',this)">Environment</button>
+    <button class="tab" onclick="showVocabGroup('health',this)">Health</button>
+    <button class="tab" onclick="showVocabGroup('sports',this)">Sports</button>
+    <button class="tab" onclick="showVocabGroup('media',this)">Media</button>
+  </div>
+
+  <div id="vocab-school" class="card">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>l'école (f)</td><td>school</td></tr>
+      <tr><td>le cours</td><td>class/course</td></tr>
+      <tr><td>les devoirs (m)</td><td>homework</td></tr>
+      <tr><td>un examen</td><td>exam</td></tr>
+      <tr><td>une note</td><td>grade/mark</td></tr>
+      <tr><td>le professeur</td><td>teacher</td></tr>
+      <tr><td>un(e) élève</td><td>student</td></tr>
+      <tr><td>la bibliothèque</td><td>library</td></tr>
+      <tr><td>l'emploi du temps (m)</td><td>schedule/timetable</td></tr>
+      <tr><td>les mathématiques (f)</td><td>math</td></tr>
+      <tr><td>les sciences (f)</td><td>science</td></tr>
+      <tr><td>l'informatique (f)</td><td>computer science</td></tr>
+      <tr><td>la récréation</td><td>recess/break</td></tr>
+      <tr><td>réussir un examen</td><td>to pass an exam</td></tr>
+      <tr><td>échouer</td><td>to fail</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-daily" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>se réveiller</td><td>to wake up</td></tr>
+      <tr><td>se lever</td><td>to get up</td></tr>
+      <tr><td>se brosser les dents</td><td>to brush teeth</td></tr>
+      <tr><td>s'habiller</td><td>to get dressed</td></tr>
+      <tr><td>prendre le petit-déjeuner</td><td>to have breakfast</td></tr>
+      <tr><td>se coucher</td><td>to go to bed</td></tr>
+      <tr><td>se doucher</td><td>to shower</td></tr>
+      <tr><td>faire les courses</td><td>to go grocery shopping</td></tr>
+      <tr><td>faire le ménage</td><td>to do housework</td></tr>
+      <tr><td>promener le chien</td><td>to walk the dog</td></tr>
+      <tr><td>la maison</td><td>house</td></tr>
+      <tr><td>la chambre</td><td>bedroom</td></tr>
+      <tr><td>la cuisine</td><td>kitchen</td></tr>
+      <tr><td>la salle de bains</td><td>bathroom</td></tr>
+      <tr><td>le salon</td><td>living room</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-food" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>le pain</td><td>bread</td></tr>
+      <tr><td>le fromage</td><td>cheese</td></tr>
+      <tr><td>le poulet</td><td>chicken</td></tr>
+      <tr><td>le poisson</td><td>fish</td></tr>
+      <tr><td>les légumes (m)</td><td>vegetables</td></tr>
+      <tr><td>les fruits (m)</td><td>fruits</td></tr>
+      <tr><td>le riz</td><td>rice</td></tr>
+      <tr><td>les pâtes (f)</td><td>pasta</td></tr>
+      <tr><td>la soupe</td><td>soup</td></tr>
+      <tr><td>le dessert</td><td>dessert</td></tr>
+      <tr><td>la boisson</td><td>drink</td></tr>
+      <tr><td>l'eau (f)</td><td>water</td></tr>
+      <tr><td>le jus</td><td>juice</td></tr>
+      <tr><td>commander</td><td>to order</td></tr>
+      <tr><td>l'addition (f)</td><td>the bill</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-travel" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>un voyage</td><td>a trip</td></tr>
+      <tr><td>l'aéroport (m)</td><td>airport</td></tr>
+      <tr><td>la gare</td><td>train station</td></tr>
+      <tr><td>le billet</td><td>ticket</td></tr>
+      <tr><td>le passeport</td><td>passport</td></tr>
+      <tr><td>la valise</td><td>suitcase</td></tr>
+      <tr><td>l'hôtel (m)</td><td>hotel</td></tr>
+      <tr><td>la carte</td><td>map/menu</td></tr>
+      <tr><td>le pays</td><td>country</td></tr>
+      <tr><td>la ville</td><td>city</td></tr>
+      <tr><td>le musée</td><td>museum</td></tr>
+      <tr><td>la plage</td><td>beach</td></tr>
+      <tr><td>la montagne</td><td>mountain</td></tr>
+      <tr><td>se perdre</td><td>to get lost</td></tr>
+      <tr><td>un séjour</td><td>a stay</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-opinions" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>à mon avis</td><td>in my opinion</td></tr>
+      <tr><td>je pense que</td><td>I think that</td></tr>
+      <tr><td>je crois que</td><td>I believe that</td></tr>
+      <tr><td>je trouve que</td><td>I find that</td></tr>
+      <tr><td>selon moi</td><td>according to me</td></tr>
+      <tr><td>il me semble que</td><td>it seems to me that</td></tr>
+      <tr><td>je suis d'accord</td><td>I agree</td></tr>
+      <tr><td>je ne suis pas d'accord</td><td>I disagree</td></tr>
+      <tr><td>c'est vrai</td><td>that's true</td></tr>
+      <tr><td>c'est faux</td><td>that's false</td></tr>
+      <tr><td>c'est intéressant</td><td>it's interesting</td></tr>
+      <tr><td>c'est ennuyeux</td><td>it's boring</td></tr>
+      <tr><td>c'est génial</td><td>it's great/awesome</td></tr>
+      <tr><td>c'est nul</td><td>it's terrible</td></tr>
+      <tr><td>c'est important</td><td>it's important</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-connectors" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>d'abord</td><td>first</td></tr>
+      <tr><td>ensuite / puis</td><td>then / next</td></tr>
+      <tr><td>enfin / finalement</td><td>finally</td></tr>
+      <tr><td>aussi</td><td>also</td></tr>
+      <tr><td>cependant / pourtant</td><td>however</td></tr>
+      <tr><td>par contre</td><td>on the other hand</td></tr>
+      <tr><td>parce que / car</td><td>because</td></tr>
+      <tr><td>donc</td><td>therefore</td></tr>
+      <tr><td>en plus</td><td>moreover</td></tr>
+      <tr><td>par exemple</td><td>for example</td></tr>
+      <tr><td>en conclusion</td><td>in conclusion</td></tr>
+      <tr><td>bien que</td><td>although</td></tr>
+      <tr><td>tandis que</td><td>while/whereas</td></tr>
+      <tr><td>malgré</td><td>despite</td></tr>
+      <tr><td>grâce à</td><td>thanks to</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-environment" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>l'environnement (m)</td><td>environment</td></tr>
+      <tr><td>la pollution</td><td>pollution</td></tr>
+      <tr><td>le réchauffement climatique</td><td>global warming</td></tr>
+      <tr><td>l'effet de serre (m)</td><td>greenhouse effect</td></tr>
+      <tr><td>les déchets (m)</td><td>waste/garbage</td></tr>
+      <tr><td>recycler</td><td>to recycle</td></tr>
+      <tr><td>l'énergie renouvelable (f)</td><td>renewable energy</td></tr>
+      <tr><td>protéger</td><td>to protect</td></tr>
+      <tr><td>la nature</td><td>nature</td></tr>
+      <tr><td>économiser</td><td>to save (resources)</td></tr>
+      <tr><td>gaspiller</td><td>to waste</td></tr>
+      <tr><td>une espèce en danger</td><td>endangered species</td></tr>
+      <tr><td>le développement durable</td><td>sustainable development</td></tr>
+      <tr><td>la déforestation</td><td>deforestation</td></tr>
+      <tr><td>réduire</td><td>to reduce</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-health" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>la santé</td><td>health</td></tr>
+      <tr><td>être en forme</td><td>to be in shape</td></tr>
+      <tr><td>le médecin</td><td>doctor</td></tr>
+      <tr><td>la maladie</td><td>illness</td></tr>
+      <tr><td>un rhume</td><td>a cold</td></tr>
+      <tr><td>la fièvre</td><td>fever</td></tr>
+      <tr><td>avoir mal à (la tête/au ventre)</td><td>to have pain in (head/stomach)</td></tr>
+      <tr><td>le stress</td><td>stress</td></tr>
+      <tr><td>se reposer</td><td>to rest</td></tr>
+      <tr><td>les médicaments (m)</td><td>medication</td></tr>
+      <tr><td>un régime</td><td>a diet</td></tr>
+      <tr><td>une blessure</td><td>an injury</td></tr>
+      <tr><td>le bien-être</td><td>well-being</td></tr>
+      <tr><td>garder la forme</td><td>to stay fit</td></tr>
+      <tr><td>une ordonnance</td><td>a prescription</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-sports" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>le football</td><td>soccer</td></tr>
+      <tr><td>le basketball</td><td>basketball</td></tr>
+      <tr><td>le hockey</td><td>hockey</td></tr>
+      <tr><td>l'équipe (f)</td><td>team</td></tr>
+      <tr><td>le match</td><td>game/match</td></tr>
+      <tr><td>gagner</td><td>to win</td></tr>
+      <tr><td>perdre</td><td>to lose</td></tr>
+      <tr><td>s'entraîner</td><td>to train</td></tr>
+      <tr><td>un joueur / une joueuse</td><td>a player</td></tr>
+      <tr><td>le terrain</td><td>field/court</td></tr>
+      <tr><td>marquer un but</td><td>to score a goal</td></tr>
+      <tr><td>un champion / une championne</td><td>a champion</td></tr>
+      <tr><td>la compétition</td><td>competition</td></tr>
+      <tr><td>un spectateur</td><td>a spectator</td></tr>
+      <tr><td>faire du sport</td><td>to play sports</td></tr>
+    </table>
+  </div>
+
+  <div id="vocab-media" class="card" style="display:none;">
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>les informations (f) / les infos</td><td>the news</td></tr>
+      <tr><td>un journal</td><td>a newspaper</td></tr>
+      <tr><td>un article</td><td>an article</td></tr>
+      <tr><td>une émission</td><td>a TV show</td></tr>
+      <tr><td>les réseaux sociaux (m)</td><td>social media</td></tr>
+      <tr><td>un site web</td><td>a website</td></tr>
+      <tr><td>publier</td><td>to publish</td></tr>
+      <tr><td>une publicité</td><td>an advertisement</td></tr>
+      <tr><td>un reportage</td><td>a report/story</td></tr>
+      <tr><td>un journaliste</td><td>a journalist</td></tr>
+      <tr><td>les médias (m)</td><td>media</td></tr>
+      <tr><td>une chaîne</td><td>a channel</td></tr>
+      <tr><td>diffuser</td><td>to broadcast</td></tr>
+      <tr><td>un auditeur / une auditrice</td><td>a listener</td></tr>
+      <tr><td>fiable</td><td>reliable</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- GRAMMAR -->
+<div class="section" id="sec-grammar">
+<div class="container">
+  <h2>Grammar</h2>
+
+  <div class="card">
+    <h3>Negation</h3>
+    <p><strong>Basic:</strong> ne ... pas (not)</p>
+    <p>Je <strong>ne</strong> parle <strong>pas</strong> français. — I don't speak French.</p>
+    <table style="margin-top:15px;">
+      <tr><th>Structure</th><th>Meaning</th><th>Example</th></tr>
+      <tr><td>ne ... jamais</td><td>never</td><td>Je ne mange jamais de viande.</td></tr>
+      <tr><td>ne ... rien</td><td>nothing</td><td>Je ne vois rien.</td></tr>
+      <tr><td>ne ... personne</td><td>no one</td><td>Je ne connais personne.</td></tr>
+      <tr><td>ne ... plus</td><td>no longer</td><td>Je ne fume plus.</td></tr>
+      <tr><td>ne ... que</td><td>only</td><td>Je n'ai que 5 dollars.</td></tr>
+      <tr><td>ne ... ni ... ni</td><td>neither...nor</td><td>Je n'aime ni le thé ni le café.</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:15px;">⚠️ In passé composé: ne + auxiliary + pas + past participle<br>Je <strong>n'ai pas</strong> mangé.</p>
+  </div>
+
+  <div class="card">
+    <h3>Asking Questions</h3>
+    <table>
+      <tr><th>Method</th><th>Example</th></tr>
+      <tr><td>Rising intonation</td><td>Tu parles français? ↗</td></tr>
+      <tr><td>Est-ce que...</td><td>Est-ce que tu parles français?</td></tr>
+      <tr><td>Inversion</td><td>Parles-tu français?</td></tr>
+    </table>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Question Words</h4>
+    <table>
+      <tr><th>French</th><th>English</th></tr>
+      <tr><td>qui</td><td>who</td></tr>
+      <tr><td>que / qu'est-ce que</td><td>what</td></tr>
+      <tr><td>où</td><td>where</td></tr>
+      <tr><td>quand</td><td>when</td></tr>
+      <tr><td>pourquoi</td><td>why</td></tr>
+      <tr><td>comment</td><td>how</td></tr>
+      <tr><td>combien (de)</td><td>how much/many</td></tr>
+      <tr><td>quel(le)(s)</td><td>which/what</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Pronouns</h3>
+    <h4 style="color:#4ecca3; margin:10px 0;">Subject Pronouns</h4>
+    <p>je, tu, il/elle/on, nous, vous, ils/elles</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">COD — Complément d'Objet Direct</h4>
+    <p>Replaces the <strong>direct object</strong> (answers "qui?" or "quoi?" after the verb)</p>
+    <table>
+      <tr><td>me (m')</td><td>te (t')</td><td>le/la (l')</td><td>nous</td><td>vous</td><td>les</td></tr>
+    </table>
+    <p><strong>Placement rules:</strong></p>
+    <table>
+      <tr><th>Context</th><th>Affirmatif</th><th>Négatif</th></tr>
+      <tr><td>Présent</td><td>Il <strong>le</strong> lit.</td><td>Il <strong>ne le</strong> lit <strong>pas</strong>.</td></tr>
+      <tr><td>Passé composé</td><td>Nous <strong>l'</strong>avons mangé.</td><td>Il <strong>ne l'</strong>a <strong>pas</strong> lu.</td></tr>
+      <tr><td>Semi-auxiliaire</td><td>Il peut <strong>le</strong> lire.</td><td>Il <strong>ne</strong> peut <strong>pas le</strong> lire.</td></tr>
+      <tr><td>Impératif ✅</td><td>Lis-<strong>le</strong>! Mangeons-<strong>la</strong>!</td><td><strong>Ne le</strong> lis <strong>pas</strong>!</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:5px;">⚠️ Impératif affirmatif: pronoun goes AFTER verb with hyphen. Négatif: pronoun goes BEFORE verb.</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">COI — Complément d'Objet Indirect</h4>
+    <p>Replaces <strong>à + person</strong> (answers "à qui?" after the verb)</p>
+    <table>
+      <tr><td>me (m')</td><td>te (t')</td><td>lui</td><td>nous</td><td>vous</td><td>leur</td></tr>
+    </table>
+    <p>Tu m'expliques l'article. → Tu <strong>m'</strong>expliques l'article. (COI replaces "à moi")</p>
+    <p style="color:#888;">COD = replaces gender + quantity | COI = replaces quantity only</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Pronom Y</h4>
+    <p>Replaces <strong>à + object/thing</strong> or <strong>a place</strong> (with à, en, dans, sur, sous…). Invariable (no gender/number agreement).</p>
+    <p><strong>Pattern:</strong> Verbe + à + objet → <strong>y</strong> replaces "à + objet"</p>
+    <table>
+      <tr><th>Original</th><th>With Y</th></tr>
+      <tr><td>Elle s'intéresse <strong>à la peinture</strong>.</td><td>Elle s'<strong>y</strong> intéresse.</td></tr>
+      <tr><td>Tu vas participer <strong>à la course</strong>.</td><td>Tu vas <strong>y</strong> participer.</td></tr>
+      <tr><td>Nous allons <strong>en France</strong>.</td><td>Nous <strong>y</strong> allons.</td></tr>
+    </table>
+    <p style="margin-top:10px;"><strong>Verbs that take Y:</strong> croire à, faire attention à, s'habituer à, s'intéresser à, jouer à, participer à, penser à, prendre garde à, réfléchir à, renoncer à, répondre à, rêver à</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Pronom EN</h4>
+    <p>Replaces <strong>de + object</strong>, <strong>quantities</strong>, or nouns with <strong>partitive/indefinite articles</strong> (du, de la, des, un, une). Invariable.</p>
+    <table>
+      <tr><th>Original</th><th>With EN</th><th>Rule</th></tr>
+      <tr><td>Elle veut <strong>du chocolat</strong>.</td><td>Elle <strong>en</strong> veut.</td><td>Partitive article</td></tr>
+      <tr><td>J'ai besoin de <strong>trois feuilles</strong>.</td><td>J'<strong>en</strong> ai besoin <strong>trois</strong>.</td><td>Quantity (keep the number!)</td></tr>
+      <tr><td>Mes amis ont <strong>trois chats</strong>.</td><td>Mes amis <strong>en</strong> ont <strong>trois</strong>.</td><td>Quantity</td></tr>
+      <tr><td>Je me souviens de <strong>son anniversaire</strong>.</td><td>Je m'<strong>en</strong> souviens.</td><td>de + object</td></tr>
+      <tr><td>Ma mère revient <strong>du supermarché</strong>.</td><td>Ma mère <strong>en</strong> revient.</td><td>de + place</td></tr>
+    </table>
+    <p style="margin-top:10px;"><strong>Verbs that take EN:</strong> avoir envie de, avoir peur de, jouer de, s'occuper de, oublier de, revenir de, rêver de, se servir de, sortir de, souffrir de, se souvenir de</p>
+    <p style="color:#f0a500;">⚠️ Negative with quantity: Mes amis <strong>n'en ont pas</strong>. (The number disappears in negative.)</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Pronoms Disjoints / Toniques (Stressed Pronouns)</h4>
+    <table>
+      <tr><th>Subject</th><th>Disjoint</th></tr>
+      <tr><td>je</td><td><strong>moi</strong></td></tr>
+      <tr><td>tu</td><td><strong>toi</strong></td></tr>
+      <tr><td>il</td><td><strong>lui</strong></td></tr>
+      <tr><td>elle</td><td><strong>elle</strong></td></tr>
+      <tr><td>nous</td><td><strong>nous</strong></td></tr>
+      <tr><td>vous</td><td><strong>vous</strong></td></tr>
+      <tr><td>ils</td><td><strong>eux</strong></td></tr>
+      <tr><td>elles</td><td><strong>elles</strong></td></tr>
+    </table>
+    <p style="margin-top:10px;"><strong>Uses:</strong></p>
+    <p>1. <strong>Emphasis:</strong> <strong>Moi</strong>, j'ai lavé la vaisselle.</p>
+    <p>2. <strong>After c'est/ce sont:</strong> C'est <strong>lui</strong> qui est tombé. | Ce sont <strong>elles</strong> qui ont mangé.</p>
+    <p>3. <strong>Short answers:</strong> Qui est parti? — <strong>Lui</strong>.</p>
+    <p>4. <strong>After prepositions (à/de + person):</strong></p>
+    <table>
+      <tr><th>With à + person</th><th>With de + person</th></tr>
+      <tr><td>Je pense à Marie → Je pense <strong>à elle</strong>.</td><td>Tu te souviens de Paul → Tu te souviens <strong>de lui</strong>.</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:5px;">⚠️ When the preposition must stay (à/de + person), use disjoints — NOT COI/Y/EN.</p>
+    <p style="margin-top:5px;"><strong>Verbes + à + person:</strong> s'adresser à, s'attacher à, croire à, s'opposer à, faire attention à, penser à, se plaindre à, se rendre à, s'associer à</p>
+    <p><strong>Verbes + de + person:</strong> avoir besoin de, se moquer de, se méfier de, s'occuper de, parler de, penser de, rêver de, se souvenir de</p>
+
+    <h4 style="color:#e94560; margin:20px 0 10px;">🔥 Doubles Pronoms (Double Object Pronouns)</h4>
+    <p><strong>Max 2 pronouns per sentence.</strong> Cannot have 2 from the same group.</p>
+    <p style="margin-top:10px;"><strong>Order at l'indicatif (and négatif impératif):</strong></p>
+    <div style="background:#1a1a2e; padding:12px; border-radius:8px; text-align:center; font-size:1.1em; margin:10px 0;">
+      <span style="color:#4ecca3;">me/te/se/nous/vous</span> → <span style="color:#e94560;">le/la/l'/les</span> → <span style="color:#f0a500;">lui/leur</span> → <span style="color:#888;">y</span> → <span style="color:#fff;">en</span>
+    </div>
+    <table>
+      <tr><th>Original</th><th>With Double Pronouns</th></tr>
+      <tr><td>Tu me promets la lune.</td><td>Tu <strong>me la</strong> promets.</td></tr>
+      <tr><td>Seb veut présenter Pierre à Paula.</td><td>Seb veut <strong>le lui</strong> présenter.</td></tr>
+      <tr><td>Lisa ne vous recommande pas la salade.</td><td>Lisa ne <strong>vous la</strong> recommande pas.</td></tr>
+      <tr><td>Samantha ne donne pas le jeu aux enfants.</td><td>Samantha ne <strong>le leur</strong> donne pas.</td></tr>
+    </table>
+    <p style="margin-top:15px;"><strong>Order at l'impératif affirmatif:</strong></p>
+    <div style="background:#1a1a2e; padding:12px; border-radius:8px; text-align:center; font-size:1.1em; margin:10px 0;">
+      <span style="color:#e94560;">le/la/les</span> → <span style="color:#4ecca3;">moi(m')/toi(t')/lui/nous/vous/leur</span> → <span style="color:#888;">y</span> → <span style="color:#fff;">en</span>
+    </div>
+    <table>
+      <tr><th>Original</th><th>Impératif</th></tr>
+      <tr><td>Donne-moi le crayon.</td><td>Donne-<strong>le-moi</strong>.</td></tr>
+      <tr><td>Donne-moi des crayons.</td><td>Donne-<strong>m'en</strong>.</td></tr>
+      <tr><td>Vendez-nous des pommes.</td><td>Vendez-<strong>nous-en</strong>.</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:10px;">⚠️ Impératif négatif uses the SAME order as l'indicatif (and moi→me, toi→te):</p>
+    <p style="color:#888;">Ne me les répète pas. | Ne nous y parlez pas.</p>
+  </div>
+
+  <div class="card">
+    <h3>Prepositions with Places</h3>
+    <table>
+      <tr><th>Rule</th><th>Example</th></tr>
+      <tr><td>à + city</td><td>à Toronto, à Paris</td></tr>
+      <tr><td>en + feminine country / vowel</td><td>en France, en Italie, en Iran</td></tr>
+      <tr><td>au + masculine country</td><td>au Canada, au Japon</td></tr>
+      <tr><td>aux + plural country</td><td>aux États-Unis</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Relative Pronouns (Pronoms Relatifs)</h3>
+    <table>
+      <tr><th>Pronoun</th><th>Use</th><th>Example</th></tr>
+      <tr><td><strong>qui</strong></td><td>Subject (who/which/that)</td><td>L'homme <strong>qui</strong> parle est mon prof. (The man <strong>who</strong> speaks is my teacher.)</td></tr>
+      <tr><td><strong>que</strong></td><td>Direct object (whom/which/that)</td><td>Le livre <strong>que</strong> je lis est bon. (The book <strong>that</strong> I'm reading is good.)</td></tr>
+      <tr><td><strong>dont</strong></td><td>Of which/whose (replaces de)</td><td>La fille <strong>dont</strong> je parle est là. (The girl <strong>about whom</strong> I'm speaking is there.)</td></tr>
+      <tr><td><strong>où</strong></td><td>Where/when</td><td>La ville <strong>où</strong> j'habite est belle. (The city <strong>where</strong> I live is beautiful.)</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:15px;">⚠️ Key difference: <strong>qui</strong> is followed by a verb (it's the subject). <strong>Que</strong> is followed by a subject + verb (it's the object).</p>
+  </div>
+
+  <div class="card">
+    <h3>Impersonal Expressions</h3>
+    <table>
+      <tr><th>Expression</th><th>Meaning</th><th>Followed by</th></tr>
+      <tr><td>il faut</td><td>it is necessary / one must</td><td>+ infinitive OR + que + subjonctif</td></tr>
+      <tr><td>il est important de</td><td>it is important to</td><td>+ infinitive</td></tr>
+      <tr><td>il est nécessaire de</td><td>it is necessary to</td><td>+ infinitive</td></tr>
+      <tr><td>il est interdit de</td><td>it is forbidden to</td><td>+ infinitive</td></tr>
+      <tr><td>il vaut mieux</td><td>it is better to</td><td>+ infinitive</td></tr>
+      <tr><td>il est possible que</td><td>it is possible that</td><td>+ subjonctif</td></tr>
+      <tr><td>il est essentiel que</td><td>it is essential that</td><td>+ subjonctif</td></tr>
+      <tr><td>il semble que</td><td>it seems that</td><td>+ subjonctif</td></tr>
+    </table>
+    <p style="margin-top:10px; color:#4ecca3;"><strong>il faut + infinitive:</strong> Il faut <strong>étudier</strong>. (One must study.)</p>
+    <p style="color:#4ecca3;"><strong>il faut que + subjonctif:</strong> Il faut que tu <strong>étudies</strong>. (You must study.)</p>
+  </div>
+
+  <div class="card">
+    <h3>Savoir vs Connaître 🧠</h3>
+    <p>Both mean "to know" but are used differently:</p>
+    <table>
+      <tr><th></th><th>Savoir</th><th>Connaître</th></tr>
+      <tr><td><strong>Meaning</strong></td><td>To know a fact or skill</td><td>To know/be familiar with a person or place</td></tr>
+      <tr><td><strong>+ que</strong></td><td>✅ Je sais <strong>que</strong> Tom est en France.</td><td>❌ Cannot use "que"</td></tr>
+      <tr><td><strong>+ infinitif</strong></td><td>✅ Je sais <strong>nager/cuisiner/compter</strong>.</td><td>❌</td></tr>
+      <tr><td><strong>+ person/place</strong></td><td>❌</td><td>✅ Je connais <strong>cet homme</strong>. / Je connais <strong>Paris</strong>.</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:10px;">⚠️ Savoir = facts + skills (intellectual). Connaître = familiarity (experiential). Connaître is NEVER followed by "que".</p>
+  </div>
+
+  <div class="card">
+    <h3>Verbes Suivis d'un Infinitif (Verbs + Infinitive)</h3>
+    <h4 style="color:#4ecca3; margin:10px 0;">Sans préposition (no preposition)</h4>
+    <p>Verbs expressing <strong>preferences</strong> connect directly to infinitive:</p>
+    <p style="color:#888;">adorer, aimer, compter, désirer, détester, devoir, espérer, penser, pouvoir, préférer, souhaiter, vouloir</p>
+    <p><strong>Form:</strong> Sujet + verbe conjugué + verbe à l'infinitif</p>
+    <p style="color:#888;">Je <strong>veux manger</strong>. | Elle <strong>préfère étudier</strong>.</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Avec la préposition À</h4>
+    <p style="color:#888;">apprendre à, commencer à, réussir à, hésiter à, s'amuser à, chercher à, continuer à, inviter à, se mettre à</p>
+    <p style="color:#888;">J'<strong>apprends à</strong> nager. | Elle <strong>commence à</strong> comprendre.</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Avec la préposition DE</h4>
+    <p style="color:#888;">essayer de, décider de, oublier de, refuser de, rêver de, arrêter de, choisir de, finir de, promettre de</p>
+    <p style="color:#888;">J'<strong>essaie de</strong> comprendre. | Il <strong>refuse de</strong> partir.</p>
+
+    <h4 style="color:#f0a500; margin:15px 0 10px;">Negation for all three types:</h4>
+    <p>Sujet + <strong>ne</strong> + verbe conjugué + <strong>pas</strong> + (préposition) + verbe à l'infinitif</p>
+    <p style="color:#888;">Tu <strong>ne veux pas</strong> nettoyer ta chambre. | Je <strong>n'essaie pas de</strong> comprendre.</p>
+  </div>
+
+  <div class="card">
+    <h3>Les Phrases Hypothétiques avec Si (If Clauses)</h3>
+    <p>Si clauses indicate <strong>possibilities</strong> and their <strong>results</strong>.</p>
+    <table>
+      <tr><th>Si clause (condition)</th><th>Result clause</th><th>Example</th></tr>
+      <tr><td>Si + <strong>présent</strong></td><td><strong>présent</strong></td><td>Si tu étudies, tu réussis.</td></tr>
+      <tr><td>Si + <strong>présent</strong></td><td><strong>futur simple</strong></td><td>Si tu étudies, tu réussiras.</td></tr>
+      <tr><td>Si + <strong>présent</strong></td><td><strong>impératif</strong></td><td>Si tu as froid, ferme la fenêtre!</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:10px;">⚠️ NEVER use futur simple in the "si" clause itself — only in the result clause.</p>
+    <p style="margin-top:10px;"><strong>With conjunctions of time + futur simple:</strong></p>
+    <p style="color:#888;">quand (when), lorsque (when), dès que (as soon as), aussitôt que (as soon as), après que (after)</p>
+    <p style="color:#888;">Venez <strong>quand</strong> vous <strong>finirez</strong>. (Come when you will finish.)</p>
+  </div>
+
+  <div class="card">
+    <h3>📖 IB Reading Comprehension Strategies</h3>
+    <div style="background:#1a1a2e; border-left:3px solid #4ecca3; padding:12px 15px; margin:10px 0; border-radius:4px;">
+      <p><strong>🔑 Golden Rules:</strong></p>
+      <p>• All answers are in <strong>chronological order</strong> (except the global question)</p>
+      <p>• You are always directed to the section of the text where the answer is</p>
+      <p>• Pull answers <strong>word for word</strong> from the text — do NOT paraphrase</p>
+      <p>• No complete sentences needed for short answers</p>
+      <p>• Grammar doesn't matter but <strong>accents DO</strong> (you're copying from the text!)</p>
+    </div>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Question Types:</h4>
+    <table>
+      <tr><th>Type</th><th>Strategy</th></tr>
+      <tr><td><strong>Global question (MCQ)</strong></td><td>Based on full text ("What is the text about?"). Found at beginning or end. Only non-chronological question.</td></tr>
+      <tr><td><strong>Short answer</strong></td><td>Pull directly from text. No paraphrasing. No full sentences.</td></tr>
+      <tr><td><strong>True/False + justification</strong></td><td>Must get BOTH right for the mark (no half marks). Justify word-for-word from text whether true OR false.</td></tr>
+      <tr><td><strong>Vocab — Column matching</strong></td><td>Word + line number given. Pick the synonym from Column B. Same gender/conjugation as original. Use process of elimination.</td></tr>
+      <tr><td><strong>Vocab — Find the word</strong></td><td>Synonym given + line number. Find the matching word IN the text at that line.</td></tr>
+      <tr><td><strong>List questions (a,b,c,d…)</strong></td><td>Each answer = 1 mark. Usually separated by letters.</td></tr>
+      <tr><td><strong>"2 statements are true"</strong></td><td>Identify which 2 from a list are correct.</td></tr>
+    </table>
+    <p style="color:#f0a500; margin-top:10px;">⚠️ Do NOT overanalyze. IB never asks you to infer — all answers come directly from the text.</p>
+    
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">🎧 Listening Strategy:</h4>
+    <p>• Everything is also in <strong>chronological order</strong></p>
+    <p>• Short answers should be <strong>word for word</strong> from what you hear</p>
+    <p>• True/False but <strong>no justification</strong> needed</p>
+    <p>• MCQ options are always <strong>3 choices</strong></p>
+    <p>• Practice listening to French on your own regularly!</p>
+  </div>
+</div>
+</div>
+
+<!-- WRITING -->
+<div class="section" id="sec-writing">
+<div class="container">
+  <h2>Tâche Écrite (Writing Guide) ✍️</h2>
+
+  <div class="card">
+    <h3>Essay Structure</h3>
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Introduction</h4>
+    <table>
+      <tr><th>Part</th><th>What It Does</th><th>Example (topic: environment)</th></tr>
+      <tr><td><strong>Sujet amené</strong></td><td>General opening statement</td><td>Aujourd'hui, l'environnement est au centre des préoccupations mondiales.</td></tr>
+      <tr><td><strong>Sujet posé</strong></td><td>State the specific topic/question</td><td>La question se pose: que pouvons-nous faire pour protéger notre planète?</td></tr>
+      <tr><td><strong>Sujet divisé</strong></td><td>Preview your main points</td><td>Nous examinerons d'abord les causes de la pollution, puis les solutions possibles.</td></tr>
+    </table>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Development (Body Paragraphs)</h4>
+    <p>Each paragraph follows: <strong>Topic sentence → Explanation → Example → Link to next</strong></p>
+    <p style="color:#888; margin-top:5px;">Aim for 2-3 body paragraphs. Each paragraph = one main idea.</p>
+
+    <h4 style="color:#4ecca3; margin:15px 0 10px;">Conclusion</h4>
+    <table>
+      <tr><th>Part</th><th>What It Does</th><th>Example</th></tr>
+      <tr><td><strong>Summary</strong></td><td>Recap main points</td><td>En somme, la pollution et le gaspillage menacent notre planète.</td></tr>
+      <tr><td><strong>Ouverture</strong></td><td>Open to broader thought/question</td><td>Il reste à voir si les générations futures prendront les mesures nécessaires.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Useful Writing Phrases (by function)</h3>
+    
+    <h4 style="color:#e94560; margin:15px 0 10px;">📌 Introducing</h4>
+    <p>Pour commencer... | Tout d'abord... | En premier lieu... | Premièrement... | D'une part...</p>
+    
+    <h4 style="color:#e94560; margin:15px 0 10px;">➕ Adding Ideas</h4>
+    <p>De plus... | En outre... | Par ailleurs... | Également... | De même... | Qui plus est... | Non seulement... mais aussi...</p>
+    
+    <h4 style="color:#e94560; margin:15px 0 10px;">⚡ Contrasting</h4>
+    <p>Cependant... | Néanmoins... | Toutefois... | Par contre... | En revanche... | Bien que (+subj)... | Malgré (+noun)... | Tandis que...</p>
+    
+    <h4 style="color:#e94560; margin:15px 0 10px;">🔗 Cause & Effect</h4>
+    <p>Parce que... | Puisque... | Car... | Donc... | Par conséquent... | C'est pourquoi... | Grâce à... | À cause de...</p>
+    
+    <h4 style="color:#e94560; margin:15px 0 10px;">💭 Giving Opinions</h4>
+    <p>À mon avis... | Selon moi... | Je pense que... | Je crois que... | Il me semble que... | Je suis convaincu(e) que... | D'après moi... | En ce qui me concerne...</p>
+    
+    <h4 style="color:#e94560; margin:15px 0 10px;">🎯 Giving Examples</h4>
+    <p>Par exemple... | Notamment... | Tel(le) que... | Comme... | C'est le cas de... | Prenons l'exemple de...</p>
+    
+    <h4 style="color:#e94560; margin:15px 0 10px;">✅ Concluding</h4>
+    <p>En conclusion... | Pour conclure... | En somme... | Bref... | En fin de compte... | Pour résumer... | En définitive...</p>
+  </div>
+
+  <div class="card">
+    <h3>Common Writing Mistakes to Avoid ⚠️</h3>
+    <table>
+      <tr><th>Mistake</th><th>Wrong</th><th>Right</th></tr>
+      <tr><td>Gender agreement</td><td>elle est content</td><td>elle est content<strong>e</strong></td></tr>
+      <tr><td>Plural agreement</td><td>les fille</td><td>les fille<strong>s</strong></td></tr>
+      <tr><td>Accent on passé composé</td><td>j'ai mange</td><td>j'ai mang<strong>é</strong></td></tr>
+      <tr><td>Anglicism: "je suis excité"</td><td>je suis excité (sexual in French!)</td><td>je suis <strong>enthousiaste</strong></td></tr>
+      <tr><td>Anglicism: "réaliser"</td><td>j'ai réalisé que (= I made real)</td><td>je me suis <strong>rendu compte</strong> que</td></tr>
+      <tr><td>Avoir vs Être</td><td>j'ai allé</td><td>je <strong>suis</strong> allé</td></tr>
+      <tr><td>Wrong preposition</td><td>penser à quelque chose de</td><td>penser <strong>à</strong> quelque chose</td></tr>
+      <tr><td>C'est vs Il est</td><td>il est un bon prof</td><td><strong>c'est</strong> un bon prof</td></tr>
+      <tr><td>Depuis + present</td><td>j'ai étudié depuis 2 ans</td><td>j'<strong>étudie</strong> depuis 2 ans</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Practice Prompts</h3>
+    <p style="color:#888; margin-bottom:15px;">Try writing 150-200 words on each. Use the phrases above!</p>
+    <ol style="line-height:2.2; padding-left:20px;">
+      <li>🌍 <strong>L'environnement:</strong> Que pouvons-nous faire dans notre vie quotidienne pour protéger l'environnement?</li>
+      <li>📱 <strong>La technologie:</strong> Les réseaux sociaux sont-ils bons ou mauvais pour les jeunes?</li>
+      <li>🏥 <strong>La santé:</strong> Comment les jeunes peuvent-ils maintenir une bonne santé mentale et physique?</li>
+      <li>🌍 <strong>Les voyages:</strong> Décrivez un voyage idéal dans un pays francophone. Pourquoi ce pays?</li>
+      <li>🎭 <strong>La culture:</strong> Pourquoi est-il important de découvrir d'autres cultures?</li>
+      <li>⚽ <strong>Le sport:</strong> Le sport est-il essentiel dans la vie des jeunes? Pourquoi?</li>
+    </ol>
+  </div>
+</div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="sec-quiz">
+<div class="container">
+  <h2>Quiz Mode 🧠</h2>
+  <div class="card">
+    <div class="tab-bar">
+      <button class="tab active" onclick="startQuiz('meaning',this)">Verb Meanings</button>
+      <button class="tab" onclick="startQuiz('conjugation',this)">Conjugation</button>
+      <button class="tab" onclick="startQuiz('tense',this)">Tense ID</button>
+      <button class="tab" onclick="startQuiz('vocab',this)">Vocabulary</button>
+      <button class="tab" onclick="startQuiz('subjunctive',this)">Subjunctive</button>
+      <button class="tab" onclick="startQuiz('pcvsimp',this)">PC vs Imp</button>
+      <button class="tab" onclick="startQuiz('mixed',this)">Mixed</button>
+    </div>
+    <div class="streak" id="quiz-streak">🔥 Streak: 0</div>
+    <div class="quiz-progress" id="quiz-progress">Question 1/10</div>
+    <div class="score-bar"><div class="score-fill" id="quiz-score-bar" style="width:0%"></div></div>
+    <div id="quiz-area"></div>
+    <div style="margin-top:20px; text-align:center;">
+      <button class="btn btn-secondary" onclick="startQuiz(currentQuizType)" id="quiz-restart" style="display:none;">🔄 New Quiz</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="section" id="sec-flashcards">
+<div class="container">
+  <h2>Flashcards 🃏</h2>
+  <div class="card">
+    <div class="tab-bar">
+      <button class="tab active" onclick="startFlashcards('verbs',this)">Verbs</button>
+      <button class="tab" onclick="startFlashcards('vocab',this)">Vocabulary</button>
+      <button class="tab" onclick="startFlashcards('irregFutur',this)">Irregular Futur</button>
+    </div>
+    <div id="flashcard-container">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="front" id="fc-front">courir</div>
+        <div class="back" id="fc-back">to run</div>
+        <div class="hint">Click to flip</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:20px;">
+      <button class="btn btn-secondary" onclick="prevCard()">⬅ Prev</button>
+      <span id="fc-progress" style="margin:0 20px; color:#888;">1 / 50</span>
+      <button class="btn" onclick="nextCard()">Next ➡</button>
+    </div>
+    <div style="text-align:center; margin-top:10px;">
+      <button class="btn-small btn btn-secondary" onclick="shuffleFlashcards()">🔀 Shuffle</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// DATA
+const verbs = [
+  // -ER verbs (40)
+  {fr:"parler",en:"to speak",group:"er"},{fr:"manger",en:"to eat",group:"er"},{fr:"jouer",en:"to play",group:"er"},
+  {fr:"regarder",en:"to watch",group:"er"},{fr:"écouter",en:"to listen",group:"er"},{fr:"travailler",en:"to work",group:"er"},
+  {fr:"étudier",en:"to study",group:"er"},{fr:"habiter",en:"to live",group:"er"},{fr:"aimer",en:"to like/love",group:"er"},
+  {fr:"détester",en:"to hate",group:"er"},{fr:"acheter",en:"to buy",group:"er"},{fr:"commencer",en:"to begin",group:"er"},
+  {fr:"donner",en:"to give",group:"er"},{fr:"trouver",en:"to find",group:"er"},{fr:"arriver",en:"to arrive",group:"er"},
+  {fr:"chercher",en:"to look for",group:"er"},{fr:"demander",en:"to ask",group:"er"},{fr:"penser",en:"to think",group:"er"},
+  {fr:"passer",en:"to pass/spend (time)",group:"er"},{fr:"marcher",en:"to walk",group:"er"},{fr:"chanter",en:"to sing",group:"er"},
+  {fr:"danser",en:"to dance",group:"er"},{fr:"nager",en:"to swim",group:"er"},{fr:"voyager",en:"to travel",group:"er"},
+  {fr:"dessiner",en:"to draw",group:"er"},{fr:"cuisiner",en:"to cook",group:"er"},{fr:"porter",en:"to wear/carry",group:"er"},
+  {fr:"montrer",en:"to show",group:"er"},{fr:"fermer",en:"to close",group:"er"},{fr:"laisser",en:"to leave/let",group:"er"},
+  {fr:"tomber",en:"to fall",group:"er"},{fr:"rester",en:"to stay",group:"er"},{fr:"retourner",en:"to return",group:"er"},
+  {fr:"monter",en:"to go up/climb",group:"er"},{fr:"entrer",en:"to enter",group:"er"},{fr:"quitter",en:"to leave/quit",group:"er"},
+  {fr:"expliquer",en:"to explain",group:"er"},{fr:"raconter",en:"to tell (a story)",group:"er"},
+  {fr:"essayer",en:"to try",group:"er"},{fr:"appeler",en:"to call",group:"er"},
+  // -IR verbs (20)
+  {fr:"finir",en:"to finish",group:"ir"},{fr:"choisir",en:"to choose",group:"ir"},{fr:"réussir",en:"to succeed",group:"ir"},
+  {fr:"réfléchir",en:"to think/reflect",group:"ir"},{fr:"remplir",en:"to fill",group:"ir"},{fr:"grandir",en:"to grow up",group:"ir"},
+  {fr:"obéir",en:"to obey",group:"ir"},{fr:"punir",en:"to punish",group:"ir"},{fr:"bâtir",en:"to build",group:"ir"},
+  {fr:"guérir",en:"to heal/cure",group:"ir"},{fr:"agir",en:"to act",group:"ir"},{fr:"réagir",en:"to react",group:"ir"},
+  {fr:"avertir",en:"to warn",group:"ir"},{fr:"applaudir",en:"to applaud",group:"ir"},{fr:"nourrir",en:"to feed/nourish",group:"ir"},
+  {fr:"ralentir",en:"to slow down",group:"ir"},{fr:"établir",en:"to establish",group:"ir"},{fr:"saisir",en:"to seize/grab",group:"ir"},
+  {fr:"grossir",en:"to gain weight",group:"ir"},{fr:"maigrir",en:"to lose weight",group:"ir"},
+  {fr:"atterrir",en:"to land (plane)",group:"ir"},{fr:"réunir",en:"to gather/reunite",group:"ir"},
+  {fr:"accomplir",en:"to accomplish",group:"ir"},{fr:"élargir",en:"to widen/broaden",group:"ir"},
+  {fr:"approfondir",en:"to deepen",group:"ir"},{fr:"enrichir",en:"to enrich",group:"ir"},
+  {fr:"embellir",en:"to beautify",group:"ir"},{fr:"vieillir",en:"to age/grow old",group:"ir"},
+  {fr:"adoucir",en:"to soften",group:"ir"},{fr:"rafraîchir",en:"to refresh/cool",group:"ir"},
+  {fr:"fournir",en:"to provide/supply",group:"ir"},{fr:"définir",en:"to define",group:"ir"},
+  // -RE verbs (25)
+  {fr:"vendre",en:"to sell",group:"re"},{fr:"attendre",en:"to wait",group:"re"},{fr:"répondre",en:"to answer",group:"re"},
+  {fr:"perdre",en:"to lose",group:"re"},{fr:"entendre",en:"to hear",group:"re"},{fr:"descendre",en:"to go down",group:"re"},
+  {fr:"rendre",en:"to return/give back",group:"re"},{fr:"mordre",en:"to bite",group:"re"},
+  {fr:"fondre",en:"to melt",group:"re"},{fr:"confondre",en:"to confuse",group:"re"},{fr:"défendre",en:"to defend/forbid",group:"re"},
+  {fr:"tendre",en:"to stretch/hand",group:"re"},{fr:"répandre",en:"to spread/spill",group:"re"},
+  {fr:"interrompre",en:"to interrupt",group:"re"},{fr:"rompre",en:"to break (up)",group:"re"},
+  {fr:"prétendre",en:"to claim/pretend",group:"re"},{fr:"suspendre",en:"to suspend/hang",group:"re"},
+  {fr:"correspondre",en:"to correspond",group:"re"},{fr:"dépendre",en:"to depend",group:"re"},
+  {fr:"étendre",en:"to extend/spread",group:"re"},{fr:"fendre",en:"to split/crack",group:"re"},
+  {fr:"tondre",en:"to mow (lawn)",group:"re"},{fr:"pondre",en:"to lay (eggs)",group:"re"},
+  {fr:"détordre",en:"to untwist",group:"re"},{fr:"pendre",en:"to hang",group:"re"},
+  // Irregular verbs (57)
+  {fr:"être",en:"to be",group:"irreg"},{fr:"avoir",en:"to have",group:"irreg"},{fr:"aller",en:"to go",group:"irreg"},
+  {fr:"faire",en:"to do/make",group:"irreg"},{fr:"pouvoir",en:"can/to be able",group:"irreg"},
+  {fr:"vouloir",en:"to want",group:"irreg"},{fr:"devoir",en:"must/to have to",group:"irreg"},
+  {fr:"savoir",en:"to know (fact)",group:"irreg"},{fr:"connaître",en:"to know (person/place)",group:"irreg"},
+  {fr:"venir",en:"to come",group:"irreg"},{fr:"prendre",en:"to take",group:"irreg"},
+  {fr:"mettre",en:"to put",group:"irreg"},{fr:"dire",en:"to say",group:"irreg"},
+  {fr:"lire",en:"to read",group:"irreg"},{fr:"écrire",en:"to write",group:"irreg"},
+  {fr:"voir",en:"to see",group:"irreg"},{fr:"courir",en:"to run",group:"irreg"},
+  {fr:"dormir",en:"to sleep",group:"irreg"},{fr:"sortir",en:"to go out",group:"irreg"},
+  {fr:"partir",en:"to leave",group:"irreg"},{fr:"ouvrir",en:"to open",group:"irreg"},
+  {fr:"mourir",en:"to die",group:"irreg"},{fr:"naître",en:"to be born",group:"irreg"},
+  {fr:"boire",en:"to drink",group:"irreg"},{fr:"croire",en:"to believe",group:"irreg"},
+  {fr:"conduire",en:"to drive",group:"irreg"},{fr:"construire",en:"to build/construct",group:"irreg"},
+  {fr:"traduire",en:"to translate",group:"irreg"},{fr:"produire",en:"to produce",group:"irreg"},
+  {fr:"suivre",en:"to follow",group:"irreg"},{fr:"vivre",en:"to live",group:"irreg"},
+  {fr:"apprendre",en:"to learn",group:"irreg"},{fr:"comprendre",en:"to understand",group:"irreg"},
+  {fr:"surprendre",en:"to surprise",group:"irreg"},{fr:"tenir",en:"to hold",group:"irreg"},
+  {fr:"obtenir",en:"to obtain",group:"irreg"},{fr:"devenir",en:"to become",group:"irreg"},
+  {fr:"revenir",en:"to come back",group:"irreg"},{fr:"sentir",en:"to feel/smell",group:"irreg"},
+  {fr:"servir",en:"to serve",group:"irreg"},{fr:"promettre",en:"to promise",group:"irreg"},
+  {fr:"permettre",en:"to allow",group:"irreg"},{fr:"soumettre",en:"to submit",group:"irreg"},
+  {fr:"recevoir",en:"to receive",group:"irreg"},{fr:"envoyer",en:"to send",group:"irreg"},
+  {fr:"plaire",en:"to please",group:"irreg"},{fr:"rire",en:"to laugh",group:"irreg"},
+  {fr:"sourire",en:"to smile",group:"irreg"},{fr:"suffire",en:"to suffice/be enough",group:"irreg"},
+  {fr:"craindre",en:"to fear",group:"irreg"},{fr:"peindre",en:"to paint",group:"irreg"},
+  {fr:"rejoindre",en:"to join/meet up",group:"irreg"},{fr:"paraître",en:"to seem/appear",group:"irreg"},
+  {fr:"disparaître",en:"to disappear",group:"irreg"},{fr:"pleuvoir",en:"to rain (il pleut)",group:"irreg"},
+  {fr:"falloir",en:"to be necessary (il faut)",group:"irreg"},{fr:"valoir",en:"to be worth",group:"irreg"}
+];
+
+const vocabAll = [
+  {fr:"l'école",en:"school"},{fr:"le cours",en:"class/course"},{fr:"les devoirs",en:"homework"},
+  {fr:"un examen",en:"exam"},{fr:"une note",en:"grade"},{fr:"le professeur",en:"teacher"},
+  {fr:"la bibliothèque",en:"library"},{fr:"l'informatique",en:"computer science"},
+  {fr:"se réveiller",en:"to wake up"},{fr:"se lever",en:"to get up"},{fr:"se coucher",en:"to go to bed"},
+  {fr:"la maison",en:"house"},{fr:"la chambre",en:"bedroom"},{fr:"la cuisine",en:"kitchen"},
+  {fr:"le pain",en:"bread"},{fr:"le fromage",en:"cheese"},{fr:"le poulet",en:"chicken"},
+  {fr:"le poisson",en:"fish"},{fr:"les légumes",en:"vegetables"},{fr:"l'eau",en:"water"},
+  {fr:"un voyage",en:"a trip"},{fr:"l'aéroport",en:"airport"},{fr:"la gare",en:"train station"},
+  {fr:"le billet",en:"ticket"},{fr:"la valise",en:"suitcase"},{fr:"la plage",en:"beach"},
+  {fr:"à mon avis",en:"in my opinion"},{fr:"je pense que",en:"I think that"},
+  {fr:"je suis d'accord",en:"I agree"},{fr:"c'est génial",en:"it's great/awesome"},
+  {fr:"d'abord",en:"first"},{fr:"ensuite",en:"then/next"},{fr:"enfin",en:"finally"},
+  {fr:"cependant",en:"however"},{fr:"parce que",en:"because"},{fr:"donc",en:"therefore"},
+  {fr:"en plus",en:"moreover"},{fr:"par exemple",en:"for example"},{fr:"malgré",en:"despite"},
+  {fr:"grâce à",en:"thanks to"},
+  {fr:"l'environnement",en:"environment"},{fr:"la pollution",en:"pollution"},{fr:"le réchauffement climatique",en:"global warming"},
+  {fr:"les déchets",en:"waste/garbage"},{fr:"recycler",en:"to recycle"},{fr:"protéger",en:"to protect"},
+  {fr:"économiser",en:"to save (resources)"},{fr:"gaspiller",en:"to waste"},{fr:"le développement durable",en:"sustainable development"},
+  {fr:"la santé",en:"health"},{fr:"être en forme",en:"to be in shape"},{fr:"le médecin",en:"doctor"},
+  {fr:"la maladie",en:"illness"},{fr:"la fièvre",en:"fever"},{fr:"se reposer",en:"to rest"},
+  {fr:"le football",en:"soccer"},{fr:"l'équipe",en:"team"},{fr:"le match",en:"game/match"},
+  {fr:"gagner",en:"to win"},{fr:"s'entraîner",en:"to train"},{fr:"marquer un but",en:"to score a goal"},
+  {fr:"les informations",en:"the news"},{fr:"un journal",en:"a newspaper"},{fr:"une émission",en:"a TV show"},
+  {fr:"les réseaux sociaux",en:"social media"},{fr:"publier",en:"to publish"},{fr:"fiable",en:"reliable"}
+];
+
+const irregFutur = [
+  {fr:"être → ser-",en:"je serai"},{fr:"avoir → aur-",en:"j'aurai"},{fr:"aller → ir-",en:"j'irai"},
+  {fr:"faire → fer-",en:"je ferai"},{fr:"pouvoir → pourr-",en:"je pourrai"},
+  {fr:"vouloir → voudr-",en:"je voudrai"},{fr:"devoir → devr-",en:"je devrai"},
+  {fr:"savoir → saur-",en:"je saurai"},{fr:"venir → viendr-",en:"je viendrai"},
+  {fr:"voir → verr-",en:"je verrai"},{fr:"envoyer → enverr-",en:"j'enverrai"},
+  {fr:"courir → courr-",en:"je courrai"},{fr:"mourir → mourr-",en:"je mourrai"}
+];
+
+const conjugations = {
+  // -ER regular (model)
+  "parler":{present:["parle","parles","parle","parlons","parlez","parlent"],pc:"ai parlé",imp:["parlais","parlais","parlait","parlions","parliez","parlaient"],futur:["parlerai","parleras","parlera","parlerons","parlerez","parleront"]},
+  "manger":{present:["mange","manges","mange","mangeons","mangez","mangent"],pc:"ai mangé",imp:["mangeais","mangeais","mangeait","mangions","mangiez","mangeaient"],futur:["mangerai","mangeras","mangera","mangerons","mangerez","mangeront"]},
+  "commencer":{present:["commence","commences","commence","commençons","commencez","commencent"],pc:"ai commencé",imp:["commençais","commençais","commençait","commencions","commenciez","commençaient"],futur:["commencerai","commenceras","commencera","commencerons","commencerez","commenceront"]},
+  "acheter":{present:["achète","achètes","achète","achetons","achetez","achètent"],pc:"ai acheté",imp:["achetais","achetais","achetait","achetions","achetiez","achetaient"],futur:["achèterai","achèteras","achètera","achèterons","achèterez","achèteront"]},
+  "appeler":{present:["appelle","appelles","appelle","appelons","appelez","appellent"],pc:"ai appelé",imp:["appelais","appelais","appelait","appelions","appeliez","appelaient"],futur:["appellerai","appelleras","appellera","appellerons","appellerez","appelleront"]},
+  "essayer":{present:["essaie","essaies","essaie","essayons","essayez","essaient"],pc:"ai essayé",imp:["essayais","essayais","essayait","essayions","essayiez","essayaient"],futur:["essaierai","essaieras","essaiera","essaierons","essaierez","essaieront"]},
+  "envoyer":{present:["envoie","envoies","envoie","envoyons","envoyez","envoient"],pc:"ai envoyé",imp:["envoyais","envoyais","envoyait","envoyions","envoyiez","envoyaient"],futur:["enverrai","enverras","enverra","enverrons","enverrez","enverront"]},
+  // -IR regular (model)
+  "finir":{present:["finis","finis","finit","finissons","finissez","finissent"],pc:"ai fini",imp:["finissais","finissais","finissait","finissions","finissiez","finissaient"],futur:["finirai","finiras","finira","finirons","finirez","finiront"]},
+  "choisir":{present:["choisis","choisis","choisit","choisissons","choisissez","choisissent"],pc:"ai choisi",imp:["choisissais","choisissais","choisissait","choisissions","choisissiez","choisissaient"],futur:["choisirai","choisiras","choisira","choisirons","choisirez","choisiront"]},
+  "réussir":{present:["réussis","réussis","réussit","réussissons","réussissez","réussissent"],pc:"ai réussi",imp:["réussissais","réussissais","réussissait","réussissions","réussissiez","réussissaient"],futur:["réussirai","réussiras","réussira","réussirons","réussirez","réussiront"]},
+  "grandir":{present:["grandis","grandis","grandit","grandissons","grandissez","grandissent"],pc:"ai grandi",imp:["grandissais","grandissais","grandissait","grandissions","grandissiez","grandissaient"],futur:["grandirai","grandiras","grandira","grandirons","grandirez","grandiront"]},
+  "obéir":{present:["obéis","obéis","obéit","obéissons","obéissez","obéissent"],pc:"ai obéi",imp:["obéissais","obéissais","obéissait","obéissions","obéissiez","obéissaient"],futur:["obéirai","obéiras","obéira","obéirons","obéirez","obéiront"]},
+  // -RE regular (model)
+  "vendre":{present:["vends","vends","vend","vendons","vendez","vendent"],pc:"ai vendu",imp:["vendais","vendais","vendait","vendions","vendiez","vendaient"],futur:["vendrai","vendras","vendra","vendrons","vendrez","vendront"]},
+  "attendre":{present:["attends","attends","attend","attendons","attendez","attendent"],pc:"ai attendu",imp:["attendais","attendais","attendait","attendions","attendiez","attendaient"],futur:["attendrai","attendras","attendra","attendrons","attendrez","attendront"]},
+  "répondre":{present:["réponds","réponds","répond","répondons","répondez","répondent"],pc:"ai répondu",imp:["répondais","répondais","répondait","répondions","répondiez","répondaient"],futur:["répondrai","répondras","répondra","répondrons","répondrez","répondront"]},
+  "perdre":{present:["perds","perds","perd","perdons","perdez","perdent"],pc:"ai perdu",imp:["perdais","perdais","perdait","perdions","perdiez","perdaient"],futur:["perdrai","perdras","perdra","perdrons","perdrez","perdront"]},
+  "entendre":{present:["entends","entends","entend","entendons","entendez","entendent"],pc:"ai entendu",imp:["entendais","entendais","entendait","entendions","entendiez","entendaient"],futur:["entendrai","entendras","entendra","entendrons","entendrez","entendront"]},
+  "descendre":{present:["descends","descends","descend","descendons","descendez","descendent"],pc:"suis descendu(e)",imp:["descendais","descendais","descendait","descendions","descendiez","descendaient"],futur:["descendrai","descendras","descendra","descendrons","descendrez","descendront"]},
+  // Core irregulars
+  "être":{present:["suis","es","est","sommes","êtes","sont"],pc:"ai été",imp:["étais","étais","était","étions","étiez","étaient"],futur:["serai","seras","sera","serons","serez","seront"]},
+  "avoir":{present:["ai","as","a","avons","avez","ont"],pc:"ai eu",imp:["avais","avais","avait","avions","aviez","avaient"],futur:["aurai","auras","aura","aurons","aurez","auront"]},
+  "aller":{present:["vais","vas","va","allons","allez","vont"],pc:"suis allé(e)",imp:["allais","allais","allait","allions","alliez","allaient"],futur:["irai","iras","ira","irons","irez","iront"]},
+  "faire":{present:["fais","fais","fait","faisons","faites","font"],pc:"ai fait",imp:["faisais","faisais","faisait","faisions","faisiez","faisaient"],futur:["ferai","feras","fera","ferons","ferez","feront"]},
+  "pouvoir":{present:["peux","peux","peut","pouvons","pouvez","peuvent"],pc:"ai pu",imp:["pouvais","pouvais","pouvait","pouvions","pouviez","pouvaient"],futur:["pourrai","pourras","pourra","pourrons","pourrez","pourront"]},
+  "vouloir":{present:["veux","veux","veut","voulons","voulez","veulent"],pc:"ai voulu",imp:["voulais","voulais","voulait","voulions","vouliez","voulaient"],futur:["voudrai","voudras","voudra","voudrons","voudrez","voudront"]},
+  "devoir":{present:["dois","dois","doit","devons","devez","doivent"],pc:"ai dû",imp:["devais","devais","devait","devions","deviez","devaient"],futur:["devrai","devras","devra","devrons","devrez","devront"]},
+  "savoir":{present:["sais","sais","sait","savons","savez","savent"],pc:"ai su",imp:["savais","savais","savait","savions","saviez","savaient"],futur:["saurai","sauras","saura","saurons","saurez","sauront"]},
+  "connaître":{present:["connais","connais","connaît","connaissons","connaissez","connaissent"],pc:"ai connu",imp:["connaissais","connaissais","connaissait","connaissions","connaissiez","connaissaient"],futur:["connaîtrai","connaîtras","connaîtra","connaîtrons","connaîtrez","connaîtront"]},
+  "venir":{present:["viens","viens","vient","venons","venez","viennent"],pc:"suis venu(e)",imp:["venais","venais","venait","venions","veniez","venaient"],futur:["viendrai","viendras","viendra","viendrons","viendrez","viendront"]},
+  "devenir":{present:["deviens","deviens","devient","devenons","devenez","deviennent"],pc:"suis devenu(e)",imp:["devenais","devenais","devenait","devenions","deveniez","devenaient"],futur:["deviendrai","deviendras","deviendra","deviendrons","deviendrez","deviendront"]},
+  "revenir":{present:["reviens","reviens","revient","revenons","revenez","reviennent"],pc:"suis revenu(e)",imp:["revenais","revenais","revenait","revenions","reveniez","revenaient"],futur:["reviendrai","reviendras","reviendra","reviendrons","reviendrez","reviendront"]},
+  "tenir":{present:["tiens","tiens","tient","tenons","tenez","tiennent"],pc:"ai tenu",imp:["tenais","tenais","tenait","tenions","teniez","tenaient"],futur:["tiendrai","tiendras","tiendra","tiendrons","tiendrez","tiendront"]},
+  "obtenir":{present:["obtiens","obtiens","obtient","obtenons","obtenez","obtiennent"],pc:"ai obtenu",imp:["obtenais","obtenais","obtenait","obtenions","obteniez","obtenaient"],futur:["obtiendrai","obtiendras","obtiendra","obtiendrons","obtiendrez","obtiendront"]},
+  "prendre":{present:["prends","prends","prend","prenons","prenez","prennent"],pc:"ai pris",imp:["prenais","prenais","prenait","prenions","preniez","prenaient"],futur:["prendrai","prendras","prendra","prendrons","prendrez","prendront"]},
+  "apprendre":{present:["apprends","apprends","apprend","apprenons","apprenez","apprennent"],pc:"ai appris",imp:["apprenais","apprenais","apprenait","apprenions","appreniez","apprenaient"],futur:["apprendrai","apprendras","apprendra","apprendrons","apprendrez","apprendront"]},
+  "comprendre":{present:["comprends","comprends","comprend","comprenons","comprenez","comprennent"],pc:"ai compris",imp:["comprenais","comprenais","comprenait","comprenions","compreniez","comprenaient"],futur:["comprendrai","comprendras","comprendra","comprendrons","comprendrez","comprendront"]},
+  "mettre":{present:["mets","mets","met","mettons","mettez","mettent"],pc:"ai mis",imp:["mettais","mettais","mettait","mettions","mettiez","mettaient"],futur:["mettrai","mettras","mettra","mettrons","mettrez","mettront"]},
+  "permettre":{present:["permets","permets","permet","permettons","permettez","permettent"],pc:"ai permis",imp:["permettais","permettais","permettait","permettions","permettiez","permettaient"],futur:["permettrai","permettras","permettra","permettrons","permettrez","permettront"]},
+  "promettre":{present:["promets","promets","promet","promettons","promettez","promettent"],pc:"ai promis",imp:["promettais","promettais","promettait","promettions","promettiez","promettaient"],futur:["promettrai","promettras","promettra","promettrons","promettrez","promettront"]},
+  "dire":{present:["dis","dis","dit","disons","dites","disent"],pc:"ai dit",imp:["disais","disais","disait","disions","disiez","disaient"],futur:["dirai","diras","dira","dirons","direz","diront"]},
+  "lire":{present:["lis","lis","lit","lisons","lisez","lisent"],pc:"ai lu",imp:["lisais","lisais","lisait","lisions","lisiez","lisaient"],futur:["lirai","liras","lira","lirons","lirez","liront"]},
+  "écrire":{present:["écris","écris","écrit","écrivons","écrivez","écrivent"],pc:"ai écrit",imp:["écrivais","écrivais","écrivait","écrivions","écriviez","écrivaient"],futur:["écrirai","écriras","écrira","écrirons","écrirez","écriront"]},
+  "voir":{present:["vois","vois","voit","voyons","voyez","voient"],pc:"ai vu",imp:["voyais","voyais","voyait","voyions","voyiez","voyaient"],futur:["verrai","verras","verra","verrons","verrez","verront"]},
+  "croire":{present:["crois","crois","croit","croyons","croyez","croient"],pc:"ai cru",imp:["croyais","croyais","croyait","croyions","croyiez","croyaient"],futur:["croirai","croiras","croira","croirons","croirez","croiront"]},
+  "boire":{present:["bois","bois","boit","buvons","buvez","boivent"],pc:"ai bu",imp:["buvais","buvais","buvait","buvions","buviez","buvaient"],futur:["boirai","boiras","boira","boirons","boirez","boiront"]},
+  "courir":{present:["cours","cours","court","courons","courez","courent"],pc:"ai couru",imp:["courais","courais","courait","courions","couriez","couraient"],futur:["courrai","courras","courra","courrons","courrez","courront"]},
+  "dormir":{present:["dors","dors","dort","dormons","dormez","dorment"],pc:"ai dormi",imp:["dormais","dormais","dormait","dormions","dormiez","dormaient"],futur:["dormirai","dormiras","dormira","dormirons","dormirez","dormiront"]},
+  "sentir":{present:["sens","sens","sent","sentons","sentez","sentent"],pc:"ai senti",imp:["sentais","sentais","sentait","sentions","sentiez","sentaient"],futur:["sentirai","sentiras","sentira","sentirons","sentirez","sentiront"]},
+  "servir":{present:["sers","sers","sert","servons","servez","servent"],pc:"ai servi",imp:["servais","servais","servait","servions","serviez","servaient"],futur:["servirai","serviras","servira","servirons","servirez","serviront"]},
+  "sortir":{present:["sors","sors","sort","sortons","sortez","sortent"],pc:"suis sorti(e)",imp:["sortais","sortais","sortait","sortions","sortiez","sortaient"],futur:["sortirai","sortiras","sortira","sortirons","sortirez","sortiront"]},
+  "partir":{present:["pars","pars","part","partons","partez","partent"],pc:"suis parti(e)",imp:["partais","partais","partait","partions","partiez","partaient"],futur:["partirai","partiras","partira","partirons","partirez","partiront"]},
+  "ouvrir":{present:["ouvre","ouvres","ouvre","ouvrons","ouvrez","ouvrent"],pc:"ai ouvert",imp:["ouvrais","ouvrais","ouvrait","ouvrions","ouvriez","ouvraient"],futur:["ouvrirai","ouvriras","ouvrira","ouvrirons","ouvrirez","ouvriront"]},
+  "mourir":{present:["meurs","meurs","meurt","mourons","mourez","meurent"],pc:"suis mort(e)",imp:["mourais","mourais","mourait","mourions","mouriez","mouraient"],futur:["mourrai","mourras","mourra","mourrons","mourrez","mourront"]},
+  "naître":{present:["nais","nais","naît","naissons","naissez","naissent"],pc:"suis né(e)",imp:["naissais","naissais","naissait","naissions","naissiez","naissaient"],futur:["naîtrai","naîtras","naîtra","naîtrons","naîtrez","naîtront"]},
+  "conduire":{present:["conduis","conduis","conduit","conduisons","conduisez","conduisent"],pc:"ai conduit",imp:["conduisais","conduisais","conduisait","conduisions","conduisiez","conduisaient"],futur:["conduirai","conduiras","conduira","conduirons","conduirez","conduiront"]},
+  "construire":{present:["construis","construis","construit","construisons","construisez","construisent"],pc:"ai construit",imp:["construisais","construisais","construisait","construisions","construisiez","construisaient"],futur:["construirai","construiras","construira","construirons","construirez","construiront"]},
+  "traduire":{present:["traduis","traduis","traduit","traduisons","traduisez","traduisent"],pc:"ai traduit",imp:["traduisais","traduisais","traduisait","traduisions","traduisiez","traduisaient"],futur:["traduirai","traduiras","traduira","traduirons","traduirez","traduiront"]},
+  "produire":{present:["produis","produis","produit","produisons","produisez","produisent"],pc:"ai produit",imp:["produisais","produisais","produisait","produisions","produisiez","produisaient"],futur:["produirai","produiras","produira","produirons","produirez","produiront"]},
+  "suivre":{present:["suis","suis","suit","suivons","suivez","suivent"],pc:"ai suivi",imp:["suivais","suivais","suivait","suivions","suiviez","suivaient"],futur:["suivrai","suivras","suivra","suivrons","suivrez","suivront"]},
+  "vivre":{present:["vis","vis","vit","vivons","vivez","vivent"],pc:"ai vécu",imp:["vivais","vivais","vivait","vivions","viviez","vivaient"],futur:["vivrai","vivras","vivra","vivrons","vivrez","vivront"]},
+  "recevoir":{present:["reçois","reçois","reçoit","recevons","recevez","reçoivent"],pc:"ai reçu",imp:["recevais","recevais","recevait","recevions","receviez","recevaient"],futur:["recevrai","recevras","recevra","recevrons","recevrez","recevront"]},
+  "plaire":{present:["plais","plais","plaît","plaisons","plaisez","plaisent"],pc:"ai plu",imp:["plaisais","plaisais","plaisait","plaisions","plaisiez","plaisaient"],futur:["plairai","plairas","plaira","plairons","plairez","plairont"]},
+  "rire":{present:["ris","ris","rit","rions","riez","rient"],pc:"ai ri",imp:["riais","riais","riait","riions","riiez","riaient"],futur:["rirai","riras","rira","rirons","rirez","riront"]},
+  "sourire":{present:["souris","souris","sourit","sourions","souriez","sourient"],pc:"ai souri",imp:["souriais","souriais","souriait","souriions","souriiez","souriaient"],futur:["sourirai","souriras","sourira","sourirons","sourirez","souriront"]},
+  "craindre":{present:["crains","crains","craint","craignons","craignez","craignent"],pc:"ai craint",imp:["craignais","craignais","craignait","craignions","craigniez","craignaient"],futur:["craindrai","craindras","craindra","craindrons","craindrez","craindront"]},
+  "peindre":{present:["peins","peins","peint","peignons","peignez","peignent"],pc:"ai peint",imp:["peignais","peignais","peignait","peignions","peigniez","peignaient"],futur:["peindrai","peindras","peindra","peindrons","peindrez","peindront"]},
+  "rejoindre":{present:["rejoins","rejoins","rejoint","rejoignons","rejoignez","rejoignent"],pc:"ai rejoint",imp:["rejoignais","rejoignais","rejoignait","rejoignions","rejoigniez","rejoignaient"],futur:["rejoindrai","rejoindras","rejoindra","rejoindrons","rejoindrez","rejoindront"]},
+  "paraître":{present:["parais","parais","paraît","paraissons","paraissez","paraissent"],pc:"ai paru",imp:["paraissais","paraissais","paraissait","paraissions","paraissiez","paraissaient"],futur:["paraîtrai","paraîtras","paraîtra","paraîtrons","paraîtrez","paraîtront"]},
+  "disparaître":{present:["disparais","disparais","disparaît","disparaissons","disparaissez","disparaissent"],pc:"ai disparu",imp:["disparaissais","disparaissais","disparaissait","disparaissions","disparaissiez","disparaissaient"],futur:["disparaîtrai","disparaîtras","disparaîtra","disparaîtrons","disparaîtrez","disparaîtront"]},
+  "surprendre":{present:["surprends","surprends","surprend","surprenons","surprenez","surprennent"],pc:"ai surpris",imp:["surprenais","surprenais","surprenait","surprenions","surpreniez","surprenaient"],futur:["surprendrai","surprendras","surprendra","surprendrons","surprendrez","surprendront"]},
+  "soumettre":{present:["soumets","soumets","soumet","soumettons","soumettez","soumettent"],pc:"ai soumis",imp:["soumettais","soumettais","soumettait","soumettions","soumettiez","soumettaient"],futur:["soumettrai","soumettras","soumettra","soumettrons","soumettrez","soumettront"]},
+  "suffire":{present:["suffis","suffis","suffit","suffisons","suffisez","suffisent"],pc:"ai suffi",imp:["suffisais","suffisais","suffisait","suffisions","suffisiez","suffisaient"],futur:["suffirai","suffiras","suffira","suffirons","suffirez","suffiront"]},
+  "pleuvoir":{present:["—","—","pleut","—","—","—"],pc:"a plu",imp:["—","—","pleuvait","—","—","—"],futur:["—","—","pleuvra","—","—","—"]},
+  "falloir":{present:["—","—","faut","—","—","—"],pc:"a fallu",imp:["—","—","fallait","—","—","—"],futur:["—","—","faudra","—","—","—"]},
+  "valoir":{present:["vaux","vaux","vaut","valons","valez","valent"],pc:"ai valu",imp:["valais","valais","valait","valions","valiez","valaient"],futur:["vaudrai","vaudras","vaudra","vaudrons","vaudrez","vaudront"]}
+};
+
+const pronouns = ["je","tu","il/elle/on","nous","vous","ils/elles"];
+
+const tenseExamples = [
+  {sentence:"Je parle français.",tense:"Présent",why:"Action happening now / general truth"},
+  {sentence:"J'ai mangé une pomme.",tense:"Passé Composé",why:"Completed action in past (avoir + past participle)"},
+  {sentence:"Il faisait beau.",tense:"Imparfait",why:"Description/weather in the past"},
+  {sentence:"Nous irons à Paris.",tense:"Futur Simple",why:"Will happen in future (irregular stem ir- + -ons)"},
+  {sentence:"Je voudrais un café.",tense:"Conditionnel",why:"Polite request (would like)"},
+  {sentence:"Quand j'étais petit, je jouais dehors.",tense:"Imparfait",why:"Habitual action in the past"},
+  {sentence:"Elle a fini ses devoirs.",tense:"Passé Composé",why:"Completed action (avoir + fini)"},
+  {sentence:"Tu seras content.",tense:"Futur Simple",why:"Will be (irregular stem ser-)"},
+  {sentence:"Ils mangeaient quand je suis arrivé.",tense:"Imparfait",why:"Ongoing action that was interrupted"},
+  {sentence:"Je ferais un voyage si j'avais l'argent.",tense:"Conditionnel",why:"Hypothetical (would do)"},
+  {sentence:"Nous avons vu le film.",tense:"Passé Composé",why:"Completed action (avoir + vu)"},
+  {sentence:"Elle lisait un livre.",tense:"Imparfait",why:"Ongoing past action (was reading)"},
+  {sentence:"Je pourrai venir demain.",tense:"Futur Simple",why:"Will be able (irregular stem pourr-)"},
+  {sentence:"Il pleuvait tous les jours.",tense:"Imparfait",why:"Repeated/habitual past action"},
+  {sentence:"Elle est née en France.",tense:"Passé Composé",why:"Completed action with être (DR MRS VANDERTRAMP)"}
+];
+
+// NAVIGATION
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  if(id === 'quiz') startQuiz(currentQuizType || 'meaning');
+  if(id === 'flashcards') startFlashcards(currentFCType || 'verbs');
+  window.scrollTo(0,0);
+}
+
+// VERB TABS
+function showVerbGroup(group, btn) {
+  ['er','ir','re','irreg'].forEach(g => {
+    document.getElementById('verb-'+g).style.display = g===group ? 'block' : 'none';
+  });
+  btn.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// VOCAB TABS
+function showVocabGroup(group, btn) {
+  ['school','daily','food','travel','opinions','connectors','environment','health','sports','media'].forEach(g => {
+    document.getElementById('vocab-'+g).style.display = g===group ? 'block' : 'none';
+  });
+  btn.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// CONJUGATION LOOKUP
+function showConjugation() {
+  const input = document.getElementById('conj-input').value.toLowerCase().trim();
+  const result = document.getElementById('conj-result');
+  if(!conjugations[input]) { result.innerHTML = input ? '<p style="color:#888;margin-top:10px;">Verb not found. Try: être, avoir, aller, faire, courir, etc.</p>' : ''; return; }
+  const c = conjugations[input];
+  let html = '<h4 style="color:#4ecca3;margin:15px 0 10px;">Présent</h4><div class="conj-grid">';
+  pronouns.forEach((p,i) => html += `<div class="conj-item"><span class="pronoun">${p}</span> <span class="form">${c.present[i]}</span></div>`);
+  html += '</div><h4 style="color:#4ecca3;margin:15px 0 10px;">Passé Composé (je)</h4><p style="color:#e0e0e0;">j\''+c.pc+'</p>';
+  html += '<h4 style="color:#4ecca3;margin:15px 0 10px;">Imparfait</h4><div class="conj-grid">';
+  pronouns.forEach((p,i) => html += `<div class="conj-item"><span class="pronoun">${p}</span> <span class="form">${c.imp[i]}</span></div>`);
+  html += '</div><h4 style="color:#4ecca3;margin:15px 0 10px;">Futur Simple</h4><div class="conj-grid">';
+  pronouns.forEach((p,i) => html += `<div class="conj-item"><span class="pronoun">${p}</span> <span class="form">${c.futur[i]}</span></div>`);
+  html += '</div>';
+  result.innerHTML = html;
+}
+
+// QUIZ
+let currentQuizType = 'meaning';
+let quizQuestions = [];
+let quizIndex = 0;
+let quizScore = 0;
+let quizStreak = 0;
+
+function shuffle(arr) { for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
+
+function generateQuiz(type) {
+  let questions = [];
+  if(type === 'meaning') {
+    const pool = shuffle([...verbs]).slice(0,10);
+    pool.forEach(v => {
+      const wrongs = shuffle(verbs.filter(x=>x.en!==v.en)).slice(0,3).map(x=>x.en);
+      const opts = shuffle([v.en,...wrongs]);
+      questions.push({q:`What does "${v.fr}" mean?`, correct:v.en, options:opts});
+    });
+  } else if(type === 'conjugation') {
+    const verbKeys = shuffle(Object.keys(conjugations)).slice(0,10);
+    verbKeys.forEach(v => {
+      const pi = Math.floor(Math.random()*6);
+      const tenseNames = ['present','imp','futur'];
+      const tenseLabels = ['présent','imparfait','futur simple'];
+      const ti = Math.floor(Math.random()*3);
+      const correct = conjugations[v][tenseNames[ti]][pi];
+      const allForms = Object.values(conjugations).flatMap(c=>c[tenseNames[ti]]);
+      const wrongs = shuffle(allForms.filter(f=>f!==correct)).slice(0,3);
+      const opts = shuffle([correct,...wrongs]);
+      questions.push({q:`${v} (${pronouns[pi]}, ${tenseLabels[ti]})`, correct, options:opts});
+    });
+  } else if(type === 'tense') {
+    shuffle([...tenseExamples]).slice(0,10).forEach(t => {
+      const tenses = ["Présent","Passé Composé","Imparfait","Futur Simple","Conditionnel"];
+      const wrongs = shuffle(tenses.filter(x=>x!==t.tense)).slice(0,3);
+      const opts = shuffle([t.tense,...wrongs]);
+      questions.push({q:`What tense? "${t.sentence}"`, correct:t.tense, options:opts, explanation:t.why});
+    });
+  } else if(type === 'vocab') {
+    const pool = shuffle([...vocabAll]).slice(0,10);
+    pool.forEach(v => {
+      const wrongs = shuffle(vocabAll.filter(x=>x.en!==v.en)).slice(0,3).map(x=>x.en);
+      const opts = shuffle([v.en,...wrongs]);
+      questions.push({q:`What does "${v.fr}" mean?`, correct:v.en, options:opts});
+    });
+  } else if(type === 'subjunctive') {
+    const subjQ = [
+      {q:"Il faut que tu ___ (faire) tes devoirs.",correct:"fasses",options:["fasses","fais","feras","ferais"]},
+      {q:"Je veux que vous ___ (être) à l'heure.",correct:"soyez",options:["soyez","êtes","serez","étiez"]},
+      {q:"Bien qu'il ___ (avoir) de l'argent, il est triste.",correct:"ait",options:["ait","a","aura","avait"]},
+      {q:"Il est important que nous ___ (aller) à l'école.",correct:"allions",options:["allions","allons","irons","allaient"]},
+      {q:"Pour que tu ___ (pouvoir) réussir, étudie!",correct:"puisses",options:["puisses","peux","pourras","pouvais"]},
+      {q:"Je doute qu'il ___ (savoir) la réponse.",correct:"sache",options:["sache","sait","saura","savait"]},
+      {q:"Il faut que je ___ (finir) avant midi.",correct:"finisse",options:["finisse","finis","finirai","finissais"]},
+      {q:"Elle veut que nous ___ (venir) demain.",correct:"venions",options:["venions","venons","viendrons","venions"]},
+      {q:"Avant que tu ___ (partir), dis-moi.",correct:"partes",options:["partes","pars","partiras","partais"]},
+      {q:"Il est possible qu'ils ___ (vouloir) rester.",correct:"veuillent",options:["veuillent","veulent","voudront","voulaient"]}
+    ];
+    questions = shuffle(subjQ).slice(0,10);
+  } else if(type === 'pcvsimp') {
+    const pcImpQ = [
+      {q:"Hier, je ___ au cinéma. (specific completed action)",correct:"Passé Composé (je suis allé)",options:["Passé Composé (je suis allé)","Imparfait (j'allais)"],explanation:"Specific, completed action → PC"},
+      {q:"Quand j'étais petit, je ___ au parc tous les jours. (habitual past)",correct:"Imparfait (jouais)",options:["Imparfait (jouais)","Passé Composé (ai joué)"],explanation:"Habitual/repeated past action → Imparfait"},
+      {q:"Il ___ beau quand nous sommes sortis. (weather description)",correct:"Imparfait (faisait)",options:["Imparfait (faisait)","Passé Composé (a fait)"],explanation:"Weather/description in the past → Imparfait"},
+      {q:"Soudain, le téléphone ___. (sudden action)",correct:"Passé Composé (a sonné)",options:["Passé Composé (a sonné)","Imparfait (sonnait)"],explanation:"Sudden, interrupting action → PC"},
+      {q:"Elle ___ ses devoirs quand je suis arrivé. (ongoing action interrupted)",correct:"Imparfait (faisait)",options:["Imparfait (faisait)","Passé Composé (a fait)"],explanation:"Ongoing action that got interrupted → Imparfait"},
+      {q:"Nous ___ trois fois la semaine dernière. (specific number of times)",correct:"Passé Composé (avons nagé)",options:["Passé Composé (avons nagé)","Imparfait (nagions)"],explanation:"Specific number of times → PC"},
+      {q:"Les enfants ___ contents pendant les vacances. (emotion/state)",correct:"Imparfait (étaient)",options:["Imparfait (étaient)","Passé Composé (ont été)"],explanation:"Emotional state/description → Imparfait"},
+      {q:"À 15h, il ___ son déjeuner. (completed at specific time)",correct:"Passé Composé (a fini)",options:["Passé Composé (a fini)","Imparfait (finissait)"],explanation:"Completed action at a specific time → PC"},
+      {q:"D'habitude, nous ___ à 7h. (usual routine)",correct:"Imparfait (nous levions)",options:["Imparfait (nous levions)","Passé Composé (nous sommes levés)"],explanation:"D'habitude = habitual → Imparfait"},
+      {q:"Ce matin, je ___ un accident. (one-time event)",correct:"Passé Composé (ai vu)",options:["Passé Composé (ai vu)","Imparfait (voyais)"],explanation:"One-time event → PC"}
+    ];
+    questions = shuffle(pcImpQ).slice(0,10);
+  } else { // mixed
+    const m = generateQuiz('meaning').slice(0,2);
+    const c = generateQuiz('conjugation').slice(0,2);
+    const t = generateQuiz('tense').slice(0,2);
+    const v = generateQuiz('vocab').slice(0,2);
+    const s = generateQuiz('subjunctive').slice(0,1);
+    const p = generateQuiz('pcvsimp').slice(0,1);
+    questions = shuffle([...m,...c,...t,...v,...s,...p]);
+  }
+  return questions;
+}
+
+function startQuiz(type, btn) {
+  currentQuizType = type;
+  if(btn) { btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); }
+  quizQuestions = generateQuiz(type);
+  quizIndex = 0; quizScore = 0; quizStreak = 0;
+  document.getElementById('quiz-restart').style.display = 'none';
+  updateQuizUI();
+}
+
+function updateQuizUI() {
+  const area = document.getElementById('quiz-area');
+  document.getElementById('quiz-streak').textContent = '🔥 Streak: ' + quizStreak;
+  document.getElementById('quiz-score-bar').style.width = (quizScore/quizQuestions.length*100)+'%';
+  
+  if(quizIndex >= quizQuestions.length) {
+    area.innerHTML = `<div style="text-align:center;padding:30px;"><h3 style="color:#4ecca3;font-size:1.5em;">Quiz Complete!</h3><p style="font-size:1.3em;margin:15px 0;">${quizScore}/${quizQuestions.length} correct (${Math.round(quizScore/quizQuestions.length*100)}%)</p><p style="color:#888;">${quizScore===quizQuestions.length?'🏆 Perfect!':quizScore>=7?'💪 Great job!':quizScore>=5?'👍 Not bad!':'📚 Keep studying!'}</p></div>`;
+    document.getElementById('quiz-restart').style.display = 'inline-block';
+    return;
+  }
+  
+  const q = quizQuestions[quizIndex];
+  document.getElementById('quiz-progress').textContent = `Question ${quizIndex+1}/${quizQuestions.length}`;
+  let html = `<p style="font-size:1.2em;margin-bottom:15px;"><strong>${q.q}</strong></p>`;
+  q.options.forEach((opt,i) => {
+    html += `<button class="quiz-option" onclick="checkAnswer(this,'${opt.replace(/'/g,"\\'")}','${q.correct.replace(/'/g,"\\'")}')">${opt}</button>`;
+  });
+  area.innerHTML = html;
+}
+
+function checkAnswer(btn, selected, correct) {
+  const buttons = document.querySelectorAll('.quiz-option');
+  buttons.forEach(b => {
+    b.disabled = true;
+    if(b.textContent === correct) b.classList.add('correct');
+  });
+  if(selected === correct) {
+    quizScore++; quizStreak++;
+    btn.classList.add('correct');
+  } else {
+    quizStreak = 0;
+    btn.classList.add('wrong');
+  }
+  document.getElementById('quiz-streak').textContent = '🔥 Streak: ' + quizStreak;
+  document.getElementById('quiz-score-bar').style.width = (quizScore/quizQuestions.length*100)+'%';
+  
+  const q = quizQuestions[quizIndex];
+  if(q.explanation) {
+    const area = document.getElementById('quiz-area');
+    area.innerHTML += `<p style="color:#4ecca3;margin-top:10px;">💡 ${q.explanation}</p>`;
+  }
+  
+  setTimeout(() => { quizIndex++; updateQuizUI(); }, 1200);
+}
+
+// FLASHCARDS
+let fcCards = [];
+let fcIndex = 0;
+let currentFCType = 'verbs';
+
+function startFlashcards(type, btn) {
+  currentFCType = type;
+  if(btn) { btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); }
+  if(type === 'verbs') fcCards = shuffle([...verbs].map(v=>({front:v.fr,back:v.en})));
+  else if(type === 'vocab') fcCards = shuffle([...vocabAll].map(v=>({front:v.fr,back:v.en})));
+  else if(type === 'irregFutur') fcCards = shuffle([...irregFutur].map(v=>({front:v.fr,back:v.en})));
+  fcIndex = 0;
+  showCard();
+}
+
+function showCard() {
+  const card = document.getElementById('flashcard');
+  card.classList.remove('flipped');
+  document.getElementById('fc-front').textContent = fcCards[fcIndex].front;
+  document.getElementById('fc-back').textContent = fcCards[fcIndex].back;
+  document.getElementById('fc-progress').textContent = `${fcIndex+1} / ${fcCards.length}`;
+}
+
+function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
+function nextCard() { fcIndex = (fcIndex+1) % fcCards.length; showCard(); }
+function prevCard() { fcIndex = (fcIndex-1+fcCards.length) % fcCards.length; showCard(); }
+function shuffleFlashcards() { fcCards = shuffle(fcCards); fcIndex = 0; showCard(); }
+
+// INIT
+startFlashcards('verbs');
+</script>
+
+</body>
+</html>
