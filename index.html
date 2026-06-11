@@ -18,6 +18,7 @@ body{font-family:'Segoe UI',sans-serif;background:#0a0a12;color:#e0e0e0;min-heig
 #topbar .subject-btn:hover{border-color:#555;color:#ccc}
 #topbar .subject-btn.active-calc{border-color:#1e90ff;color:#1e90ff;background:#1e90ff15}
 #topbar .subject-btn.active-french{border-color:#e94560;color:#e94560;background:#e9456015}
+#topbar .subject-btn.active-history{border-color:#f0a500;color:#f0a500;background:#f0a50015}
 
 /* === LANDING PAGE === */
 #landing{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
@@ -28,6 +29,8 @@ body{font-family:'Segoe UI',sans-serif;background:#0a0a12;color:#e0e0e0;min-heig
 .subject-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .subject-card.calc-card:hover{border-color:#1e90ff}
 .subject-card.french-card:hover{border-color:#e94560}
+.subject-card.hist-card:hover{border-color:#f0a500}
+.hist-card h2{color:#f0a500}
 .subject-card .icon{font-size:3em;margin-bottom:15px}
 .subject-card h2{margin-bottom:8px;font-size:1.3em}
 .subject-card p{color:#777;font-size:.9em}
@@ -35,7 +38,34 @@ body{font-family:'Segoe UI',sans-serif;background:#0a0a12;color:#e0e0e0;min-heig
 .french-card h2{color:#e94560}
 
 /* === APP CONTAINERS === */
-#calc-app,#french-app{display:none}
+#calc-app,#french-app,#history-app{display:none}
+
+/* ========== HISTORY STYLES ========== */
+#history-app nav{background:#1a1508;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #f0a500;flex-wrap:wrap;gap:10px}
+#history-app nav h1{color:#f0a500;font-size:1.3em}
+#history-app nav .links{display:flex;gap:8px;flex-wrap:wrap}
+#history-app nav a{color:#888;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:.85em;transition:.2s}
+#history-app nav a:hover,#history-app nav a.active{background:#f0a500;color:#000}
+#history-app h2{color:#f0a500}
+#history-app h3{color:#d4a017}
+#history-app h4{color:#ffcc44}
+#history-app .card{background:#1a1a10;border:1px solid #333}
+#history-app .card:hover{border-color:#f0a50033}
+#history-app .unit-card:hover{border-color:#f0a500}
+#history-app .unit-card h3{color:#f0a500}
+#history-app .unit-card .badge{background:#f0a50022;color:#f0a500}
+#history-app .btn{background:#f0a500;color:#000}
+#history-app .btn:hover{background:#d4a017}
+#history-app .tab.active{background:#f0a500;color:#000}
+#history-app th{background:#f0a500;color:#000;padding:10px;text-align:left;font-size:.9em}
+#history-app .fc{border-color:#f0a50033}
+#history-app .fc .front{color:#f0a500}
+#history-app .fc .back{color:#ffcc44}
+#history-app .quiz-opt:hover{border-color:#f0a500}
+#history-app .score-fill{background:linear-gradient(90deg,#f0a500,#ffcc44)}
+.h-section{display:none}.h-section.active{display:block}
+#history-app .key{color:#f0a500;font-weight:bold}
+#history-app .note{background:#1a1a10;border-left:3px solid #f0a500;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0;font-size:.9em}
 
 /* ========== CALC STYLES ========== */
 #calc-app nav{background:#111;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #1e90ff;flex-wrap:wrap;gap:10px}
@@ -134,6 +164,7 @@ tr:hover{background:#1a1a2a}
   <span class="logo" onclick="goHome()">📚 Lock In Or No Food</span>
   <button class="subject-btn" id="tb-calc" onclick="openApp('calc')" style="display:none">∫ Calc BC</button>
   <button class="subject-btn" id="tb-french" onclick="openApp('french')" style="display:none">🇫🇷 French</button>
+  <button class="subject-btn" id="tb-history" onclick="openApp('history')" style="display:none">📜 History</button>
 </div>
 
 <!-- LANDING -->
@@ -145,6 +176,11 @@ tr:hover{background:#1a1a2a}
       <div class="icon">∫</div>
       <h2>AP Calculus BC</h2>
       <p>10 units · 134 practice questions · formula flashcards · calculator section</p>
+    </div>
+    <div class="subject-card hist-card" onclick="openApp('history')">
+      <div class="icon">📜</div>
+      <h2>Canadian History</h2>
+      <p>5 units · 75+ flashcards · 48 quiz questions · exam review</p>
     </div>
     <div class="subject-card french-card" onclick="openApp('french')">
       <div class="icon">🇫🇷</div>
@@ -1999,14 +2035,18 @@ function openApp(app) {
   document.getElementById('landing').style.display = 'none';
   document.getElementById('calc-app').style.display = app==='calc' ? 'block' : 'none';
   document.getElementById('french-app').style.display = app==='french' ? 'block' : 'none';
+  document.getElementById('history-app').style.display = app==='history' ? 'block' : 'none';
   document.getElementById('tb-calc').style.display = 'inline-block';
   document.getElementById('tb-french').style.display = 'inline-block';
+  document.getElementById('tb-history').style.display = 'inline-block';
   document.querySelectorAll('.subject-btn').forEach(b => b.className = 'subject-btn');
-  document.getElementById('tb-'+app).classList.add(app==='calc' ? 'active-calc' : 'active-french');
+  const cls = app==='calc' ? 'active-calc' : app==='french' ? 'active-french' : 'active-history';
+  document.getElementById('tb-'+app).classList.add(cls);
   currentApp = app;
   window.scrollTo(0,0);
   if(app==='calc') { calcInit(); }
   if(app==='french') { frenchInit(); }
+  if(app==='history') { histInit(); }
 }
 </script>
 
@@ -3693,6 +3733,474 @@ document.addEventListener('keydown',function(e){
 startFlashcards('verbs');
 function frenchInit() { /* already initialized */ }
 
+</script>
+
+<!-- ==================== HISTORY APP ==================== -->
+<div id="history-app">
+<nav>
+<h1>📜 Canadian History</h1>
+<div class="links">
+<a href="#" onclick="hShow('home')" class="active" id="hn-home">Home</a>
+<a href="#" onclick="hShow('units')" id="hn-units">Units</a>
+<a href="#" onclick="hShow('flash')" id="hn-flash">Flashcards</a>
+<a href="#" onclick="hShow('quiz')" id="hn-quiz">Quiz</a>
+</div>
+</nav>
+<div class="container">
+<div class="h-section active" id="hs-home">
+<h2>📜 Canadian History Exam Review</h2>
+<div class="card"><p>5 units covering Introduction to History, WWI, Roaring 20s & Dirty 30s, WWII, and 1950s–Present. Plus Big Themes for long answer prep.</p>
+<p style="margin-top:10px;color:#f0a500;font-weight:bold">75+ flashcards · 48 quiz questions · complete notes</p></div>
+<div id="h-unit-list"></div>
+</div>
+<div class="h-section" id="hs-units"><div id="h-unit-content"></div></div>
+<div class="h-section" id="hs-flash">
+<h2>📇 Flashcards</h2>
+<div class="tab-bar" id="h-fc-tabs"></div>
+<div style="text-align:center;margin-bottom:10px">
+<span class="progress" id="h-fc-progress">1 / ?</span>
+</div>
+<div class="fc" id="h-fc-card" onclick="hFlipCard()">
+<div class="front" id="h-fc-front"></div>
+<div class="back" id="h-fc-back"></div>
+<div class="hint">Click to flip</div>
+</div>
+<div style="text-align:center;margin-top:15px">
+<button class="btn btn-s" onclick="hFcPrev()">← Prev</button>
+<button class="btn btn-s" onclick="hFcShuffle()">🔀 Shuffle</button>
+<button class="btn btn-s" onclick="hFcNext()">Next →</button>
+</div>
+</div>
+<div class="h-section" id="hs-quiz">
+<h2>📝 Quiz</h2>
+<div id="h-quiz-setup" style="text-align:center;padding:20px">
+<p style="color:#888;margin-bottom:15px">Test your knowledge across all units</p>
+<div style="margin-bottom:15px">
+<label style="color:#aaa">Questions: </label>
+<select id="h-q-count" style="padding:4px 8px;border-radius:6px;background:#1a1a10;color:#f0a500;border:1px solid #333">
+<option value="10">10</option><option value="20">20</option><option value="30">30</option><option value="0">All</option>
+</select>
+</div>
+<button class="btn" onclick="hStartQuiz()">Start Quiz</button>
+</div>
+<div id="h-quiz-area"></div>
+</div>
+</div>
+</div>
+
+
+<script>
+// ==================== HISTORY APP ====================
+const HUNITS = [
+{id:1,name:"Unit 1: Introduction to History",content:`<h4>Primary vs Secondary Sources</h4>
+<ul><li><span class="key">Primary source</span> — created at the time of the event by someone who was there (diary, photo, speech, letter, artifact)</li>
+<li><span class="key">Secondary source</span> — created after the event by someone analyzing/interpreting primary sources (textbook, documentary, biography)</li></ul>
+<h4>Bias</h4>
+<p>Every source has a <span class="key">perspective</span>. Identifying bias helps you understand <em>why</em> a source says what it says, who created it, and what they might leave out. No source is perfectly objective.</p>
+<h4>Inference</h4>
+<p>An <span class="key">inference</span> is a conclusion drawn from evidence + reasoning — reading between the lines of what a source doesn't explicitly say.</p>
+<h4>OPCVL Method</h4>
+<ul><li><span class="key">O</span>rigin — Who created it? When? Where?</li>
+<li><span class="key">P</span>urpose — Why was it created? Who was the audience?</li>
+<li><span class="key">C</span>ontent — What does it say? What information does it provide?</li>
+<li><span class="key">V</span>alue — What makes this source useful? "A value of the origin of the source is…"</li>
+<li><span class="key">L</span>imitation — What weaknesses does it have? "A possible limitation of the origin of the source is…"</li></ul>
+<div class="note">Always identify O, P, or C <em>before</em> stating values/limitations. Use the correct academic language.</div>
+<h4>The Big 6 Historical Thinking Concepts</h4>
+<ol><li><span class="key">Historical Significance</span> — Why does this event matter? (resulted in change, affected many people, revealing, prominent at the time)</li>
+<li><span class="key">Evidence</span> — How do we know what happened?</li>
+<li><span class="key">Continuity & Change</span> — What stayed the same? What changed?</li>
+<li><span class="key">Cause & Consequence</span> — What caused the event? What resulted from it?</li>
+<li><span class="key">Historical Perspective</span> — Understanding people's decisions within the context of their time (don't judge the past by today's values)</li>
+<li><span class="key">Ethical Dimension</span> — How do we make ethical judgments about the past?</li></ol>`},
+
+{id:2,name:"Unit 2: Canada in WWI",content:`<h4>Long-Term Causes of WWI (M.A.I.N.)</h4>
+<ul><li><span class="key">Militarism</span> — European powers built massive armies and navies, especially the Anglo-German naval arms race</li>
+<li><span class="key">Alliances</span> — Two alliance systems: Triple Entente (Britain, France, Russia) vs Triple Alliance (Germany, Austria-Hungary, Italy). If one country was attacked, allies were pulled in</li>
+<li><span class="key">Imperialism</span> — European nations competed for colonies, resources, and global power → tension and rivalry</li>
+<li><span class="key">Nationalism</span> — Intense pride in one's nation/ethnic group. Some wanted independence (e.g. Slavic peoples in Austria-Hungary), others wanted dominance</li></ul>
+<h4>Immediate Cause</h4>
+<p>Assassination of <span class="key">Archduke Franz Ferdinand</span> of Austria-Hungary by Gavrilo Princip (Serbian nationalist) in Sarajevo, June 28, 1914. Austria-Hungary declared war on Serbia → alliance system triggered → all of Europe at war within weeks.</p>
+<h4>Why Canada Went to War</h4>
+<p>Canada was part of the <span class="key">British Empire</span>. When Britain declared war, Canada was automatically at war. However, Canada decided the size of its own contribution.</p>
+<h4>Key Battles</h4>
+<ul><li><span class="key">Ypres (1915)</span> — First major Canadian battle. Germans used <span class="key">chlorine gas</span> for the first time. Canadians held the line when French colonial troops retreated</li>
+<li><span class="key">Somme (1916)</span> — Brutal, costly battle. Over 24,000 Canadian casualties. Tanks used for the first time</li>
+<li><span class="key">Vimy Ridge (April 1917)</span> — All four Canadian divisions fought together for the first time. Used <span class="key">creeping barrage</span> tactics. Considered a defining moment of Canadian national identity</li>
+<li><span class="key">Passchendaele (1917)</span> — Fought in terrible mud. ~16,000 Canadian casualties for a gain of only a few kilometres</li></ul>
+<h4>The Schlieffen Plan → Trench Warfare</h4>
+<p>Germany's plan to avoid a <span class="key">two-front war</span>: quickly defeat France by sweeping through Belgium, then turn east to fight Russia. The plan failed — France didn't fall quickly, Russia mobilized faster than expected → <span class="key">stalemate</span> on the Western Front → both sides dug trenches.</p>
+<h4>Women's Changing Roles</h4>
+<ul><li>Worked in <span class="key">munitions factories</span>, farms, offices — jobs previously held by men</li>
+<li>Served as <span class="key">nurses</span> near the front lines</li>
+<li><span class="key">Suffragettes</span> gained momentum → women won the right to vote (Manitoba first in 1916, federally in 1918)</li></ul>
+<h4>Conscription Crisis</h4>
+<p>PM <span class="key">Robert Borden</span> passed the <span class="key">Military Service Act (1917)</span> — mandatory military service. <span class="key">English Canada</span> largely supported it. <span class="key">French Canada</span> strongly opposed — they felt no loyalty to Britain or France and saw it as an English Canadian war. Deep national divide.</p>
+<h4>Treaty of Versailles (1919)</h4>
+<p>Signed at the <span class="key">Palace of Versailles</span>. Terms imposed on Germany:</p>
+<ul><li><span class="key">War Guilt Clause</span> (Article 231) — Germany accepted full blame</li>
+<li><span class="key">Reparations</span> — $33 billion in payments</li>
+<li>Lost territory (Alsace-Lorraine to France, colonies taken)</li>
+<li>Military restricted (100,000 soldiers, no air force, limited navy)</li>
+<li>Led to <span class="key">hyperinflation</span>, economic devastation, resentment → contributed to rise of Hitler and WWII</li></ul>
+<p><span class="key">Retribution vs Rehabilitation</span>: The treaty was punitive (retribution) rather than helping Germany recover (rehabilitation). Too harsh — humiliated Germany without destroying its ability to eventually rearm.</p>
+<div class="note">Key terms: <span class="key">Borden</span> (PM), <span class="key">Ferdinand</span> (assassination), <span class="key">Suffragettes</span>, <span class="key">Ypres</span>, <span class="key">No Man's Land</span> (area between trenches), <span class="key">Vimy Ridge</span>, <span class="key">U-Boat</span> (German submarine), <span class="key">Lusitania</span> (British ship sunk by U-Boat, 1,198 dead), <span class="key">Zimmerman Telegram</span> (Germany asked Mexico to attack US → US entered war), <span class="key">Victory Bonds</span> (citizens lent money for war effort), <span class="key">League of Nations</span></div>`},
+
+{id:3,name:"Unit 3: Roaring 20s & Dirty 30s",content:`<h4>Who Didn't Experience the Prosperity of the 1920s?</h4>
+<ul><li><span class="key">Black Canadians</span> — faced segregation, limited job opportunities, racism in housing and education</li>
+<li><span class="key">Indigenous peoples</span> — <span class="key">Residential schools</span> forcibly removed children from families to "assimilate" them. The <span class="key">Indian Act</span> controlled every aspect of their lives</li>
+<li><span class="key">Chinese immigrants</span> — <span class="key">Chinese Exclusion Act (1923)</span> banned Chinese immigration entirely. Those already in Canada faced discrimination</li>
+<li><span class="key">Jewish Canadians</span> — faced antisemitism, university quotas, restricted immigration ("none is too many" policy)</li></ul>
+<h4>The Famous Five & The Persons Case</h4>
+<p>Five women: <span class="key">Emily Murphy, Nellie McClung, Irene Parlby, Louise McKinney, Henrietta Muir Edwards</span></p>
+<p>They challenged whether women were "persons" under the BNA Act. Canada's Supreme Court said <em>no</em>. They appealed to Britain's Privy Council, which ruled in 1929: <span class="key">women ARE persons</span>. Landmark for women's rights in Canada.</p>
+<h4>Group of Seven</h4>
+<p>A group of <span class="key">Canadian landscape painters</span> (1920s) who painted the Canadian wilderness in a bold, distinctive style. Helped create a unique <span class="key">Canadian artistic identity</span>.</p>
+<h4>Women's Christian Temperance Movement & Prohibition</h4>
+<p>The WCTM campaigned against alcohol, linking it to domestic violence and poverty → <span class="key">Prohibition</span> (laws banning alcohol). Ultimately failed due to bootlegging, organized crime, and lack of enforcement.</p>
+<h4>Causes of the Great Depression</h4>
+<p><span class="key">Long-term:</span></p>
+<ul><li><span class="key">Overproduction</span> — factories produced more than people could buy</li>
+<li><span class="key">Over-speculation</span> — reckless stock market investing</li>
+<li><span class="key">Buying on margin</span> — borrowing money to buy stocks</li>
+<li><span class="key">Uneven wealth distribution</span> — the rich got richer, most couldn't afford goods</li>
+<li>Canada's <span class="key">dependence on exports</span> (wheat, fish, lumber)</li></ul>
+<p><span class="key">Short-term:</span> <span class="key">Black Tuesday</span> — October 29, 1929. Stock market crashed → banks failed → unemployment skyrocketed.</p>`},
+
+{id:4,name:"Unit 4: World War Two",content:`<h4>Why the League of Nations Failed</h4>
+<ul><li>Had <span class="key">no army</span> to enforce decisions</li>
+<li>The <span class="key">US never joined</span></li>
+<li>Couldn't stop aggression from Japan, Italy, or Germany</li></ul>
+<h4>Nazi-Soviet Non-Aggression Pact (Molotov-Ribbentrop)</h4>
+<p><span class="key">Hitler</span> wanted to avoid a two-front war. <span class="key">Stalin</span> wanted time to build his military. They agreed not to attack each other and secretly divided Poland. Editorial cartoon <span class="key">"Rendezvous"</span> depicted their partnership.</p>
+<h4>Totalitarianism</h4>
+<p>Characteristics: single party rule, censorship, propaganda, secret police, cult of personality, no opposition.</p>
+<ul><li><span class="key">Italy</span> — Benito Mussolini → <span class="key">Fascism</span></li>
+<li><span class="key">Soviet Union</span> — Joseph Stalin → <span class="key">Communism</span></li>
+<li><span class="key">Germany</span> — Adolf Hitler → <span class="key">Nazism</span></li></ul>
+<h4>Hitler's Anti-Semitism</h4>
+<p>Roots: failed art career in Vienna, exposure to antisemitic propaganda, WWI — embraced the <span class="key">"stab in the back" myth</span> (Jews/communists caused Germany's defeat). Used Jews as scapegoats.</p>
+<h4>Lebensraum</h4>
+<p><span class="key">"Living space"</span> — expand German territory eastward for the "Aryan race."</p>
+<h4>Appeasement</h4>
+<p>Policy of <span class="key">giving in to demands</span> to avoid war:</p>
+<ul><li><span class="key">Anschluss (1938)</span> — annexed Austria</li>
+<li><span class="key">Sudetenland (1938)</span> — took German-speaking Czechoslovakia</li>
+<li><span class="key">Munich Agreement</span> — Britain & France agreed. Chamberlain: "peace for our time." Hitler broke it within months</li></ul>
+<h4>Blitzkrieg</h4>
+<p><span class="key">"Lightning war"</span> — fast coordinated attacks with tanks, aircraft, infantry.</p>
+<h4>Axis vs Allies</h4>
+<ul><li><span class="key">Axis</span>: Germany, Italy, Japan</li>
+<li><span class="key">Allies</span>: Britain, France, Canada, later USSR and USA (both 1941)</li></ul>
+<h4>Key Battles</h4>
+<ul><li><span class="key">Battle of Britain (1940)</span> — Air war, RAF vs Luftwaffe. Britain survived</li>
+<li><span class="key">Dieppe Raid (1942)</span> — Disastrous Canadian attack. 907 killed, 1,946 captured. Lessons applied to D-Day</li>
+<li><span class="key">Battle of the Atlantic</span> — U-Boats vs Allied convoys. Canada's navy played major role</li>
+<li><span class="key">D-Day (June 6, 1944)</span> — Operation Overlord. Canada landed at <span class="key">Juno Beach</span></li></ul>
+<h4>The Holocaust</h4>
+<ul><li><span class="key">Final Solution</span> — systematic extermination of Jews</li>
+<li>Targets: Jews (~6M), Roma, disabled, LGBTQ+, political opponents</li>
+<li><span class="key">Stages of Isolation</span>: Identification → Exclusion → Concentration → Extermination</li></ul>
+<h4>Japanese Internment</h4>
+<p>After <span class="key">Pearl Harbor (Dec 7, 1941)</span>, ~22,000 Japanese Canadians forcibly relocated. Property seized. Motivated by racism, not evidence. Canada apologized 1988.</p>
+<h4>Manhattan Project & Atomic Bombs</h4>
+<ul><li><span class="key">"Little Boy"</span> on <span class="key">Hiroshima</span> — Aug 6, 1945</li>
+<li><span class="key">"Fat Man"</span> on <span class="key">Nagasaki</span> — Aug 9, 1945</li>
+<li>Japan surrendered Aug 15 (V-J Day)</li></ul>
+<h4>WWI vs WWII: Continuity & Change</h4>
+<ul><li><span class="key">Continuity</span>: fought alongside Britain, total war, women's new roles, propaganda</li>
+<li><span class="key">Change</span>: Canada declared war independently, more technology, Holocaust, Canada emerged as middle power</li></ul>`},
+
+{id:5,name:"Unit 5: 1950s to Present",content:`<h4>The Cold War</h4>
+<p>A <span class="key">cold war</span> = political/military tension <em>without</em> direct conflict. The Cold War (1947–1991): <span class="key">USA (capitalism)</span> vs <span class="key">USSR (communism)</span>.</p>
+<h4>The United Nations</h4>
+<p>Est. <span class="key">1945</span>, replaced League of Nations. Canadian <span class="key">John Humphrey</span> drafted the initial <span class="key">UN Declaration of Human Rights (1948)</span>.</p>
+<h4>Mutually Assured Destruction (MAD)</h4>
+<p>Both sides had enough <span class="key">nuclear weapons</span> to destroy each other → paradoxically <em>prevented</em> direct war.</p>
+<h4>NATO vs Warsaw Pact</h4>
+<ul><li><span class="key">NATO (1949)</span> — Western military alliance</li>
+<li><span class="key">Warsaw Pact (1955)</span> — Soviet military alliance</li>
+<li>Both → <span class="key">arms race</span></li></ul>
+<h4>The Arctic</h4>
+<p><span class="key">DEW Line</span> — radar stations to detect Soviet bombers. Today: Northwest Passage sovereignty disputes, resource claims as ice melts.</p>
+<h4>Korean War (1950–1953)</h4>
+<p>North Korea invaded South Korea. Canada sent troops as <span class="key">UN force</span>. Stalemate at the <span class="key">38th parallel</span>.</p>
+<h4>Peacekeeping</h4>
+<ul><li><span class="key">Suez Crisis (1956)</span> — <span class="key">Lester B. Pearson</span> proposed UN peacekeeping force. Won <span class="key">Nobel Peace Prize</span></li>
+<li><span class="key">Rwanda (1994)</span> — ~800,000 killed. General <span class="key">Roméo Dallaire</span> commanded small UN force. World failed to intervene</li></ul>
+<h4>Charter of Rights and Freedoms (1982)</h4>
+<p>Part of Constitution Act. Guarantees fundamental freedoms, democratic rights, equality rights.</p>
+<h4>French-English Relations</h4>
+<ul><li><span class="key">October Crisis (1970)</span> — FLQ kidnappings. Trudeau invoked <span class="key">War Measures Act</span></li>
+<li><span class="key">1980 Referendum</span> — Quebec stays (~60% No)</li>
+<li><span class="key">1995 Referendum</span> — Extremely close: 50.6% No, 49.4% Yes</li>
+<li><span class="key">Bill 21</span> — Quebec secularism law banning religious symbols for public workers</li></ul>
+<h4>Indigenous-Canadian Relations</h4>
+<ul><li><span class="key">Residential Schools</span> (1880s–1996) — forcibly removed children, widespread abuse</li>
+<li><span class="key">TRC</span> — 94 Calls to Action</li>
+<li><span class="key">Oka Crisis (1990)</span> — Mohawk land dispute, 78-day standoff</li>
+<li><span class="key">Inuit Arctic Relocation (1950s)</span> — forced relocation to assert sovereignty</li></ul>
+<h4>War in Afghanistan (2001–2014)</h4>
+<p>After 9/11, Canada joined US-led invasion. Combat in <span class="key">Kandahar</span>. <span class="key">158 soldiers killed</span>. Largest combat since Korea.</p>`},
+
+{id:6,name:"Big Themes (Long Answer Prep)",content:`<h4>Theme 1: Comparing WWI / WWII / Cold War</h4>
+<ul><li><span class="key">WWI</span>: Entered automatically (British Empire). Trench warfare. Growing national identity (Vimy). Conscription crisis</li>
+<li><span class="key">WWII</span>: Declared war independently. Tech warfare. Key roles (Juno Beach, Atlantic). Emerged as middle power</li>
+<li><span class="key">Cold War</span>: No direct combat. Peacekeeping role (Suez, Korea, Rwanda). NATO member</li>
+<li><span class="key">Evolution</span>: Colonial obligation → independent decision → peacekeeping/diplomacy</li></ul>
+<h4>Theme 2: History of Reconciliation</h4>
+<ul><li>1920s excluded Indigenous, Black, Chinese, Jewish Canadians</li>
+<li>WWI: Conscription forced on unwilling populations</li>
+<li>WWII: Japanese internment, antisemitism, Indigenous soldiers returned to discrimination</li>
+<li>Residential schools (1880s–1996) → TRC, 94 Calls to Action</li>
+<li>Pattern: Injustice → delayed acknowledgment → apology → ongoing work</li></ul>
+<h4>Theme 3: Canada in International Conflicts</h4>
+<ul><li>WWI → military credibility (Vimy Ridge)</li>
+<li>WWII → independent player (Juno Beach)</li>
+<li>Korean War → UN commitment</li>
+<li>Suez → invented peacekeeping (Pearson)</li>
+<li>Rwanda → failure of international community</li>
+<li>Afghanistan → combat role post-9/11</li>
+<li>Identity shifted from <span class="key">warrior nation to peacekeeper</span></li></ul>
+<div class="note">For long answers: tie analysis to themes. Use specific examples with dates. Show continuity AND change.</div>`}
+];
+
+const HCARDS = [
+{q:"What is a primary source?",a:"A source created at the time of the event by someone who was there (diary, photo, speech, letter)"},
+{q:"What is a secondary source?",a:"A source created after the event by someone analyzing primary sources (textbook, documentary)"},
+{q:"Why is identifying bias important?",a:"Helps understand why a source says what it says, who created it, and what might be left out"},
+{q:"What is an inference?",a:"A conclusion drawn from evidence and reasoning — reading between the lines"},
+{q:"What does OPCVL stand for?",a:"Origin, Purpose, Content, Value, Limitation"},
+{q:"How do you state a value in OPCVL?",a:"\"A value of the origin of the source is…\" (identify O, P, or C first)"},
+{q:"Name the Big 6 historical thinking concepts",a:"Historical Significance, Evidence, Continuity & Change, Cause & Consequence, Historical Perspective, Ethical Dimension"},
+{q:"What does historical perspective mean?",a:"Understanding decisions within the context of their time — don't judge the past by today's values"},
+{q:"What does M.A.I.N. stand for?",a:"Militarism, Alliances, Imperialism, Nationalism"},
+{q:"What was the immediate cause of WWI?",a:"Assassination of Archduke Franz Ferdinand by Gavrilo Princip in Sarajevo, June 28, 1914"},
+{q:"Why did Canada go to war in WWI?",a:"Part of British Empire — when Britain declared war, Canada was automatically at war"},
+{q:"What happened at Ypres (1915)?",a:"First major Canadian battle. Germans used chlorine gas for the first time. Canadians held the line"},
+{q:"Why is Vimy Ridge significant?",a:"All 4 Canadian divisions fought together (April 1917). Creeping barrage. Defining moment of Canadian identity"},
+{q:"What was the Schlieffen Plan?",a:"Germany's plan to quickly defeat France through Belgium, then fight Russia — failed → trench warfare"},
+{q:"What was the Conscription Crisis?",a:"Borden's Military Service Act (1917). English Canada supported, French Canada opposed — deep divide"},
+{q:"Where was the Treaty of Versailles signed?",a:"Palace of Versailles, 1919"},
+{q:"What were the main terms of the Treaty of Versailles?",a:"War guilt clause, $33B reparations, lost territory, military restrictions → hyperinflation → WWII"},
+{q:"What was the War Guilt Clause?",a:"Article 231 — Germany accepted full blame for WWI"},
+{q:"What was the Lusitania?",a:"British ship sunk by German U-Boat. 1,198 killed including 128 Americans"},
+{q:"What was the Zimmerman Telegram?",a:"Germany asked Mexico to attack the US → helped bring US into WWI"},
+{q:"What were Victory Bonds?",a:"Citizens lent money to the government to fund the war effort"},
+{q:"What was No Man's Land?",a:"Dangerous area between opposing trenches — barbed wire, craters, dead soldiers"},
+{q:"How did women's roles change during WWI?",a:"Munitions factories, nursing, farming. Suffragettes won the right to vote"},
+{q:"Who were the Famous Five?",a:"Emily Murphy, Nellie McClung, Irene Parlby, Louise McKinney, Henrietta Muir Edwards"},
+{q:"What was the Persons Case (1929)?",a:"Famous Five proved women are 'persons' under law — can be appointed to Senate"},
+{q:"What was the Chinese Exclusion Act?",a:"1923 law banning Chinese immigration to Canada"},
+{q:"What was the Group of Seven?",a:"Canadian landscape painters (1920s) — distinctive Canadian artistic identity"},
+{q:"What caused the Great Depression? (long-term)",a:"Overproduction, over-speculation, buying on margin, uneven wealth, export dependence"},
+{q:"What was Black Tuesday?",a:"Oct 29, 1929 — stock market crashed → Great Depression"},
+{q:"Why did the League of Nations fail?",a:"No army, US never joined, couldn't enforce decisions"},
+{q:"What was the Molotov-Ribbentrop Pact?",a:"Nazi-Soviet non-aggression pact. Hitler avoided two-front war, Stalin gained time. Secretly divided Poland"},
+{q:"Name the 3 totalitarian leaders and ideologies",a:"Mussolini (Italy/Fascism), Stalin (USSR/Communism), Hitler (Germany/Nazism)"},
+{q:"What are characteristics of totalitarianism?",a:"Single party, censorship, propaganda, secret police, cult of personality, no opposition"},
+{q:"What was lebensraum?",a:"\"Living space\" — Hitler's goal to expand eastward for the Aryan race"},
+{q:"What is appeasement?",a:"Giving in to an aggressor's demands to avoid war"},
+{q:"What was the Anschluss?",a:"Germany annexed Austria in 1938"},
+{q:"What was the Munich Agreement?",a:"Britain & France let Hitler keep Sudetenland. He broke the promise within months"},
+{q:"What is Blitzkrieg?",a:"\"Lightning war\" — fast coordinated attacks with tanks, planes, infantry"},
+{q:"Name the Axis powers",a:"Germany, Italy, Japan"},
+{q:"Name the Allied powers",a:"Britain, France, Canada, later USSR and USA"},
+{q:"What was D-Day?",a:"June 6, 1944 — Allied invasion of Normandy (Operation Overlord). Canada landed at Juno Beach"},
+{q:"What was the Dieppe Raid?",a:"1942 — disastrous Canadian attack. 907 killed, 1,946 captured. Lessons applied to D-Day"},
+{q:"What was the Final Solution?",a:"Nazi plan for systematic extermination of Jews"},
+{q:"What were the Stages of Isolation?",a:"Identification → Exclusion → Concentration → Extermination"},
+{q:"What was Japanese internment in Canada?",a:"After Pearl Harbor, ~22,000 Japanese Canadians relocated and property seized. Racism, not evidence"},
+{q:"What was the Manhattan Project?",a:"Secret US program to develop the atomic bomb"},
+{q:"Name the two atomic bombs and targets",a:"\"Little Boy\" on Hiroshima (Aug 6, 1945), \"Fat Man\" on Nagasaki (Aug 9, 1945)"},
+{q:"How did Canada's WWI vs WWII entry differ?",a:"WWI: automatic (British Empire). WWII: declared war independently, 1 week after Britain"},
+{q:"What is a cold war?",a:"Political/military tension between powers without direct military conflict"},
+{q:"Who drafted the UN Declaration of Human Rights?",a:"Canadian John Humphrey (1948)"},
+{q:"What is MAD?",a:"Mutually Assured Destruction — both sides have enough nukes to destroy each other, preventing direct war"},
+{q:"What is NATO?",a:"North Atlantic Treaty Organization (1949) — Western military alliance"},
+{q:"What was the Warsaw Pact?",a:"1955 Soviet military alliance (USSR + Eastern Europe)"},
+{q:"What was the DEW Line?",a:"Distant Early Warning — Arctic radar stations to detect Soviet bombers"},
+{q:"What happened in the Korean War?",a:"North Korea invaded South (1950). Canada sent UN troops. Stalemate at 38th parallel"},
+{q:"Why is Lester B. Pearson significant?",a:"Proposed UN peacekeeping force during Suez Crisis (1956). Won Nobel Peace Prize"},
+{q:"What happened in Rwanda (1994)?",a:"Genocide — ~800,000 killed. Dallaire's UN force couldn't stop it. World failed to intervene"},
+{q:"What was the October Crisis (1970)?",a:"FLQ kidnapped diplomats, murdered Laporte. Trudeau invoked War Measures Act"},
+{q:"What was the 1995 Quebec referendum result?",a:"50.6% No, 49.4% Yes — extremely close"},
+{q:"What is Bill 21?",a:"Quebec secularism law banning religious symbols for public workers"},
+{q:"What was the TRC?",a:"Truth and Reconciliation Commission — investigated residential schools, 94 Calls to Action"},
+{q:"What was the Oka Crisis (1990)?",a:"Mohawk land dispute — town wanted golf course on burial ground. 78-day standoff"},
+{q:"What was the Inuit Arctic Relocation?",a:"1950s — government forcibly relocated Inuit to High Arctic to assert sovereignty"},
+{q:"Canada's role in Afghanistan?",a:"2001–2014, post-9/11. Combat in Kandahar. 158 killed. Largest combat since Korea"},
+{q:"What is the Charter of Rights and Freedoms?",a:"1982 — guarantees fundamental freedoms, democratic rights, equality rights"},
+{q:"What were residential schools?",a:"Government/church schools (1880s–1996) forcibly removing Indigenous children. Widespread abuse"},
+{q:"How did Canada's international role evolve?",a:"Colonial obligation (WWI) → independent decision (WWII) → peacekeeping (Cold War)"},
+{q:"What was the 'stab in the back' myth?",a:"False belief that Jews/communists caused Germany's WWI defeat — fueled Hitler's antisemitism"},
+{q:"What was the Battle of the Atlantic?",a:"Ongoing naval war — U-Boats vs Allied convoys. Canada's navy escorted supplies"},
+{q:"What was Pearl Harbor?",a:"Dec 7, 1941 — Japan attacked US naval base in Hawaii → US entered WWII"},
+{q:"What was Passchendaele?",a:"1917 battle in mud. ~16,000 Canadian casualties for a few km"},
+{q:"What was Prohibition?",a:"Laws banning alcohol — pushed by temperance. Failed due to bootlegging"},
+{q:"Retribution vs rehabilitation (Treaty of Versailles)?",a:"Treaty punished Germany (retribution) instead of helping recover (rehabilitation) — fueled resentment"}
+];
+
+const HQUIZ = [
+{q:"Which is a primary source?",o:["Textbook","Documentary","Soldier's diary from 1916","Wikipedia article"],a:2,t:"mc"},
+{q:"OPCVL stands for Origin, Purpose, Content, Value, Limitation.",o:["True","False"],a:0,t:"tf"},
+{q:"What does the 'M' in M.A.I.N. stand for?",o:["Monarchy","Militarism","Migration","Marxism"],a:1,t:"mc"},
+{q:"Who was assassinated to trigger WWI?",o:["Kaiser Wilhelm","Franz Ferdinand","Bismarck","Tsar Nicholas"],a:1,t:"mc"},
+{q:"Canada declared war independently in WWI.",o:["True","False"],a:1,t:"tf"},
+{q:"What weapon was first used at Ypres?",o:["Tanks","Machine guns","Chlorine gas","Atomic bomb"],a:2,t:"mc"},
+{q:"All 4 Canadian divisions first fought together at...",o:["Somme","Ypres","Vimy Ridge","Passchendaele"],a:2,t:"mc"},
+{q:"The Schlieffen Plan aimed to avoid a...",o:["Naval war","Colonial war","Two-front war","Civil war"],a:2,t:"mc"},
+{q:"Who passed the Military Service Act (1917)?",o:["Laurier","Borden","Pearson","Trudeau"],a:1,t:"mc"},
+{q:"The Treaty of Versailles was signed in 1919.",o:["True","False"],a:0,t:"tf"},
+{q:"The Zimmerman Telegram was sent by...",o:["Britain","France","Germany","Russia"],a:2,t:"mc"},
+{q:"The Lusitania was a...",o:["German U-Boat","British ship","French battleship","Canadian destroyer"],a:1,t:"mc"},
+{q:"The Famous Five fought for...",o:["Voting rights","Women as 'persons' under law","Equal pay","Prohibition"],a:1,t:"mc"},
+{q:"The Persons Case was decided in...",o:["1919","1923","1929","1935"],a:2,t:"mc"},
+{q:"The Chinese Exclusion Act was passed in...",o:["1914","1923","1930","1939"],a:1,t:"mc"},
+{q:"Black Tuesday was on October 29, 1929.",o:["True","False"],a:0,t:"tf"},
+{q:"Which was NOT a cause of the Great Depression?",o:["Overproduction","Buying on margin","Nuclear arms race","Over-speculation"],a:2,t:"mc"},
+{q:"The Group of Seven were...",o:["Politicians","Scientists","Landscape painters","Musicians"],a:2,t:"mc"},
+{q:"The League of Nations failed because...",o:["It had no army","US never joined","Couldn't enforce decisions","All of the above"],a:3,t:"mc"},
+{q:"The Molotov-Ribbentrop Pact was between...",o:["Britain and France","Germany and USSR","US and Britain","Italy and Japan"],a:1,t:"mc"},
+{q:"Mussolini's ideology was...",o:["Communism","Nazism","Fascism","Democracy"],a:2,t:"mc"},
+{q:"Lebensraum means...",o:["Lightning war","Living space","Master race","New order"],a:1,t:"mc"},
+{q:"What was the Anschluss?",o:["Invasion of Poland","Annexation of Austria","Attack on France","Bombing of London"],a:1,t:"mc"},
+{q:"Blitzkrieg means 'lightning war.'",o:["True","False"],a:0,t:"tf"},
+{q:"Canada landed at which beach on D-Day?",o:["Omaha","Utah","Sword","Juno"],a:3,t:"mc"},
+{q:"The Dieppe Raid was a success.",o:["True","False"],a:1,t:"tf"},
+{q:"The first stage of Holocaust isolation was...",o:["Concentration","Exclusion","Identification","Extermination"],a:2,t:"mc"},
+{q:"How many Japanese Canadians were interned?",o:["~5,000","~12,000","~22,000","~50,000"],a:2,t:"mc"},
+{q:"'Little Boy' was dropped on...",o:["Nagasaki","Tokyo","Hiroshima","Okinawa"],a:2,t:"mc"},
+{q:"The Manhattan Project developed...",o:["Radar","Atomic bomb","Jet engine","Penicillin"],a:1,t:"mc"},
+{q:"Canada declared war independently in WWII.",o:["True","False"],a:0,t:"tf"},
+{q:"MAD stands for...",o:["Military Action Defense","Mutually Assured Destruction","Massive Arms Development","Multiple Alliance Doctrine"],a:1,t:"mc"},
+{q:"NATO was formed in...",o:["1945","1949","1955","1961"],a:1,t:"mc"},
+{q:"The Korean War ended with Korea divided at the...",o:["17th parallel","38th parallel","49th parallel","Equator"],a:1,t:"mc"},
+{q:"Who won the Nobel Peace Prize for the Suez Crisis?",o:["Trudeau","Dallaire","Pearson","Humphrey"],a:2,t:"mc"},
+{q:"~800,000 people were killed in the Rwanda genocide.",o:["True","False"],a:0,t:"tf"},
+{q:"The October Crisis involved the...",o:["FLQ","IRA","NATO","RCMP"],a:0,t:"mc"},
+{q:"The 1995 Quebec referendum result was...",o:["70% No","60% No","50.6% No","55% No"],a:2,t:"mc"},
+{q:"The TRC published how many Calls to Action?",o:["46","72","94","150"],a:2,t:"mc"},
+{q:"The Oka Crisis lasted...",o:["3 days","2 weeks","78 days","6 months"],a:2,t:"mc"},
+{q:"How many Canadian soldiers died in Afghanistan?",o:["58","108","158","258"],a:2,t:"mc"},
+{q:"The Charter of Rights and Freedoms is from...",o:["1967","1972","1982","1995"],a:2,t:"mc"},
+{q:"John Humphrey drafted the initial...",o:["Charter of Rights","Treaty of Versailles","UN Declaration of Human Rights","NATO treaty"],a:2,t:"mc"},
+{q:"Pearl Harbor was attacked on...",o:["June 6, 1944","Dec 7, 1941","Aug 6, 1945","Sept 1, 1939"],a:1,t:"mc"},
+{q:"The War Measures Act was invoked during the...",o:["Oka Crisis","October Crisis","Conscription Crisis","Suez Crisis"],a:1,t:"mc"},
+{q:"Residential schools operated from the 1880s to...",o:["1945","1969","1996","2008"],a:2,t:"mc"},
+{q:"The 'Rendezvous' cartoon depicted...",o:["Hitler and Mussolini","Hitler and Stalin","Churchill and Roosevelt","Pearson and Trudeau"],a:1,t:"mc"},
+{q:"Article 231 of the Treaty of Versailles is the...",o:["Peace clause","War guilt clause","Reparations clause","Disarmament clause"],a:1,t:"mc"}
+];
+
+// === HISTORY STATE ===
+let hFcIdx=0, hFcList=[...HCARDS], hQuizList=[], hQIdx=0, hQScore=0, hQDone=false;
+
+function hShow(sec) {
+  document.querySelectorAll('.h-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('hs-'+sec).classList.add('active');
+  document.querySelectorAll('#history-app nav a').forEach(a=>a.classList.remove('active'));
+  const el=document.getElementById('hn-'+sec);
+  if(el) el.classList.add('active');
+  if(sec==='units') hShowUnitList();
+}
+
+function hShowUnitList() {
+  const c=document.getElementById('h-unit-content');
+  let h='<h2>📖 Study Notes</h2><button class="btn btn-s" onclick="hShow(\'home\')" style="margin-bottom:15px">← Back</button>';
+  HUNITS.forEach(u=>{
+    h+=`<div class="unit-card" onclick="hShowUnit(${u.id})"><h3>${u.name}</h3></div>`;
+  });
+  c.innerHTML=h;
+}
+
+function hShowUnit(id) {
+  const u=HUNITS.find(x=>x.id===id);
+  if(!u) return;
+  const c=document.getElementById('h-unit-content');
+  c.innerHTML=`<button class="btn btn-s" onclick="hShowUnitList()" style="margin-bottom:15px">← Back to Units</button><h2>${u.name}</h2><div class="card">${u.content}</div>`;
+}
+
+// === FLASHCARDS ===
+function hInitFlashcards() {
+  hFcIdx=0;
+  hFcList=[...HCARDS];
+  hRenderFc();
+}
+function hRenderFc() {
+  if(hFcList.length===0) return;
+  const card=hFcList[hFcIdx];
+  document.getElementById('h-fc-front').textContent=card.q;
+  document.getElementById('h-fc-back').textContent=card.a;
+  document.getElementById('h-fc-card').classList.remove('flipped');
+  document.getElementById('h-fc-progress').textContent=(hFcIdx+1)+' / '+hFcList.length;
+}
+function hFlipCard(){document.getElementById('h-fc-card').classList.toggle('flipped')}
+function hFcNext(){hFcIdx=(hFcIdx+1)%hFcList.length;hRenderFc()}
+function hFcPrev(){hFcIdx=(hFcIdx-1+hFcList.length)%hFcList.length;hRenderFc()}
+function hFcShuffle(){for(let i=hFcList.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[hFcList[i],hFcList[j]]=[hFcList[j],hFcList[i]]}hFcIdx=0;hRenderFc()}
+
+// === QUIZ ===
+function hStartQuiz() {
+  const cnt=parseInt(document.getElementById('h-q-count').value);
+  let pool=[...HQUIZ];
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+  hQuizList=cnt===0?pool:pool.slice(0,cnt);
+  hQIdx=0;hQScore=0;hQDone=false;
+  document.getElementById('h-quiz-setup').style.display='none';
+  hShowQuestion();
+}
+function hShowQuestion() {
+  if(hQIdx>=hQuizList.length){hShowResults();return}
+  const q=hQuizList[hQIdx];
+  const area=document.getElementById('h-quiz-area');
+  let h=`<div style="margin-bottom:8px;color:#888;font-size:.85em">Question ${hQIdx+1} of ${hQuizList.length}</div>`;
+  h+=`<div class="score-bar"><div class="score-fill" style="width:${hQIdx/hQuizList.length*100}%"></div></div>`;
+  h+=`<div style="color:#f0a500;margin-bottom:12px">Score: ${hQScore}/${hQIdx}</div>`;
+  h+=`<div class="card"><h3 style="color:#fff;margin-bottom:15px">${q.q}</h3>`;
+  q.o.forEach((opt,i)=>{
+    h+=`<button class="quiz-opt" onclick="hAnswer(this,${i},${q.a})">${opt}</button>`;
+  });
+  h+=`</div>`;
+  area.innerHTML=h;
+}
+function hAnswer(btn,picked,correct) {
+  const opts=document.querySelectorAll('#h-quiz-area .quiz-opt');
+  opts.forEach((o,i)=>{
+    o.disabled=true;o.classList.add('dis');
+    if(i===correct)o.classList.add('correct');
+    if(i===picked&&picked!==correct)o.classList.add('wrong');
+  });
+  if(picked===correct)hQScore++;
+  setTimeout(()=>{hQIdx++;hShowQuestion()},1200);
+}
+function hShowResults() {
+  const pct=Math.round(hQScore/hQuizList.length*100);
+  const grade=pct>=80?'🔥 Amazing!':pct>=60?'👍 Solid!':'📚 Keep studying!';
+  const cls=pct>=80?'color:#4ecca3':pct>=60?'color:#f0a500':'color:#e94560';
+  document.getElementById('h-quiz-area').innerHTML=`
+    <div style="text-align:center;padding:30px;background:#1a1a10;border-radius:14px;border:1px solid #333">
+      <h2 style="color:#f0a500">${grade}</h2>
+      <div style="font-size:2.5em;font-weight:bold;margin:15px 0;${cls}">${pct}%</div>
+      <p style="color:#888;margin-bottom:15px">${hQScore} out of ${hQuizList.length} correct</p>
+      <button class="btn" onclick="hResetQuiz()">Try Again</button>
+    </div>`;
+}
+function hResetQuiz() {
+  document.getElementById('h-quiz-setup').style.display='block';
+  document.getElementById('h-quiz-area').innerHTML='';
+}
+
+// === INIT ===
+function histInit() {
+  // Build home unit list
+  const list=document.getElementById('h-unit-list');
+  let h='';
+  HUNITS.forEach(u=>{
+    h+=`<div class="unit-card" onclick="hShow('units');hShowUnit(${u.id})"><h3>${u.name}</h3></div>`;
+  });
+  list.innerHTML=h;
+  hInitFlashcards();
+}
 </script>
 
 </body>
