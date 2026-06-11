@@ -4116,8 +4116,47 @@ function hShowUnitList() {
 function hShowUnit(id) {
   const u=HUNITS.find(x=>x.id===id);
   if(!u) return;
+  const saved=localStorage.getItem('h_notes_'+id);
+  const content=saved||u.content;
   const c=document.getElementById('h-unit-content');
-  c.innerHTML=`<button class="btn btn-s" onclick="hShowUnitList()" style="margin-bottom:15px">← Back to Units</button><h2>${u.name}</h2><div class="card">${u.content}</div>`;
+  c.innerHTML=`<button class="btn btn-s" onclick="hShowUnitList()" style="margin-bottom:15px">← Back to Units</button>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+      <h2 style="margin:0">${u.name}</h2>
+      <button class="btn btn-s btn-sm" id="h-edit-btn" onclick="hToggleEdit(${id})">✏️ Edit</button>
+      <button class="btn btn-s btn-sm" id="h-reset-btn" onclick="hResetNotes(${id})" style="display:none;background:#e94560;color:#fff">↩️ Reset</button>
+      <span id="h-save-msg" style="color:#4ecca3;font-size:.8em;display:none">✓ Saved</span>
+    </div>
+    <div class="card" id="h-note-card">${content}</div>`;
+}
+let hEditing=false;
+function hToggleEdit(id){
+  const card=document.getElementById('h-note-card');
+  const btn=document.getElementById('h-edit-btn');
+  const rst=document.getElementById('h-reset-btn');
+  hEditing=!hEditing;
+  if(hEditing){
+    card.contentEditable='true';
+    card.style.border='2px solid #f0a500';
+    card.style.outline='none';
+    btn.textContent='💾 Save';
+    btn.style.background='#4ecca3';btn.style.color='#000';
+    rst.style.display='inline-block';
+    card.focus();
+  } else {
+    card.contentEditable='false';
+    card.style.border='1px solid #333';
+    btn.textContent='✏️ Edit';
+    btn.style.background='';btn.style.color='';
+    localStorage.setItem('h_notes_'+id, card.innerHTML);
+    const msg=document.getElementById('h-save-msg');
+    msg.style.display='inline';
+    setTimeout(()=>msg.style.display='none',2000);
+  }
+}
+function hResetNotes(id){
+  if(!confirm('Reset to original notes? Your edits will be lost.'))return;
+  localStorage.removeItem('h_notes_'+id);
+  hShowUnit(id);
 }
 
 // === FLASHCARDS ===
